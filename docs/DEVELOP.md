@@ -2,6 +2,8 @@
 
 利用者向けの説明はリポジトリ直下の [README.md](../README.md)。仕様は [SPEC.md](./SPEC.md)。引継ぎは [AGENT_HANDOFF.md](./AGENT_HANDOFF.md)。
 
+公開 URL: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/
+
 ## ローカル起動
 
 ```powershell
@@ -30,10 +32,11 @@ npm test
 
 parse effects（合成 HTML fixture）/ inherit list / parse courses / obtainable。
 
-## GitHub Pages（まだ出さない）
+## GitHub Pages
 
-push / Pages はユーザーが明示したときだけ。
+push / Pages の実行はユーザーが明示したときだけ。README の使い方は公開 URL 前提。
 
+- アカウント: `Tsuyuchan-jp`。リポジトリ名はこのまま
 - ソースは **リポジトリ全体**（`app/` だけをルートにすると `data/` と `assets/` が切れる）
 - 公開 URL のトップは `/app/` へリダイレクトする
 - Jekyll を避けるためルートに `.nojekyll` を置く

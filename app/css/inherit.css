@@ -8,10 +8,6 @@ body {
   background-attachment: fixed;
 }
 
-.world-bg {
-  display: none;
-}
-
 .inherit-main,
 .app-header {
   position: relative;

@@ -8,9 +8,9 @@
 |------|------|
 | 名前 | umamusume-inherit-skill-list（継承白因子リスト） |
 | パス | `C:\Users\PC1\Projects\umamusume-inherit-skill-list` |
-| 形態 | 静的 HTML/JS + JSON。ルートで `npm run serve` → `/` が `/app/` へ飛ぶ |
+| 形態 | 静的 HTML/JS + JSON。公開は GitHub Pages（`/app/`）。ローカルは `npm run serve` |
 | 目的 | ウマ娘DBでレンタル継承親を探すとき、スキルを OR 条件で並べる元リストをコピーする。中身は任意コース・脚質の U-tools 有効スキル（白∩共通）から本育成で取れる分を除いた先頭25件。貼り付け先は [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) |
-| 公開 | まだ。remote 未設定。push / Pages はユーザー明示時のみ |
+| 公開 | まだ。remote 未設定。push / Pages はユーザー明示時のみ。URL 予定: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ |
 | 言語 | ユーザー向け応答・コードコメントは日本語 |
 
 **触らない:** `umamusume-sp-calc` 本体には機能追加しない。画像・ピッカー・JSON は流用済み。v1 の機能・見た目は完了。大きな UI 変更をしない。
@@ -54,7 +54,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** 公開前レビューの残りは CSS 間引きだけ。機能追加・見た目の作り直しはしない。push / Pages はユーザー明示時のみ。
+**いま:** 公開前レビューは一通り完了。次は GitHub Pages 公開（ユーザー明示時）。機能追加・見た目の作り直しはしない。push も明示時のみ。
 
 合意メモ:
 
@@ -63,11 +63,11 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 - ヘッダーのリード文は外し、使い方へ移した
 - v1 機能・デザインは完了（実機OK）
 - モック（`docs/mocks/`・`app/mock-course-ui.html`）は削除済み
-- README は利用者向け。extract は `docs/DEVELOP.md`
+- README は利用者向け（Pages URL）。extract は `docs/DEVELOP.md`
+- CSS は `chrome.css`（トークン＋ピッカー＋編成）＋ `inherit.css`。sp-calc の `style.css` / `foundation.css` は削除済み
 
 後回し:
 
-- **CSS 間引き**（`style.css` / `foundation.css` は sp-calc 由来が多い。ピッカー見た目が依存するので実機確認必須）
 - 全コース分の `extract:effects` 一括（やらない。金ドット36件）
 - アプリ内から extract
 - GitHub Pages 公開そのもの（ユーザー明示時）
@@ -81,7 +81,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 | 役割 | 場所 |
 |------|------|
-| UI | `app/index.html` `app/js/app.js` `app/js/deckUi.js` `app/css/inherit.css` |
+| UI | `app/index.html` `app/js/app.js` `app/js/deckUi.js` `app/css/inherit.css` `app/css/chrome.css` |
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
@@ -91,7 +91,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-v1 の機能とデザインは完了（実機OK）。公開前レビューの残りは CSS 間引き。
-いきなり実装せず、案から。見た目の作り直しと機能追加はしない。
-push / GitHub Pages はまだ。明示するまでやらない。
+v1 の機能とデザインは完了（実機OK）。公開前レビューも完了。
+次は GitHub Pages 公開。push / Pages は明示するまでやらない。
+見た目の作り直しと機能追加はしない。
 ```

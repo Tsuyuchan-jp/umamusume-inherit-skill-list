@@ -6,15 +6,17 @@
 
 非公式・非商用です。ウマ娘プリティーダービー、U-tools、ウマ娘DB およびゲームの権利は各権利者に帰属します。
 
-## 使い方
+## 使う（公開版）
 
-GitHub Pages はまだ公開していません。ローカルではリポジトリのルートで HTTP サーバーを起動します。
+**インストール不要。** 次の URL をブラウザで開くだけです。
 
-```powershell
-npm run serve
-```
+**https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/**
 
-ブラウザで `http://localhost:5173/` を開くと `/app/` へ入ります。
+| 項目 | URL |
+|------|-----|
+| アプリ入口 | https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ |
+| リポジトリ直下 | https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/ → `/app/` へ自動移動 |
+| ソース | https://github.com/Tsuyuchan-jp/umamusume-inherit-skill-list |
 
 1. コースと脚質を選ぶ
 2. 必要なら「U-tools の有効スキルを開く」で同じ条件のページと突き合わせる（白と共通にチェック）
