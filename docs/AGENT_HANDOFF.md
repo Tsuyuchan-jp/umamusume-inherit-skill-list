@@ -30,7 +30,7 @@
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
 - 背景 z-index 修正済み（コース選択・結果が隠れていた）
 
-有効スキル JSON が入っているのは **東京 2400 芝（courseId 10606）の4脚質のみ**。他コースは `npm run extract:effects -- --course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`（extract:effects が更新）。選んだ courseId は従来どおり localStorage。
+有効スキル JSON があるのは東京 2400 芝（`10606`）と大井 2000 ダート（`11103`）。後者はダートの試し抽出。残りは U-tools にデータがあるコースを対象にする予定。他は `npm run extract:effects -- --course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
 
 ## 確定仕様
 
