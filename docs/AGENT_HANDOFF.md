@@ -10,37 +10,39 @@
 | パス | `C:\Users\PC1\Projects\umamusume-inherit-skill-list` |
 | 形態 | 静的 HTML/JS + JSON。ルートで `npm run serve` → `/app/` |
 | 目的 | ウマ娘DBでレンタル継承親を探すとき、スキルを OR 条件で並べる元リストをコピーする。中身は任意コース・脚質の U-tools 有効スキル（白∩共通）から本育成で取れる分を除いた先頭25件。貼り付け先は [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) |
-| 公開 | まだ。push / Pages はユーザー明示時のみ |
+| 公開 | まだ。remote 未設定。push / Pages はユーザー明示時のみ |
 | 言語 | ユーザー向け応答・コードコメントは日本語 |
 
-**触らない:** `umamusume-sp-calc` 本体には機能追加しない。画像・ピッカー・JSON は流用済み。
+**触らない:** `umamusume-sp-calc` 本体には機能追加しない。画像・ピッカー・JSON は流用済み。v1 の機能・見た目は完了。大きな UI 変更をしない。
 
 関連: `C:\Users\PC1\Projects\umamusume-sp-calc` / `C:\Users\PC1\Projects\umamusume-rental-factor-fill`
 
-## いま動いていること（実機OK）
+## いま動いていること（実機OK・v1完了）
 
-- コースは場チップ → 距離チップ（芝緑 / ダ茶・回り・距離区分）。**既定はデータありのみ**（実機OK）。「すべてのコースを見る」で140件。そのときデータなしは薄く、金ドットは全件表示の距離チップだけ。場チップにドットは付けない。切替は localStorage。脚質（逃/先/差/追）
+- コースは場チップ → 距離チップ（芝緑 / ダ茶・回り・距離区分）。**既定はデータありのみ**。「すべてのコースを見る」で140件。そのときデータなしは薄く、金ドットは全件表示の距離チップだけ。場チップにドットは付けない。切替は localStorage。脚質（逃/先/差/追）
 - 一覧は 140 件（芝80 + ダート60）。U-tools のダート表記は「ダ」。`extract:courses` は「ダ」を取り `ground: "ダート"` に正規化する
 - 育成ウマ娘（全カード画像）＋サポカ優先40種（タイプ絞込のみ）
 - 白∩共通 − 本育成取得可能（金チェーン含む）→ 先頭25件コピー
 - 先頭25件を行ごとに手動除外。下に「除外中」（戻す）。コピーは残件の先頭25件。除外はコース＋脚質ごとに localStorage
 - 各行に獲得バ身と 100Pt あたりのバ/Pt（U-tools の expectedEffect / needSkillPoint）
 - 行タップで詳細（チャンミ9 / リグヒ12 の順位ドット、効果・局面・脚質距離）。閉じた行は順位条件があるときだけ前/中後/その他
-- 「U-tools の有効スキルを開く」→ `/race/courses/{courseId}/effects/{style}`。文言に場・距離（回り）・芝/ダ・脚質を入れる
+- 「U-tools の有効スキルを開く」→ `/race/courses/{courseId}/effects/{style}`。文言に場・距離（回り）・芝/ダ・脚質（例: 東京 2400m 左 芝・先行）
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
-- 背景 z-index 修正済み（コース選択・結果が隠れていた）
-- **UI:** 全面イラストなし。暗い帽子ヘッダー＋白い机＋メッシュ下地（左上紫・右下金、濃さ調整済み）。リード文はヘッダーに出さない。背景関連は完了（実機OK）
-- **使い方:** 目的（ウマ娘DBでレンタル継承親を探すときの OR 元リスト）＋中身の説明＋手順は常時表示。計上の前提・リストの見方は折りたたみ。extract は出さない。レンタル因子貼り付けへリンク。閉じるは×と外側クリック
-- **結果枠:** 見出しは「不足しているかもしれないスキルリスト」。コピーは金ボタン「スキルリストをコピー」（コア出口。幅100%・上限24remでスマホ全幅／PCは左寄せ）。ウマ娘DBは白枠の補助ボタン（実機確認待ち）
+- 背景 z-index 修正済み
+- **UI:** 全面イラストなし。暗い帽子ヘッダー＋白い机＋メッシュ下地（左上紫・右下金）。リード文はヘッダーに出さない
+- **使い方:** 目的（ウマ娘DBでレンタル継承親を探すときの OR 元リスト）＋中身＋手順は常時表示。計上の前提・リストの見方は折りたたみ。extract は出さない。レンタル因子貼り付けへリンク。閉じるは×と外側クリック
+- **結果枠:** 見出しは「不足しているかもしれないスキルリスト」。コピーは金ボタン「スキルリストをコピー」（幅100%・上限24rem。スマホ全幅／PCは左寄せ）。ウマ娘DBは白枠の補助ボタン
 
 有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。追加・更新は `npm run extract:effects -- --from-tracks`（既存はスキップ）または `--course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
+
+テスト: `npm test`（parse effects / inherit list / parse courses）。
 
 ## 確定仕様
 
 - フィルタ正本: U-tools で白スキル **かつ** 共通スキル（積集合）。継承固有の白は出さない
 - サポカ: 40種のみ選択可。イベント UI なし → ヒント＋イベント全選択肢を「取れる」
 - シナリオ UI なし → トレセン軒の **自動付与のみ** 除外。リンク6択・ラーメン3択は見ない
-- コピー既定: 有効順の先頭25件（改行のスキル名。rental-factor-fill が解釈できる）
+- コピー既定: 有効順の先頭25件（改行のスキル名。rental-factor-fill が解釈できる）。ボタン文言は「スキルリストをコピー」
 - ウマ娘DB入力は既存ユーザースクリプト。このアプリに入れない（別オリジンのため不可）
 - Git: 変更のたびコミット。PowerShell は `git add .` と `git commit` を別ステップ。push は明示時のみ
 
@@ -49,20 +51,38 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ## 次にやること（この順・1つずつ）
 
-正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
+正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** 次の1件は未定。後回しは TODO。
+**いま:** 公開に向けたレビューとリファクタ。機能追加・見た目の作り直しはしない。
+
+進め方:
+
+1. リポジトリを読んで問題と候補を洗い出す（実装はしない）
+2. 案を出して優先を相談する
+3. 合意した1件だけ直す
+
+レビューで見てほしい目安（確定ではない）:
+
+- sp-calc から借りた未使用 CSS/JS（`app/css/style.css` は大きい。`share-card-btn` は既にやめた）
+- `docs/mocks/` と `app/mock-course-ui.html` を公開物に残すか
+- 公開用 README（利用者向け）と開発者向け（extract / HANDOFF）の分離
+- GitHub Pages にしたときのパス（`/app/`、`data/`、カード画像）
+- 非公式・非商用の注記
+- `npm test` の範囲
 
 合意メモ:
 
 - コースチップ視認性は現状で足りる
-- 全面壁紙はやめた。UmaTools寄せ。3（暗い帽子＋白い机）＋メッシュ採用・濃さOK。背景関連は完了
-- ヘッダーのリード文は外した。使い方へ移し、目的（OR 元リスト）と中身の整理まで完了
+- 全面壁紙はやめた。UmaTools寄せ。3（暗い帽子＋白い机）＋メッシュ採用・濃さOK
+- ヘッダーのリード文は外し、使い方へ移した
+- v1 機能・デザインは完了（実機OK）
 
 後回し:
 
 - 全コース分の `extract:effects` 一括（やらない。金ドット36件）
-- アプリ内から extract / GitHub Pages / フィルタ精密化
+- アプリ内から extract
+- GitHub Pages 公開そのもの（レビュー後、ユーザー明示時）
+- フィルタ精密化
 
 コース選択の大きな作り直しはしない（v1）。
 
@@ -76,11 +96,13 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
-| 背景ヘッダー比較 | `docs/mocks/umatoo-mesh-preview.html` `docs/mocks/umatoo-bg-texture.html` `docs/mocks/umatoo-palettes.html` |
+| 比較モック（開発用） | `docs/mocks/` `app/mock-course-ui.html` |
 
 ## 新チャットの最初のメッセージ例
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-使い方ダイアログ改修まで完了。次の1件は未定（後回しは TODO）。
+v1 の機能とデザインは完了（実機OK）。次は公開に向けてのレビューとリファクタリング。
+いきなり実装せず、問題の洗い出しと案から。見た目の作り直しと機能追加はしない。
+push / GitHub Pages はまだ。明示するまでやらない。
 ```
