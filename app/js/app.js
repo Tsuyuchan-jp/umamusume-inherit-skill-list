@@ -10,6 +10,7 @@ import { escapeHtml } from "./htmlEscape.js";
 
 const DATA_BASE = new URL("../../data/", import.meta.url);
 const SESSION_KEY = "umamusume-inherit-skill-list-v1";
+const UTOOLS_ORIGIN = "https://xn--gck1f423k.xn--1bvt37a.tools";
 const STYLE_LABELS = {
   runner: "逃げ",
   leader: "先行",
@@ -108,6 +109,19 @@ function syncStyleButtons() {
   });
 }
 
+function utoolsEffectsUrl(courseId, style) {
+  return `${UTOOLS_ORIGIN}/race/courses/${courseId}/effects/${style}`;
+}
+
+function syncUtoolsLink() {
+  const a = document.getElementById("utools-link");
+  if (!a) return;
+  const style = STYLE_LABELS[state.ui.style] ? state.ui.style : "leader";
+  a.href = utoolsEffectsUrl(state.ui.courseId, style);
+  const styleLabel = STYLE_LABELS[style] || style;
+  a.textContent = `U-tools の有効スキルを開く（${styleLabel}）`;
+}
+
 async function loadEffects() {
   const { courseId, style } = state.ui;
   const res = await fetch(dataUrl(`effects/${courseId}/${style}.json`));
@@ -172,6 +186,7 @@ function recalc() {
 }
 
 async function onCourseOrStyleChange() {
+  syncUtoolsLink();
   await loadEffects();
   recalc();
   scheduleSessionSave();
@@ -227,6 +242,7 @@ async function init() {
 
   fillCourseSelect();
   syncStyleButtons();
+  syncUtoolsLink();
   bind();
 
   deckUi = createDeckUi({

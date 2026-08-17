@@ -84,6 +84,12 @@
   border-color: transparent;
 }
 
+.utools-link {
+  font-size: 0.85rem;
+  color: var(--ink-mid, #5a5288);
+  width: fit-content;
+}
+
 .inherit-result__head {
   display: grid;
   gap: 0.4rem;
