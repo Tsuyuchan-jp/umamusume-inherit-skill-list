@@ -30,7 +30,7 @@
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
 - 背景 z-index 修正済み（コース選択・結果が隠れていた）
 
-有効スキル JSON があるのは東京 2400 芝（`10606`）と大井 2000 ダート（`11103`）。後者はダートの試し抽出。残りは U-tools にデータがあるコースを対象にする予定。他は `npm run extract:effects -- --course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
+有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。追加・更新は `npm run extract:effects -- --from-tracks`（既存はスキップ）または `--course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
 
 ## 確定仕様
 
@@ -46,11 +46,10 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ## 次にやること（この順・1つずつ）
 
-正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
+正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。合意済みの extract 増分は完了。残りは後回し可。
 
-1. **使うコースの `extract:effects` を増やす** ← 次。対象は対話で決めてから。140件×4脚質の一括はしない（遅延 800ms・負荷）
-2. 背景を sp-calc と差別化（後回し可）
-3. コースチップの視認性（芝/ダートを行分け、区分ラベルを外す等。詰めない。やるなら1手）
+1. 背景を sp-calc と差別化（後回し可）
+2. コースチップの視認性（芝/ダートを行分け、区分ラベルを外す等。詰めない。やるなら1手）
 
 コース選択 UI は実機OK。チップが密で見づらいが、v1 として先に進める合意済み。モック往復に戻らない。
 
@@ -69,5 +68,5 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-次は使うコースの extract:effects を増やす（TODO の1）。全件一括はしない。対象を決めてから実行。
+U-tools にデータがある36コースの extract:effects は済み。次は後回し可（背景差別化 / コースチップ視認性）。いきなり実装に入らず提案と相談から。
 ```

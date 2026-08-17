@@ -33,6 +33,26 @@ function normalizeGround(raw) {
   return raw === "芝" ? "芝" : "ダート";
 }
 
+/** 有効スキルの金ドット（course__effect）が付いている courseId */
+export function parseEffectCourseIds(html) {
+  const joined = decodeRscChunks(html) + html;
+  const matches = [...joined.matchAll(/pathname":"\/race\/courses\/(\d+)"/g)];
+  const ids = [];
+  const seen = new Set();
+
+  for (let i = 0; i < matches.length; i++) {
+    const id = Number(matches[i][1]);
+    const start = matches[i].index;
+    const end = i + 1 < matches.length ? matches[i + 1].index : joined.length;
+    const block = joined.slice(start, end);
+    if (!/course__effect__/.test(block)) continue;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    ids.push(id);
+  }
+  return ids.sort((a, b) => a - b);
+}
+
 export function parseCourses(html) {
   const joined = decodeRscChunks(html) + html;
   const headers = [...joined.matchAll(/header__name__[^"]*","children":"([^"]+)"/g)];

@@ -1,4 +1,4 @@
-import { parseCourses } from "./extract_utools_courses.mjs";
+import { parseCourses, parseEffectCourseIds } from "./extract_utools_courses.mjs";
 
 const fixture = `
 header__name__x","children":"札幌"
@@ -21,3 +21,14 @@ if (!dirt.name.includes("ダート")) {
 }
 
 console.log("ok parseCourses turf+dirt");
+
+const effectFixture = `
+pathname":"/race/courses/11102"
+pathname":"/race/courses/11103","hash":"$undefined"},"children":[["$","div",null,{"className":"raceTrackCourseItem_component_course__effect__daXrR"}]]
+pathname":"/race/courses/11301"
+`;
+const effectIds = parseEffectCourseIds(effectFixture);
+if (effectIds.length !== 1 || effectIds[0] !== 11103) {
+  throw new Error(`effect ids ${JSON.stringify(effectIds)}`);
+}
+console.log("ok parseEffectCourseIds");

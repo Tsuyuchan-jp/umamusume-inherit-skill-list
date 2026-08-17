@@ -3,10 +3,12 @@
  *
  *   node scripts/extract_utools_effects.mjs --course 10606
  *   node scripts/extract_utools_effects.mjs --course 10606 --style leader --cache-only
+ *   node scripts/extract_utools_effects.mjs --from-tracks
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseEffectCourseIds } from "./extract_utools_courses.mjs";
 import {
   STYLE_IDS,
   filterWhiteCommon,
@@ -17,16 +19,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const DATA_DIR = path.join(ROOT, "data");
 const CACHE_DIR = path.join(ROOT, ".cache");
+const TRACKS_CACHE = path.join(CACHE_DIR, "tracks.html");
 const UTOOLS = "https://xn--gck1f423k.xn--1bvt37a.tools";
 
 function parseArgs(argv) {
-  const opts = { course: null, style: null, cacheOnly: false, delayMs: 800 };
+  const opts = {
+    courses: [],
+    style: null,
+    cacheOnly: false,
+    delayMs: 800,
+    fromTracks: false,
+  };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
-    if (a === "--course") opts.course = Number(argv[++i]);
+    if (a === "--course") opts.courses.push(Number(argv[++i]));
     else if (a === "--style") opts.style = argv[++i];
     else if (a === "--cache-only") opts.cacheOnly = true;
     else if (a === "--delay") opts.delayMs = Number(argv[++i]);
+    else if (a === "--from-tracks") opts.fromTracks = true;
   }
   return opts;
 }
@@ -104,12 +114,25 @@ function refreshAvailableIndex() {
   fs.writeFileSync(dest, `${JSON.stringify({ courseIds }, null, 2)}\n`);
 }
 
-async function main() {
-  const opts = parseArgs(process.argv);
-  const courseId = opts.course || 10606;
-  const styles = opts.style ? [opts.style] : STYLE_IDS;
-  fs.mkdirSync(CACHE_DIR, { recursive: true });
+function isComplete(courseId, styles) {
+  const dir = path.join(DATA_DIR, "effects", String(courseId));
+  return styles.every((style) => fs.existsSync(path.join(dir, `${style}.json`)));
+}
 
+async function loadTracksHtml(cacheOnly) {
+  if (cacheOnly) {
+    if (!fs.existsSync(TRACKS_CACHE)) throw new Error("tracks cache missing");
+    return fs.readFileSync(TRACKS_CACHE, "utf8");
+  }
+  const res = await fetch(`${UTOOLS}/race/tracks`);
+  if (!res.ok) throw new Error(`tracks HTTP ${res.status}`);
+  const html = await res.text();
+  fs.mkdirSync(CACHE_DIR, { recursive: true });
+  fs.writeFileSync(TRACKS_CACHE, html);
+  return html;
+}
+
+async function extractCourse(courseId, styles, opts) {
   for (let i = 0; i < styles.length; i++) {
     const style = styles[i];
     if (i > 0 && !opts.cacheOnly) await sleep(opts.delayMs);
@@ -120,7 +143,44 @@ async function main() {
       `${courseId}/${style}: ranked=${out.rankedCount} white∩共通=${out.whiteCommonCount}`
     );
   }
+}
+
+async function main() {
+  const opts = parseArgs(process.argv);
+  const styles = opts.style ? [opts.style] : STYLE_IDS;
+  fs.mkdirSync(CACHE_DIR, { recursive: true });
+
+  let courseIds = opts.courses.filter((id) => Number.isFinite(id) && id > 0);
+  if (opts.fromTracks) {
+    const tracksHtml = await loadTracksHtml(opts.cacheOnly);
+    courseIds = parseEffectCourseIds(tracksHtml);
+    console.log(`tracks の印あり: ${courseIds.length} 件`);
+  }
+  if (courseIds.length === 0) courseIds = [10606];
+
+  const failures = [];
+  let extracted = 0;
+  for (let i = 0; i < courseIds.length; i++) {
+    const courseId = courseIds[i];
+    if (opts.fromTracks && isComplete(courseId, styles)) {
+      console.log(`${courseId}: 既存のためスキップ`);
+      continue;
+    }
+    if (extracted > 0 && !opts.cacheOnly) await sleep(opts.delayMs);
+    try {
+      await extractCourse(courseId, styles, opts);
+      extracted += 1;
+      refreshAvailableIndex();
+    } catch (err) {
+      console.error(`${courseId}: ${err.message || err}`);
+      failures.push(courseId);
+    }
+  }
   refreshAvailableIndex();
+  console.log(`完了: 新規 ${extracted} 件 / 失敗 ${failures.length} 件`);
+  if (failures.length) {
+    throw new Error(`失敗: ${failures.join(", ")}`);
+  }
 }
 
 main().catch((err) => {
