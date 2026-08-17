@@ -75,6 +75,7 @@ function writeEffectJson(courseId, style, ranked) {
       id: s.id,
       name: s.name,
       expectedEffect: s.expectedEffect,
+      needSkillPoint: s.needSkillPoint,
     })),
   };
   const dest = path.join(dir, `${style}.json`);

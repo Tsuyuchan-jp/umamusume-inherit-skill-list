@@ -2,609 +2,729 @@
   "courseId": 10606,
   "style": "chaser",
   "source": "https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/10606/effects/chaser",
-  "fetchedAt": "2026-08-17T03:21:53.643Z",
+  "fetchedAt": "2026-08-17T04:11:01.189Z",
   "rankedCount": 455,
   "whiteCommonCount": 120,
   "skills": [
     {
       "id": 203522,
       "name": "垣間見た光",
-      "expectedEffect": 1.3889097000000001
+      "expectedEffect": 1.3889097000000001,
+      "needSkillPoint": 170
     },
     {
       "id": 202872,
       "name": "渾身の足取り",
-      "expectedEffect": 1.274600975
+      "expectedEffect": 1.274600975,
+      "needSkillPoint": 180
     },
     {
       "id": 202082,
       "name": "ワンチャンス",
-      "expectedEffect": 1.1078133
+      "expectedEffect": 1.1078133,
+      "needSkillPoint": 160
     },
     {
       "id": 203112,
       "name": "正面突破",
-      "expectedEffect": 1.1078133
+      "expectedEffect": 1.1078133,
+      "needSkillPoint": 160
     },
     {
       "id": 203532,
       "name": "登竜門",
-      "expectedEffect": 1.0048608
+      "expectedEffect": 1.0048608,
+      "needSkillPoint": 120
     },
     {
       "id": 201591,
       "name": "ウマ好み",
-      "expectedEffect": 0.95484975
+      "expectedEffect": 0.95484975,
+      "needSkillPoint": 160
     },
     {
       "id": 201101,
       "name": "中距離直線◎",
-      "expectedEffect": 0.8969623250000001
+      "expectedEffect": 0.8969623250000001,
+      "needSkillPoint": 110
     },
     {
       "id": 201451,
       "name": "追込直線◎",
-      "expectedEffect": 0.8969623250000001
+      "expectedEffect": 0.8969623250000001,
+      "needSkillPoint": 140
     },
     {
       "id": 203582,
       "name": "捕捉",
-      "expectedEffect": 0.8936286250000001
+      "expectedEffect": 0.8936286250000001,
+      "needSkillPoint": 190
     },
     {
       "id": 200271,
       "name": "おひとり様◎",
-      "expectedEffect": 0.834577
+      "expectedEffect": 0.834577,
+      "needSkillPoint": 110
     },
     {
       "id": 202492,
       "name": "切れ味",
-      "expectedEffect": 0.824808819541
+      "expectedEffect": 0.824808819541,
+      "needSkillPoint": 180
     },
     {
       "id": 200492,
       "name": "垂れウマ回避",
-      "expectedEffect": 0.79267135
+      "expectedEffect": 0.79267135,
+      "needSkillPoint": 150
     },
     {
       "id": 201111,
       "name": "中距離コーナー◎",
-      "expectedEffect": 0.75117215
+      "expectedEffect": 0.75117215,
+      "needSkillPoint": 110
     },
     {
       "id": 201461,
       "name": "追込コーナー◎",
-      "expectedEffect": 0.75117215
+      "expectedEffect": 0.75117215,
+      "needSkillPoint": 140
     },
     {
       "id": 202922,
       "name": "惜しみなし",
-      "expectedEffect": 0.717972975
+      "expectedEffect": 0.717972975,
+      "needSkillPoint": 160
     },
     {
       "id": 204322,
       "name": "阿吽の呼吸",
-      "expectedEffect": 0.717972975
+      "expectedEffect": 0.717972975,
+      "needSkillPoint": 180
     },
     {
       "id": 204062,
       "name": "凛然と",
-      "expectedEffect": 0.6967951
+      "expectedEffect": 0.6967951,
+      "needSkillPoint": 170
     },
     {
       "id": 202522,
       "name": "型破り",
-      "expectedEffect": 0.6967951
+      "expectedEffect": 0.6967951,
+      "needSkillPoint": 180
     },
     {
       "id": 202742,
       "name": "品行方正",
-      "expectedEffect": 0.6967951
+      "expectedEffect": 0.6967951,
+      "needSkillPoint": 180
     },
     {
       "id": 203792,
       "name": "好戦的",
-      "expectedEffect": 0.6967951
+      "expectedEffect": 0.6967951,
+      "needSkillPoint": 180
     },
     {
       "id": 204472,
       "name": "奮い立つ心",
-      "expectedEffect": 0.6967951
+      "expectedEffect": 0.6967951,
+      "needSkillPoint": 180
     },
     {
       "id": 200021,
       "name": "左回り◎",
-      "expectedEffect": 0.628985
+      "expectedEffect": 0.628985,
+      "needSkillPoint": 110
     },
     {
       "id": 200191,
       "name": "秋ウマ娘◎",
-      "expectedEffect": 0.628985
+      "expectedEffect": 0.628985,
+      "needSkillPoint": 110
     },
     {
       "id": 200301,
       "name": "伏兵◎",
-      "expectedEffect": 0.628985
+      "expectedEffect": 0.628985,
+      "needSkillPoint": 110
     },
     {
       "id": 200272,
       "name": "おひとり様○",
-      "expectedEffect": 0.628985
+      "expectedEffect": 0.628985,
+      "needSkillPoint": 90
     },
     {
       "id": 201102,
       "name": "中距離直線○",
-      "expectedEffect": 0.5966768
+      "expectedEffect": 0.5966768,
+      "needSkillPoint": 100
     },
     {
       "id": 201452,
       "name": "追込直線○",
-      "expectedEffect": 0.5966768
+      "expectedEffect": 0.5966768,
+      "needSkillPoint": 130
     },
     {
       "id": 200362,
       "name": "直線巧者",
-      "expectedEffect": 0.5966768
+      "expectedEffect": 0.5966768,
+      "needSkillPoint": 170
     },
     {
       "id": 204262,
       "name": "星の煌き",
-      "expectedEffect": 0.57259905
+      "expectedEffect": 0.57259905,
+      "needSkillPoint": 200
     },
     {
       "id": 203502,
       "name": "比類なき",
-      "expectedEffect": 0.5563912000000001
+      "expectedEffect": 0.5563912000000001,
+      "needSkillPoint": 200
     },
     {
       "id": 201611,
       "name": "尻尾上がり",
-      "expectedEffect": 0.550903175
+      "expectedEffect": 0.550903175,
+      "needSkillPoint": 100
     },
     {
       "id": 203342,
       "name": "這い寄る足音",
-      "expectedEffect": 0.540422925
+      "expectedEffect": 0.540422925,
+      "needSkillPoint": 170
     },
     {
       "id": 203862,
       "name": "気ままな足取り",
-      "expectedEffect": 0.5373778250000001
+      "expectedEffect": 0.5373778250000001,
+      "needSkillPoint": 180
     },
     {
       "id": 202882,
       "name": "たぎる血潮",
-      "expectedEffect": 0.5236156750000001
+      "expectedEffect": 0.5236156750000001,
+      "needSkillPoint": 180
     },
     {
       "id": 204122,
       "name": "勝負を懸けて",
-      "expectedEffect": 0.5236156750000001
+      "expectedEffect": 0.5236156750000001,
+      "needSkillPoint": 200
     },
     {
       "id": 204453,
       "name": "聖女の挑戦",
-      "expectedEffect": 0.49594615000000003
+      "expectedEffect": 0.49594615000000003,
+      "needSkillPoint": 140
     },
     {
       "id": 203512,
       "name": "覇気十分",
-      "expectedEffect": 0.49594615000000003
+      "expectedEffect": 0.49594615000000003,
+      "needSkillPoint": 200
     },
     {
       "id": 200342,
       "name": "コーナー加速○",
-      "expectedEffect": 0.49338945000000006
+      "expectedEffect": 0.49338945000000006,
+      "needSkillPoint": 180
     },
     {
       "id": 203052,
       "name": "揺るがぬ信念",
-      "expectedEffect": 0.47483580000000003
+      "expectedEffect": 0.47483580000000003,
+      "needSkillPoint": 160
     },
     {
       "id": 203572,
       "name": "足がかり",
-      "expectedEffect": 0.47483580000000003
+      "expectedEffect": 0.47483580000000003,
+      "needSkillPoint": 160
     },
     {
       "id": 202902,
       "name": "推力十分",
-      "expectedEffect": 0.47483580000000003
+      "expectedEffect": 0.47483580000000003,
+      "needSkillPoint": 180
     },
     {
       "id": 204072,
       "name": "気持ちを乗せて",
-      "expectedEffect": 0.47483580000000003
+      "expectedEffect": 0.47483580000000003,
+      "needSkillPoint": 180
     },
     {
       "id": 203632,
       "name": "夢への挑戦",
-      "expectedEffect": 0.45828662500000006
+      "expectedEffect": 0.45828662500000006,
+      "needSkillPoint": 180
     },
     {
       "id": 202552,
       "name": "快速",
-      "expectedEffect": 0.45828662500000006
+      "expectedEffect": 0.45828662500000006,
+      "needSkillPoint": 200
     },
     {
       "id": 201112,
       "name": "中距離コーナー○",
-      "expectedEffect": 0.455335875
+      "expectedEffect": 0.455335875,
+      "needSkillPoint": 100
     },
     {
       "id": 201462,
       "name": "追込コーナー○",
-      "expectedEffect": 0.455335875
+      "expectedEffect": 0.455335875,
+      "needSkillPoint": 130
     },
     {
       "id": 202662,
       "name": "込み上げる熱",
-      "expectedEffect": 0.439623825
+      "expectedEffect": 0.439623825,
+      "needSkillPoint": 180
     },
     {
       "id": 203252,
       "name": "急襲",
-      "expectedEffect": 0.439623825
+      "expectedEffect": 0.439623825,
+      "needSkillPoint": 180
     },
     {
       "id": 203642,
       "name": "光明",
-      "expectedEffect": 0.439623825
+      "expectedEffect": 0.439623825,
+      "needSkillPoint": 180
     },
     {
       "id": 203172,
       "name": "切り替え上手",
-      "expectedEffect": 0.43780435
+      "expectedEffect": 0.43780435,
+      "needSkillPoint": 160
     },
     {
       "id": 200722,
       "name": "テンポアップ",
-      "expectedEffect": 0.43440127500000003
+      "expectedEffect": 0.43440127500000003,
+      "needSkillPoint": 160
     },
     {
       "id": 202102,
       "name": "前のめり",
-      "expectedEffect": 0.43440127500000003
+      "expectedEffect": 0.43440127500000003,
+      "needSkillPoint": 160
     },
     {
       "id": 202382,
       "name": "打開策",
-      "expectedEffect": 0.43440127500000003
+      "expectedEffect": 0.43440127500000003,
+      "needSkillPoint": 180
     },
     {
       "id": 202532,
       "name": "しとやかな足取り",
-      "expectedEffect": 0.43440127500000003
+      "expectedEffect": 0.43440127500000003,
+      "needSkillPoint": 180
     },
     {
       "id": 203032,
       "name": "素直な一歩",
-      "expectedEffect": 0.43440127500000003
+      "expectedEffect": 0.43440127500000003,
+      "needSkillPoint": 180
     },
     {
       "id": 203362,
       "name": "一歩ずつ前へ",
-      "expectedEffect": 0.43440127500000003
+      "expectedEffect": 0.43440127500000003,
+      "needSkillPoint": 180
     },
     {
       "id": 203652,
       "name": "活路を拓く！",
-      "expectedEffect": 0.43440127500000003
+      "expectedEffect": 0.43440127500000003,
+      "needSkillPoint": 180
     },
     {
       "id": 203852,
       "name": "心惹かれて",
-      "expectedEffect": 0.43440127500000003
+      "expectedEffect": 0.43440127500000003,
+      "needSkillPoint": 180
     },
     {
       "id": 204042,
       "name": "華麗な足取り",
-      "expectedEffect": 0.43011390000000005
+      "expectedEffect": 0.43011390000000005,
+      "needSkillPoint": 120
     },
     {
       "id": 202172,
       "name": "下り坂巧者",
-      "expectedEffect": 0.426270525
+      "expectedEffect": 0.426270525,
+      "needSkillPoint": 170
     },
     {
       "id": 201631,
       "name": "シンパシー",
-      "expectedEffect": 0.421384
+      "expectedEffect": 0.421384,
+      "needSkillPoint": 70
     },
     {
       "id": 201641,
       "name": "一匹狼",
-      "expectedEffect": 0.421384
+      "expectedEffect": 0.421384,
+      "needSkillPoint": 70
     },
     {
       "id": 200022,
       "name": "左回り○",
-      "expectedEffect": 0.421384
+      "expectedEffect": 0.421384,
+      "needSkillPoint": 90
     },
     {
       "id": 200192,
       "name": "秋ウマ娘○",
-      "expectedEffect": 0.421384
+      "expectedEffect": 0.421384,
+      "needSkillPoint": 90
     },
     {
       "id": 200302,
       "name": "伏兵○",
-      "expectedEffect": 0.421384
+      "expectedEffect": 0.421384,
+      "needSkillPoint": 90
     },
     {
       "id": 202602,
       "name": "イグニッション",
-      "expectedEffect": 0.41813145
+      "expectedEffect": 0.41813145,
+      "needSkillPoint": 160
     },
     {
       "id": 201702,
       "name": "ありったけ",
-      "expectedEffect": 0.39751135000000004
+      "expectedEffect": 0.39751135000000004,
+      "needSkillPoint": 160
     },
     {
       "id": 204182,
       "name": "巨歩",
-      "expectedEffect": 0.39518775
+      "expectedEffect": 0.39518775,
+      "needSkillPoint": 180
     },
     {
       "id": 204052,
       "name": "灯を胸に",
-      "expectedEffect": 0.3944903
+      "expectedEffect": 0.3944903,
+      "needSkillPoint": 180
     },
     {
       "id": 202032,
       "name": "あやしげな作戦",
-      "expectedEffect": 0.39290300000000006
+      "expectedEffect": 0.39290300000000006,
+      "needSkillPoint": 120
     },
     {
       "id": 203432,
       "name": "躍動",
-      "expectedEffect": 0.392485825
+      "expectedEffect": 0.392485825,
+      "needSkillPoint": 170
     },
     {
       "id": 200632,
       "name": "仕掛け抜群",
-      "expectedEffect": 0.392485825
+      "expectedEffect": 0.392485825,
+      "needSkillPoint": 180
     },
     {
       "id": 203762,
       "name": "追駆",
-      "expectedEffect": 0.392485825
+      "expectedEffect": 0.392485825,
+      "needSkillPoint": 180
     },
     {
       "id": 202932,
       "name": "影踏み",
-      "expectedEffect": 0.38610425000000004
+      "expectedEffect": 0.38610425000000004,
+      "needSkillPoint": 180
     },
     {
       "id": 200732,
       "name": "食い下がり",
-      "expectedEffect": 0.38500165
+      "expectedEffect": 0.38500165,
+      "needSkillPoint": 160
     },
     {
       "id": 200261,
       "name": "外枠得意◎",
-      "expectedEffect": 0.36690770700500003
+      "expectedEffect": 0.36690770700500003,
+      "needSkillPoint": 110
     },
     {
       "id": 200332,
       "name": "コーナー巧者○",
-      "expectedEffect": 0.36255375000000006
+      "expectedEffect": 0.36255375000000006,
+      "needSkillPoint": 180
     },
     {
       "id": 202092,
       "name": "闘争心",
-      "expectedEffect": 0.35377827500000003
+      "expectedEffect": 0.35377827500000003,
+      "needSkillPoint": 160
     },
     {
       "id": 201132,
       "name": "イナズマステップ",
-      "expectedEffect": 0.344311825
+      "expectedEffect": 0.344311825,
+      "needSkillPoint": 140
     },
     {
       "id": 203802,
       "name": "想い焦がれて",
-      "expectedEffect": 0.34365785000000004
+      "expectedEffect": 0.34365785000000004,
+      "needSkillPoint": 200
     },
     {
       "id": 202802,
       "name": "序盤巧者",
-      "expectedEffect": 0.34036115
+      "expectedEffect": 0.34036115,
+      "needSkillPoint": 160
     },
     {
       "id": 201651,
       "name": "スリップストリーム",
-      "expectedEffect": 0.3291816
+      "expectedEffect": 0.3291816,
+      "needSkillPoint": 160
     },
     {
       "id": 201661,
       "name": "遊びはおしまいっ！",
-      "expectedEffect": 0.3291816
+      "expectedEffect": 0.3291816,
+      "needSkillPoint": 160
     },
     {
       "id": 203312,
       "name": "光差す方へ",
-      "expectedEffect": 0.32594595000000004
+      "expectedEffect": 0.32594595000000004,
+      "needSkillPoint": 140
     },
     {
       "id": 203752,
       "name": "影を追って",
-      "expectedEffect": 0.32594595000000004
+      "expectedEffect": 0.32594595000000004,
+      "needSkillPoint": 140
     },
     {
       "id": 202792,
       "name": "中盤巧者",
-      "expectedEffect": 0.32594595000000004
+      "expectedEffect": 0.32594595000000004,
+      "needSkillPoint": 160
     },
     {
       "id": 204222,
       "name": "もう一踏ん張り",
-      "expectedEffect": 0.325417775
+      "expectedEffect": 0.325417775,
+      "needSkillPoint": 180
     },
     {
       "id": 203152,
       "name": "むきだしの情熱",
-      "expectedEffect": 0.32384250000000003
+      "expectedEffect": 0.32384250000000003,
+      "needSkillPoint": 180
     },
     {
       "id": 202652,
       "name": "自信家",
-      "expectedEffect": 0.321838
+      "expectedEffect": 0.321838,
+      "needSkillPoint": 180
     },
     {
       "id": 204202,
       "name": "戦略家",
-      "expectedEffect": 0.321838
+      "expectedEffect": 0.321838,
+      "needSkillPoint": 180
     },
     {
       "id": 200151,
       "name": "良バ場◎",
-      "expectedEffect": 0.321254
+      "expectedEffect": 0.321254,
+      "needSkillPoint": 110
     },
     {
       "id": 200281,
       "name": "対抗意識◎",
-      "expectedEffect": 0.321254
+      "expectedEffect": 0.321254,
+      "needSkillPoint": 110
     },
     {
       "id": 200512,
       "name": "末脚",
-      "expectedEffect": 0.312565825
+      "expectedEffect": 0.312565825,
+      "needSkillPoint": 170
     },
     {
       "id": 200462,
       "name": "ペースアップ",
-      "expectedEffect": 0.29324442500000003
+      "expectedEffect": 0.29324442500000003,
+      "needSkillPoint": 170
     },
     {
       "id": 200262,
       "name": "外枠得意○",
-      "expectedEffect": 0.24580719287199998
+      "expectedEffect": 0.24580719287199998,
+      "needSkillPoint": 90
     },
     {
       "id": 202722,
       "name": "折れない心",
-      "expectedEffect": 0.243945625
+      "expectedEffect": 0.243945625,
+      "needSkillPoint": 180
     },
     {
       "id": 204032,
       "name": "労を惜しまず",
-      "expectedEffect": 0.243945625
+      "expectedEffect": 0.243945625,
+      "needSkillPoint": 180
     },
     {
       "id": 203842,
       "name": "優等生",
-      "expectedEffect": 0.23715335
+      "expectedEffect": 0.23715335,
+      "needSkillPoint": 160
     },
     {
       "id": 202022,
       "name": "早仕掛け",
-      "expectedEffect": 0.23715335
+      "expectedEffect": 0.23715335,
+      "needSkillPoint": 180
     },
     {
       "id": 203662,
       "name": "健脚",
-      "expectedEffect": 0.23715335
+      "expectedEffect": 0.23715335,
+      "needSkillPoint": 180
     },
     {
       "id": 203142,
       "name": "克己心",
-      "expectedEffect": 0.23715335
+      "expectedEffect": 0.23715335,
+      "needSkillPoint": 200
     },
     {
       "id": 204502,
       "name": "ダブルアクセル",
-      "expectedEffect": 0.22866555000000002
+      "expectedEffect": 0.22866555000000002,
+      "needSkillPoint": 200
     },
     {
       "id": 200152,
       "name": "良バ場○",
-      "expectedEffect": 0.216536
+      "expectedEffect": 0.216536,
+      "needSkillPoint": 90
     },
     {
       "id": 200282,
       "name": "対抗意識○",
-      "expectedEffect": 0.216536
+      "expectedEffect": 0.216536,
+      "needSkillPoint": 90
     },
     {
       "id": 202442,
       "name": "やまっけ",
-      "expectedEffect": 0.2165217
+      "expectedEffect": 0.2165217,
+      "needSkillPoint": 180
     },
     {
       "id": 201601,
       "name": "地固め",
-      "expectedEffect": 0.187357825
+      "expectedEffect": 0.187357825,
+      "needSkillPoint": 100
     },
     {
       "id": 203372,
       "name": "切り返し",
-      "expectedEffect": 0.178189225
+      "expectedEffect": 0.178189225,
+      "needSkillPoint": 180
     },
     {
       "id": 203002,
       "name": "手練手管",
-      "expectedEffect": 0.16243555
+      "expectedEffect": 0.16243555,
+      "needSkillPoint": 180
     },
     {
       "id": 200211,
       "name": "晴れの日◎",
-      "expectedEffect": 0.121917
+      "expectedEffect": 0.121917,
+      "needSkillPoint": 110
     },
     {
       "id": 200291,
       "name": "徹底マーク◎",
-      "expectedEffect": 0.121917
+      "expectedEffect": 0.121917,
+      "needSkillPoint": 110
     },
     {
       "id": 203902,
       "name": "急降下",
-      "expectedEffect": 0.0962925
+      "expectedEffect": 0.0962925,
+      "needSkillPoint": 120
     },
     {
       "id": 204392,
       "name": "息抜き上手",
-      "expectedEffect": 0.09543965000000001
+      "expectedEffect": 0.09543965000000001,
+      "needSkillPoint": 190
     },
     {
       "id": 203242,
       "name": "端緒",
-      "expectedEffect": 0.09543965000000001
+      "expectedEffect": 0.09543965000000001,
+      "needSkillPoint": 200
     },
     {
       "id": 200212,
       "name": "晴れの日○",
-      "expectedEffect": 0.081593
+      "expectedEffect": 0.081593,
+      "needSkillPoint": 90
     },
     {
       "id": 200292,
       "name": "徹底マーク○",
-      "expectedEffect": 0.081593
+      "expectedEffect": 0.081593,
+      "needSkillPoint": 90
     },
     {
       "id": 201581,
       "name": "登山家",
-      "expectedEffect": 0.06757402500000001
+      "expectedEffect": 0.06757402500000001,
+      "needSkillPoint": 160
     },
     {
       "id": 200372,
       "name": "直線加速",
-      "expectedEffect": 0.0335997
+      "expectedEffect": 0.0335997,
+      "needSkillPoint": 170
     },
     {
       "id": 201562,
       "name": "ラッキーセブン",
-      "expectedEffect": 0.02468152596
+      "expectedEffect": 0.02468152596,
+      "needSkillPoint": 110
     },
     {
       "id": 202692,
       "name": "一番乗り",
-      "expectedEffect": 0.0168609
+      "expectedEffect": 0.0168609,
+      "needSkillPoint": 120
     },
     {
       "id": 204142,
       "name": "あふれる活力",
-      "expectedEffect": 0
+      "expectedEffect": 0,
+      "needSkillPoint": 180
     }
   ]
 }

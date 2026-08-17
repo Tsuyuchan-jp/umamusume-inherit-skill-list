@@ -3,6 +3,7 @@ import { collectObtainableSkillIds } from "./obtainable.js";
 import {
   COPY_LIMIT,
   buildInheritSkillList,
+  formatEffectStats,
   formatSkillLines,
 } from "./inheritList.js";
 import { copyTextToClipboard } from "./clipboard.js";
@@ -169,9 +170,14 @@ function rowHtml(row, index, action, label) {
   const kind = action === "exclude" ? "exclude" : "restore";
   const aria =
     action === "exclude" ? ' aria-label="外す"' : ' aria-label="戻す"';
+  const stats = formatEffectStats(row);
   return `<li>
     <span class="result-rank">${index}</span>
     <span class="result-name">${escapeHtml(row.name)}</span>
+    <span class="result-stats">
+      <span>${escapeHtml(stats.basha)}</span>
+      <span>${escapeHtml(stats.perPt)}</span>
+    </span>
     <button type="button" class="result-row-btn result-row-btn--${kind}" data-${action}-id="${row.id}"${aria}>${label}</button>
   </li>`;
 }

@@ -68,3 +68,22 @@ export function buildInheritSkillList({
 export function formatSkillLines(rows) {
   return rows.map((row) => row.name).join("\n");
 }
+
+/** U-tools と同じく 100Pt あたりの獲得バ身 */
+export function ptEfficiencyPer100(expectedEffect, needSkillPoint) {
+  const pt = Number(needSkillPoint);
+  if (!Number.isFinite(expectedEffect) || !Number.isFinite(pt) || pt <= 0) {
+    return null;
+  }
+  return (expectedEffect / pt) * 100;
+}
+
+export function formatEffectStats(row) {
+  const basha =
+    row.expectedEffect == null || !Number.isFinite(Number(row.expectedEffect))
+      ? "—"
+      : `${Number(row.expectedEffect).toFixed(2)}バ`;
+  const per = ptEfficiencyPer100(row.expectedEffect, row.needSkillPoint);
+  const perPt = per == null ? "—" : `${per.toFixed(2)}バ/Pt`;
+  return { basha, perPt };
+}

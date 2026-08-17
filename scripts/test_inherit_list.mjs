@@ -1,4 +1,9 @@
-import { expandObtainedChainIds, buildInheritSkillList } from "../app/js/inheritList.js";
+import {
+  expandObtainedChainIds,
+  buildInheritSkillList,
+  formatEffectStats,
+  ptEfficiencyPer100,
+} from "../app/js/inheritList.js";
 import { getChainRoot, isChainMember } from "../app/js/goldLower.js";
 
 const skillById = new Map([
@@ -66,5 +71,17 @@ if (hiddenManual.manualExcludedVisible.length !== 0) {
 
 const root = getChainRoot(skillById.get(3), skillById);
 if (!isChainMember(root) || root.id !== 1) throw new Error("root mismatch");
+
+const per100 = ptEfficiencyPer100(1.27062995, 120);
+if (per100.toFixed(2) !== "1.06") {
+  throw new Error(`U-tools 100Pt efficiency mismatch: ${per100}`);
+}
+const stats = formatEffectStats({
+  expectedEffect: 1.27062995,
+  needSkillPoint: 120,
+});
+if (stats.basha !== "1.27バ" || stats.perPt !== "1.06バ/Pt") {
+  throw new Error(`format mismatch: ${JSON.stringify(stats)}`);
+}
 
 console.log("ok inheritList");

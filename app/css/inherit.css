@@ -122,12 +122,30 @@
 
 .result-list li {
   display: grid;
-  grid-template-columns: 2rem 1fr auto;
+  grid-template-columns: 2rem minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.4rem;
   border-radius: 8px;
   background: var(--surface-muted, #f5f3f8);
+}
+
+.result-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-stats {
+  display: grid;
+  justify-items: end;
+  gap: 0.05rem;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .result-row-btn {

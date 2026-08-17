@@ -41,6 +41,12 @@ for (const u of inheritUniques) {
   }
 }
 
+const yosei = whiteCommon.find((s) => s.name === "余勢を駆って");
+if (!yosei) throw new Error("余勢を駆って missing");
+if (yosei.needSkillPoint !== 120) {
+  throw new Error(`needSkillPoint ${yosei.needSkillPoint}`);
+}
+
 console.log(
   `ok ranked=${ranked.length} whiteCommon=${whiteCommon.length} inheritUniqueWhite=${inheritUniques.length}`
 );

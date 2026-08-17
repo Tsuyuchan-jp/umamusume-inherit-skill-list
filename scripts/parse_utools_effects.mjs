@@ -62,7 +62,7 @@ export function isWhiteCommonSkill(row) {
 
 /**
  * HTML から expectedEffect 付きスキルを獲得バ身降順で返す。
- * @returns {{ id: number, name: string, rarity: number, characterCardId: number|null, expectedEffect: number }[]}
+ * @returns {{ id: number, name: string, rarity: number, characterCardId: number|null, needSkillPoint: number|null, expectedEffect: number }[]}
  */
 export function parseRankedSkillsFromHtml(html) {
   const joined = decodeRscChunks(html);
@@ -78,6 +78,7 @@ export function parseRankedSkillsFromHtml(html) {
     const nameM = [...slice.matchAll(/"skillName":"((?:\\.|[^"\\])*)"/g)].at(-1);
     const catM = [...slice.matchAll(/"skillCategory":(\d+)/g)].at(-1);
     const charaM = [...slice.matchAll(/"characterCardId":(null|\d+)/g)].at(-1);
+    const ptM = [...slice.matchAll(/"needSkillPoint":(\d+)/g)].at(-1);
     if (!idM || !nameM) continue;
     const id = Number(idM[1]);
     if (seen.has(id)) continue;
@@ -88,6 +89,7 @@ export function parseRankedSkillsFromHtml(html) {
       rarity: rarityM ? Number(rarityM[1]) : null,
       skillCategory: catM ? Number(catM[1]) : null,
       characterCardId: charaM && charaM[1] !== "null" ? Number(charaM[1]) : null,
+      needSkillPoint: ptM ? Number(ptM[1]) : null,
       expectedEffect: effect,
     });
   }
