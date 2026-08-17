@@ -29,6 +29,7 @@
 - 「U-tools の有効スキルを開く」→ `/race/courses/{courseId}/effects/{style}`
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
 - 背景 z-index 修正済み（コース選択・結果が隠れていた）
+- **UI:** 全面イラストなし。暗い帽子ヘッダー＋白い机＋メッシュ下地（左上紫・右下金）。リード文はヘッダーに出さない
 
 有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。追加・更新は `npm run extract:effects -- --from-tracks`（既存はスキップ）または `--course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
 
@@ -48,14 +49,13 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
 
-**いま:** UmaTools寄せ。2と3が有力。メッシュ確認は [mocks/umatoo-mesh-preview.html](./mocks/umatoo-mesh-preview.html)（前回薄すぎた）。本体未着手。
+**いま:** 帽子＋メッシュを本体に入れた。実機確認。濃さの微調整があればそのとき。
 
 合意メモ:
 
 - コースチップ視認性は現状で足りる
-- 全面壁紙はやめる。構成は UmaTools 寄せ
-- 色は 2 と 3 がよい。メッシュ下地は前回薄すぎたので確認用モックあり（`umatoo-mesh-preview.html`）
-- ヘッダーのリード文は外す。使い方改修（後で）に同趣旨を入れる
+- 全面壁紙はやめた。UmaTools寄せ。3（暗い帽子＋白い机）＋メッシュ採用
+- ヘッダーのリード文は外した。使い方改修（後で）に同趣旨を入れる
 
 後回し:
 
@@ -80,5 +80,5 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-背景＋ヘッダーは 2/3 と机の下地を比較中。メッシュ確認は docs/mocks/umatoo-mesh-preview.html。本体未着手。
+帽子＋メッシュを本体に入れたあと。実機確認から続けて。使い方改修は後で。
 ```

@@ -4,13 +4,7 @@
 
 ## 次（合意済み）
 
-- [ ] **背景差し替え + ヘッダー** — モック比較中。本体はまだ変えない
-  - 2と3が有力。机のCSS下地: [mocks/umatoo-bg-texture.html](./mocks/umatoo-bg-texture.html)
-  - メッシュ確認（濃いめ）: [mocks/umatoo-mesh-preview.html](./mocks/umatoo-mesh-preview.html)
-  - 色の比較: [mocks/umatoo-palettes.html](./mocks/umatoo-palettes.html)
-  - 帯挿絵との比較: [mocks/layout-band-vs-umatoo.html](./mocks/layout-band-vs-umatoo.html)
-  - ヘッダーのリード文は外す（使い方改修で同趣旨を入れる）
-  - コース選択の大きな作り直しはしない
+- [ ] 実機で帽子＋メッシュの見え方を確認する（濃さの微調整があればそのとき）
 
 ## 後で
 
@@ -18,6 +12,7 @@
 
 ## 完了
 
+- [x] **背景＋ヘッダー** — UmaTools寄せ。暗い帽子＋白い机＋メッシュ下地。全面イラスト廃止。リード文はヘッダーから外した
 - [x] 使うコースの `extract:effects`（U-tools 金ドット36件。`--from-tracks`。140×4 の一括はしない）
 - [x] コース選択は既定データありのみ。「すべてのコースを見る」で全件。データなしは薄く、金ドットは全件表示時のみ
 - [x] コース選択 UI（場→距離チップ。セレクト廃止）
