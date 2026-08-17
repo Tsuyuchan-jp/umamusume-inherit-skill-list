@@ -50,6 +50,8 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 1. **コース選択を U-tools の [コース一覧](https://xn--gck1f423k.xn--1bvt37a.tools/race/tracks) に近い UI へ** ← 次
 2. 背景を sp-calc と差別化
 
+コース選択の合意: 巨大セレクトをやめる。場チップ → その場の距離チップ（芝/ダート付き）。脚質はそのまま。データ無しコースも選べるが、チップ時点で有無が分かるアイコンを付ける（有り側でも無し側でも可。意味は学習でよい）。選んだコースは localStorage。実装前にモック1本で確認してから本体へ。
+
 手動除外の合意: コース＋脚質ごと。見える25件から外す。除外中は下に有効順。戻すは行のみ。コピーは残件の先頭25件。IDは残し、本育成で取れなくなった行は除外中に出さない。
 
 ## 主要ファイル
@@ -64,6 +66,6 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 ## 新チャットの最初のメッセージ例
 
 ```
-C:\Users\PC1\Projects\umamusume-inherit-skill-list を開いて、docs/AGENT_HANDOFF.md を読んでから続けて。
-次はスキルの手動除外（TODO の1）。
+C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
+次はコース選択 UI（TODO の1）。実装にいきなり入らず、合意済みの場→距離チップをモックで確認してから本体へ。
 ```
