@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>継承白因子リスト</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/inherit.css" />
+  </head>
+  <body>
+    <div class="world-bg" aria-hidden="true"></div>
+
+    <header class="app-header">
+      <div class="app-header__inner">
+        <h1 class="app-title">継承白因子リスト</h1>
+        <p class="app-lead">
+          任意コースの有効スキル（白∩共通）から、本育成で取れる分を除いた先頭25件を、ウマ娘DB貼り付け用にコピーします。
+        </p>
+        <button type="button" id="help-open" class="text-btn">使い方</button>
+      </div>
+    </header>
+
+    <main class="inherit-main">
+      <section class="panel inherit-course" aria-label="コースと脚質">
+        <label class="field-label" for="course-select">コース</label>
+        <select id="course-select" class="course-select"></select>
+        <div class="style-seg" role="group" aria-label="脚質">
+          <button type="button" data-style="runner" aria-pressed="false">逃げ</button>
+          <button type="button" class="is-on" data-style="leader" aria-pressed="true">先行</button>
+          <button type="button" data-style="betweener" aria-pressed="false">差し</button>
+          <button type="button" data-style="chaser" aria-pressed="false">追込</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="本育成編成">
+        <div class="deck-dashboard">
+          <div class="deck-dashboard__row">
+            <div class="deck-character-wrap">
+              <span class="deck-slot-label">育成ウマ娘</span>
+              <button type="button" id="deck-character" class="deck-slot deck-slot--character" aria-label="育成ウマ娘を選択"></button>
+            </div>
+            <div class="deck-supports-wrap">
+              <span class="deck-slot-label">サポートカード（優先40種）</span>
+              <div class="deck-supports" id="deck-supports"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel inherit-result" aria-label="継承候補">
+        <div class="inherit-result__head">
+          <h2>先頭25件</h2>
+          <p id="result-meta" class="inherit-result__meta"></p>
+          <div class="inherit-result__actions">
+            <button type="button" id="copy-top" class="share-card-btn share-card-btn--primary" disabled>
+              先頭25件をコピー
+            </button>
+            <button type="button" id="open-db" class="share-card-btn">ウマ娘DBを開く</button>
+          </div>
+        </div>
+        <ol id="result-list" class="result-list"></ol>
+        <p class="inherit-result__hint">
+          コピーしたテキストを
+          <a href="https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill" target="_blank" rel="noopener">レンタル因子貼り付け</a>
+          に貼ってください。検索ボタンは押しません。
+        </p>
+      </section>
+    </main>
+
+    <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-dialog-title">
+      <div class="help-dialog__chrome">
+        <h2 id="help-dialog-title" class="help-dialog__title">使い方</h2>
+        <button type="button" id="help-close" class="help-dialog__close" aria-label="閉じる">×</button>
+      </div>
+      <div class="help-dialog__body">
+        <p>U-tools の有効スキルを、白スキルかつ共通スキルに絞ったリストから、本育成（ウマ娘・サポカ・シナリオ自動）で取れるスキルを除きます。</p>
+        <ul>
+          <li>サポカは優先40種のみ。絞り込みはタイプだけです</li>
+          <li>イベントは全選択肢を「取れる」とみなします（UIなし）</li>
+          <li>シナリオは自動付与だけ除外します。リンクとラーメン選択は見ません</li>
+          <li>金が取れるスキルは、対応する白も除外します</li>
+          <li>有効スキルデータの更新は <code>npm run extract:effects</code> です</li>
+        </ul>
+      </div>
+    </dialog>
+
+    <dialog id="card-picker" class="card-picker" aria-labelledby="card-picker-title">
+      <div class="card-picker__chrome">
+        <div id="card-picker-preview-thumb" class="card-picker__preview-thumb" aria-hidden="true"></div>
+        <div class="card-picker__head">
+          <h2 id="card-picker-title" class="card-picker__title"></h2>
+          <p id="card-picker-preview-name" class="card-picker__preview-name"></p>
+          <p class="card-picker__preview-hint">タップで確定 · この枠の現在</p>
+        </div>
+        <button type="button" id="card-picker-close" class="card-picker__close" aria-label="閉じる">×</button>
+      </div>
+      <div class="card-picker__controls">
+        <div id="card-picker-filters" class="card-picker__filters" hidden>
+          <div id="card-picker-type-chips" class="card-picker__type-chips" role="group" aria-label="タイプ絞込"></div>
+        </div>
+        <div class="card-picker__search-field">
+          <div class="card-picker__search" role="search">
+            <input
+              type="search"
+              id="card-picker-search"
+              class="card-picker__search-input"
+              placeholder="名前・かな・ローマ字"
+              autocomplete="off"
+              aria-label="名前・かな・ローマ字で検索"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="card-picker__body">
+        <div id="card-picker-grid" class="card-picker__grid"></div>
+      </div>
+      <div class="card-picker__footer">
+        <button type="button" id="card-picker-clear" class="card-picker__clear">選択をクリア</button>
+      </div>
+    </dialog>
+
+    <script type="module">
+      document.getElementById("help-open")?.addEventListener("click", () => {
+        document.getElementById("help-dialog")?.showModal();
+      });
+      document.getElementById("help-close")?.addEventListener("click", () => {
+        document.getElementById("help-dialog")?.close();
+      });
+    </script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,727 @@
+{
+  "source": "https://xn--gck1f423k.xn--1bvt37a.tools/race/tracks",
+  "fetchedAt": "2026-08-17T03:22:54.252Z",
+  "count": 80,
+  "courses": [
+    {
+      "id": 10101,
+      "name": "札幌 1200m（芝）",
+      "place": "札幌",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10102,
+      "name": "札幌 1500m（芝）",
+      "place": "札幌",
+      "distance": 1500,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10103,
+      "name": "札幌 1800m（芝）",
+      "place": "札幌",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10104,
+      "name": "札幌 2000m（芝）",
+      "place": "札幌",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10105,
+      "name": "札幌 2600m（芝）",
+      "place": "札幌",
+      "distance": 2600,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10201,
+      "name": "函館 1000m（芝）",
+      "place": "函館",
+      "distance": 1000,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10202,
+      "name": "函館 1200m（芝）",
+      "place": "函館",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10203,
+      "name": "函館 1800m（芝）",
+      "place": "函館",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10204,
+      "name": "函館 2000m（芝）",
+      "place": "函館",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10205,
+      "name": "函館 2600m（芝）",
+      "place": "函館",
+      "distance": 2600,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10301,
+      "name": "新潟 1000m（芝）",
+      "place": "新潟",
+      "distance": 1000,
+      "distClass": "短距離",
+      "turn": "直",
+      "ground": "芝"
+    },
+    {
+      "id": 10302,
+      "name": "新潟 1200m（芝）",
+      "place": "新潟",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10303,
+      "name": "新潟 1400m（芝）",
+      "place": "新潟",
+      "distance": 1400,
+      "distClass": "短距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10304,
+      "name": "新潟 1600m（芝）",
+      "place": "新潟",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10305,
+      "name": "新潟 1800m（芝）",
+      "place": "新潟",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10306,
+      "name": "新潟 2000m（芝）",
+      "place": "新潟",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10307,
+      "name": "新潟 2000m（芝）",
+      "place": "新潟",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10308,
+      "name": "新潟 2200m（芝）",
+      "place": "新潟",
+      "distance": 2200,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10309,
+      "name": "新潟 2400m（芝）",
+      "place": "新潟",
+      "distance": 2400,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10401,
+      "name": "福島 1200m（芝）",
+      "place": "福島",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10402,
+      "name": "福島 1800m（芝）",
+      "place": "福島",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10403,
+      "name": "福島 2000m（芝）",
+      "place": "福島",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10404,
+      "name": "福島 2600m（芝）",
+      "place": "福島",
+      "distance": 2600,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10501,
+      "name": "中山 1200m（芝）",
+      "place": "中山",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10502,
+      "name": "中山 1600m（芝）",
+      "place": "中山",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10503,
+      "name": "中山 1800m（芝）",
+      "place": "中山",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10504,
+      "name": "中山 2000m（芝）",
+      "place": "中山",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10505,
+      "name": "中山 2200m（芝）",
+      "place": "中山",
+      "distance": 2200,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10506,
+      "name": "中山 2500m（芝）",
+      "place": "中山",
+      "distance": 2500,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10507,
+      "name": "中山 3600m（芝）",
+      "place": "中山",
+      "distance": 3600,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10601,
+      "name": "東京 1400m（芝）",
+      "place": "東京",
+      "distance": 1400,
+      "distClass": "短距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10602,
+      "name": "東京 1600m（芝）",
+      "place": "東京",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10603,
+      "name": "東京 1800m（芝）",
+      "place": "東京",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10604,
+      "name": "東京 2000m（芝）",
+      "place": "東京",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10605,
+      "name": "東京 2300m（芝）",
+      "place": "東京",
+      "distance": 2300,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10606,
+      "name": "東京 2400m（芝）",
+      "place": "東京",
+      "distance": 2400,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10607,
+      "name": "東京 2500m（芝）",
+      "place": "東京",
+      "distance": 2500,
+      "distClass": "長距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10608,
+      "name": "東京 3400m（芝）",
+      "place": "東京",
+      "distance": 3400,
+      "distClass": "長距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10701,
+      "name": "中京 1200m（芝）",
+      "place": "中京",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10702,
+      "name": "中京 1400m（芝）",
+      "place": "中京",
+      "distance": 1400,
+      "distClass": "短距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10703,
+      "name": "中京 1600m（芝）",
+      "place": "中京",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10704,
+      "name": "中京 2000m（芝）",
+      "place": "中京",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10705,
+      "name": "中京 2200m（芝）",
+      "place": "中京",
+      "distance": 2200,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 10801,
+      "name": "京都 1200m（芝）",
+      "place": "京都",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10802,
+      "name": "京都 1400m（芝）",
+      "place": "京都",
+      "distance": 1400,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10803,
+      "name": "京都 1400m（芝）",
+      "place": "京都",
+      "distance": 1400,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10804,
+      "name": "京都 1600m（芝）",
+      "place": "京都",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10805,
+      "name": "京都 1600m（芝）",
+      "place": "京都",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10806,
+      "name": "京都 1800m（芝）",
+      "place": "京都",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10807,
+      "name": "京都 2000m（芝）",
+      "place": "京都",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10808,
+      "name": "京都 2200m（芝）",
+      "place": "京都",
+      "distance": 2200,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10809,
+      "name": "京都 2400m（芝）",
+      "place": "京都",
+      "distance": 2400,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10810,
+      "name": "京都 3000m（芝）",
+      "place": "京都",
+      "distance": 3000,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10811,
+      "name": "京都 3200m（芝）",
+      "place": "京都",
+      "distance": 3200,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10901,
+      "name": "阪神 1200m（芝）",
+      "place": "阪神",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10902,
+      "name": "阪神 1400m（芝）",
+      "place": "阪神",
+      "distance": 1400,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10903,
+      "name": "阪神 1600m（芝）",
+      "place": "阪神",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10904,
+      "name": "阪神 1800m（芝）",
+      "place": "阪神",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10905,
+      "name": "阪神 2000m（芝）",
+      "place": "阪神",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10906,
+      "name": "阪神 2200m（芝）",
+      "place": "阪神",
+      "distance": 2200,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10907,
+      "name": "阪神 2400m（芝）",
+      "place": "阪神",
+      "distance": 2400,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10908,
+      "name": "阪神 2600m（芝）",
+      "place": "阪神",
+      "distance": 2600,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10909,
+      "name": "阪神 3000m（芝）",
+      "place": "阪神",
+      "distance": 3000,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 10914,
+      "name": "阪神 3200m（芝）",
+      "place": "阪神",
+      "distance": 3200,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 11001,
+      "name": "小倉 1200m（芝）",
+      "place": "小倉",
+      "distance": 1200,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 11002,
+      "name": "小倉 1800m（芝）",
+      "place": "小倉",
+      "distance": 1800,
+      "distClass": "マイル",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 11003,
+      "name": "小倉 2000m（芝）",
+      "place": "小倉",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 11004,
+      "name": "小倉 2600m（芝）",
+      "place": "小倉",
+      "distance": 2600,
+      "distClass": "長距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 11201,
+      "name": "ロンシャン 1000m（芝）",
+      "place": "ロンシャン",
+      "distance": 1000,
+      "distClass": "短距離",
+      "turn": "直",
+      "ground": "芝"
+    },
+    {
+      "id": 11202,
+      "name": "ロンシャン 1400m（芝）",
+      "place": "ロンシャン",
+      "distance": 1400,
+      "distClass": "短距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 11203,
+      "name": "ロンシャン 2400m（芝）",
+      "place": "ロンシャン",
+      "distance": 2400,
+      "distClass": "中距離",
+      "turn": "右",
+      "ground": "芝"
+    },
+    {
+      "id": 11612,
+      "name": "サンタアニタパーク 2000m（芝）",
+      "place": "サンタアニタパーク",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 11613,
+      "name": "サンタアニタパーク 1000m（芝）",
+      "place": "サンタアニタパーク",
+      "distance": 1000,
+      "distClass": "短距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 11614,
+      "name": "サンタアニタパーク 1600m（芝）",
+      "place": "サンタアニタパーク",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 11615,
+      "name": "サンタアニタパーク 2000m（芝）",
+      "place": "サンタアニタパーク",
+      "distance": 2000,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 11616,
+      "name": "サンタアニタパーク 2400m（芝）",
+      "place": "サンタアニタパーク",
+      "distance": 2400,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 11701,
+      "name": "デルマー 1000m（芝）",
+      "place": "デルマー",
+      "distance": 1000,
+      "distClass": "短距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 11702,
+      "name": "デルマー 1600m（芝）",
+      "place": "デルマー",
+      "distance": 1600,
+      "distClass": "マイル",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 11703,
+      "name": "デルマー 2200m（芝）",
+      "place": "デルマー",
+      "distance": 2200,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    },
+    {
+      "id": 11704,
+      "name": "デルマー 2400m（芝）",
+      "place": "デルマー",
+      "distance": 2400,
+      "distClass": "中距離",
+      "turn": "左",
+      "ground": "芝"
+    }
+  ]
+}
