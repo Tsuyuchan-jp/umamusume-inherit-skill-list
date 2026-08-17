@@ -32,6 +32,8 @@ const state = {
     style: "leader",
     characterId: 100101,
     supportIds: [null, null, null, null, null, null],
+    // コースID:脚質 → 手動除外したスキルID
+    excludedByKey: {},
   },
 };
 
@@ -81,6 +83,14 @@ function restoreSession() {
         id == null ? null : Number(id)
       );
     }
+    if (saved.excludedByKey && typeof saved.excludedByKey === "object") {
+      const next = {};
+      for (const [key, ids] of Object.entries(saved.excludedByKey)) {
+        if (!Array.isArray(ids)) continue;
+        next[key] = ids.map(Number).filter((n) => Number.isFinite(n));
+      }
+      state.ui.excludedByKey = next;
+    }
   } catch {
     /* ignore */
   }
@@ -109,6 +119,29 @@ function syncStyleButtons() {
   });
 }
 
+function exclusionKey(courseId, style) {
+  return `${courseId}:${style}`;
+}
+
+function getManualExcludeIds() {
+  const arr = state.ui.excludedByKey[exclusionKey(state.ui.courseId, state.ui.style)] || [];
+  return new Set(arr);
+}
+
+function addManualExclude(skillId) {
+  const key = exclusionKey(state.ui.courseId, state.ui.style);
+  const set = new Set(state.ui.excludedByKey[key] || []);
+  set.add(Number(skillId));
+  state.ui.excludedByKey[key] = [...set];
+}
+
+function removeManualExclude(skillId) {
+  const key = exclusionKey(state.ui.courseId, state.ui.style);
+  const next = (state.ui.excludedByKey[key] || []).filter((id) => id !== Number(skillId));
+  if (next.length) state.ui.excludedByKey[key] = next;
+  else delete state.ui.excludedByKey[key];
+}
+
 function utoolsEffectsUrl(courseId, style) {
   return `${UTOOLS_ORIGIN}/race/courses/${courseId}/effects/${style}`;
 }
@@ -132,8 +165,18 @@ async function loadEffects() {
   state.effects = await res.json();
 }
 
+function rowHtml(row, index, action, label) {
+  return `<li>
+    <span class="result-rank">${index}</span>
+    <span class="result-name">${escapeHtml(row.name)}</span>
+    <button type="button" class="result-row-btn" data-${action}-id="${row.id}">${label}</button>
+  </li>`;
+}
+
 function recalc() {
   const listEl = document.getElementById("result-list");
+  const excludedEl = document.getElementById("excluded-list");
+  const excludedBlock = document.getElementById("excluded-block");
   const metaEl = document.getElementById("result-meta");
   const copyBtn = document.getElementById("copy-top");
   if (!listEl) return;
@@ -144,6 +187,7 @@ function recalc() {
       "<li class=\"result-empty\">このコース・脚質の有効スキルデータがまだありません。<code>npm run extract:effects -- --course " +
       state.ui.courseId +
       "</code> を実行してください。</li>";
+    if (excludedBlock) excludedBlock.hidden = true;
     if (metaEl) metaEl.textContent = "データなし";
     if (copyBtn) copyBtn.disabled = true;
     return;
@@ -159,11 +203,13 @@ function recalc() {
     characterId: state.ui.characterId,
     supportIds: state.ui.supportIds,
   });
+  const manualExcludeIds = getManualExcludeIds();
   const result = buildInheritSkillList({
     rankedWhiteCommon: state.effects.skills,
     obtainableIds,
     skillById,
     limit: COPY_LIMIT,
+    manualExcludeIds,
   });
   lastResult = result;
 
@@ -171,16 +217,27 @@ function recalc() {
     listEl.innerHTML = '<li class="result-empty">先頭25件に残るスキルはありません。</li>';
   } else {
     listEl.innerHTML = result.top
-      .map(
-        (row, i) =>
-          `<li><span class="result-rank">${i + 1}</span><span class="result-name">${escapeHtml(row.name)}</span></li>`
-      )
+      .map((row, i) => rowHtml(row, i + 1, "exclude", "外す"))
       .join("");
   }
 
+  const visibleExcluded = result.manualExcludedVisible || [];
+  if (excludedEl && excludedBlock) {
+    if (!visibleExcluded.length) {
+      excludedBlock.hidden = true;
+      excludedEl.innerHTML = "";
+    } else {
+      excludedBlock.hidden = false;
+      excludedEl.innerHTML = visibleExcluded
+        .map((row) => rowHtml(row, "—", "restore", "戻す"))
+        .join("");
+    }
+  }
+
   const styleLabel = STYLE_LABELS[state.ui.style] || state.ui.style;
+  const manualCount = visibleExcluded.length;
   if (metaEl) {
-    metaEl.textContent = `白∩共通 ${state.effects.whiteCommonCount ?? state.effects.skills.length}件 → 除外後 ${result.remaining.length}件 / 表示 ${result.top.length}件（${styleLabel}）`;
+    metaEl.textContent = `白∩共通 ${state.effects.whiteCommonCount ?? state.effects.skills.length}件 → 除外後 ${result.remaining.length}件 / 表示 ${result.top.length}件（${styleLabel}） / 手動除外 ${manualCount}件`;
   }
   if (copyBtn) copyBtn.disabled = result.top.length === 0;
 }
@@ -215,6 +272,20 @@ function bind() {
   });
   document.getElementById("open-db")?.addEventListener("click", () => {
     window.open("https://uma.pure-db.com/ja-jp/advanced-search", "_blank", "noopener");
+  });
+  document.getElementById("result-list")?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-exclude-id]");
+    if (!btn) return;
+    addManualExclude(btn.dataset.excludeId);
+    recalc();
+    scheduleSessionSave();
+  });
+  document.getElementById("excluded-list")?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-restore-id]");
+    if (!btn) return;
+    removeManualExclude(btn.dataset.restoreId);
+    recalc();
+    scheduleSessionSave();
   });
 }
 

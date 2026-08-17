@@ -41,19 +41,27 @@ export function expandObtainedChainIds(ids, skillById) {
  * @param {Set<number>} params.obtainableIds
  * @param {Map<number, object>} params.skillById
  * @param {number} [params.limit]
+ * @param {Set<number>} [params.manualExcludeIds] 手動除外（チェーン展開しない）
  */
 export function buildInheritSkillList({
   rankedWhiteCommon,
   obtainableIds,
   skillById,
   limit = COPY_LIMIT,
+  manualExcludeIds = new Set(),
 }) {
-  const excluded = expandObtainedChainIds(obtainableIds, skillById);
-  const remaining = rankedWhiteCommon.filter((row) => !excluded.has(row.id));
+  const autoExcluded = expandObtainedChainIds(obtainableIds, skillById);
+  const afterAuto = rankedWhiteCommon.filter((row) => !autoExcluded.has(row.id));
+  const remaining = afterAuto.filter((row) => !manualExcludeIds.has(row.id));
+  // 有効順のまま。本育成で取れなくなった／リストに無い ID は出さない
+  const manualExcludedVisible = afterAuto.filter((row) =>
+    manualExcludeIds.has(row.id)
+  );
   return {
     remaining,
     top: remaining.slice(0, limit),
     excludedCount: rankedWhiteCommon.length - remaining.length,
+    manualExcludedVisible,
   };
 }
 

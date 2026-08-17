@@ -122,11 +122,37 @@
 
 .result-list li {
   display: grid;
-  grid-template-columns: 2rem 1fr;
+  grid-template-columns: 2rem 1fr auto;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.4rem;
   border-radius: 8px;
   background: var(--surface-muted, #f5f3f8);
+}
+
+.result-row-btn {
+  font: inherit;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.excluded-block {
+  margin-top: 1rem;
+}
+
+.excluded-block__title {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.result-list--excluded li {
+  opacity: 0.78;
 }
 
 .result-rank {
