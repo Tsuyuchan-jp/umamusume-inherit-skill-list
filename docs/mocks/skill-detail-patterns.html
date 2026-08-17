@@ -166,18 +166,51 @@
     .chip--effect { background: #e7eef8; color: #3d5278; }
     .chip--phase { background: #ece8f3; color: #534a72; }
     .chip--apt { background: #e8f0ea; color: #3d5c48; }
+    .cm-dots.is-12 .cm-dot {
+      width: 1.08rem;
+      height: 1.08rem;
+      font-size: 0.56rem;
+    }
+    .list-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+    .seg {
+      display: flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+    .seg button {
+      font: inherit;
+      font-size: 0.75rem;
+      border: 0;
+      background: #fff;
+      padding: 0.28rem 0.7rem;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .seg button.is-on {
+      background: var(--ink);
+      color: #fff;
+    }
+    .list-bar__hint { font-size: 0.72rem; color: var(--muted); }
   </style>
 </head>
 <body>
   <header>
     <h1>B案モック — 順位の出し方と比較</h1>
     <p class="lead">
-      本体未接続。行タップで詳細。折りたたみ行のバッジは条件があるときだけ（前 / 中後 / その他）。
-      1〜9の色付けは<strong>詳細の中だけ</strong>に置いてあります（閉じた行に9個並べると名前が潰れるため）。
+      本体未接続。閉じた行の <strong>前 / 中後 / その他</strong> は残しています。
+      効果は複数あれば全部出します。急襲は「現在速度」です。
     </p>
-    <div class="controls" id="rank-btns">
-      <button type="button" data-rank="dots" class="is-on">詳細: 1〜9の色付け</button>
-      <button type="button" data-rank="text">詳細: 4位〜9位の文字</button>
+    <div class="controls" id="label-btns">
+      <button type="button" data-label="header" class="is-on">推奨: 一覧で切替（行に種別名なし）</button>
+      <button type="button" data-label="row">比較: 各詳細の頭にチャンミ/リグヒバッジ</button>
     </div>
     <div class="controls" id="width-btns">
       <button type="button" data-width="phone" class="is-on">幅 390（スマホ）</button>
@@ -190,7 +223,7 @@
   </div>
 
   <script>
-    /* チャンミ9頭換算: order_rate と 100*順位/9 の比較（U-tools の 4位〜9位 に合わせた概算） */
+    /* チャンミ9 / リグヒ12。rate = 100 * 順位 / 頭数（U-tools の ≥40 → チャンミ4〜9位に合わせた概算） */
     const SKILLS = [
       {
         name: "余勢を駆って",
@@ -198,7 +231,7 @@
         pt: "1.06",
         badge: null,
         desc: "上り坂で速度がわずかに上がる\n＜作戦・先行＞",
-        cm: null,
+        rateConds: null,
         effects: ["速度"],
         phases: ["上り坂"],
         apts: ["先行"],
@@ -210,7 +243,7 @@
         badge: "前",
         badgeKind: "front",
         desc: "レース終盤始めの方で前方にいると\n加速力がわずかに上がる＜作戦・先行＞",
-        cm: { from: 1, to: 4 },
+        rateConds: [{ sign: "<=", value: 50 }],
         effects: ["加速"],
         phases: ["終盤始め"],
         apts: ["先行"],
@@ -222,7 +255,7 @@
         badge: "中後",
         badgeKind: "back",
         desc: "レース終盤始めの方で中団以降にいると\n加速力がわずかに上がる＜中距離＞",
-        cm: { from: 4, to: 9 },
+        rateConds: [{ sign: ">=", value: 40 }],
         effects: ["加速"],
         phases: ["終盤始め"],
         apts: ["中距離"],
@@ -234,7 +267,7 @@
         badge: "中後",
         badgeKind: "back",
         desc: "レース終盤始めの方に中団以降にいると\nわずかに前に出る＜中距離/長距離＞",
-        cm: { from: 4, to: 9 },
+        rateConds: [{ sign: ">=", value: 40 }],
         effects: ["現在速度"],
         phases: ["終盤始め"],
         apts: ["中距離", "長距離"],
@@ -246,7 +279,7 @@
         badge: "その他",
         badgeKind: "other",
         desc: "終盤以降の最終コーナーで\n中団以前にいる時ゴールまで遠いと\n加速力がわずかに上がる＜先行/差し＞",
-        cm: { from: 1, to: 6 },
+        rateConds: [{ sign: "<=", value: 70 }],
         effects: ["加速"],
         phases: ["終盤以降", "最終コーナー", "ゴールまで遠い"],
         apts: ["先行", "差し"],
@@ -258,41 +291,57 @@
         badge: "中後",
         badgeKind: "back",
         desc: "レース中盤に中団で競り合うと\n持久力がちょっと回復し\n速度がわずかに上がる＜中距離＞",
-        cm: { from: 5, to: 9 },
+        rateConds: [{ sign: ">=", value: 50 }],
         effects: ["回復", "速度"],
         phases: ["中盤"],
         apts: ["中距離"],
       },
     ];
 
-    let rankMode = "dots";
+    let fieldSize = 9;
+    let labelMode = "header";
     let openId = 2;
     const stage = document.getElementById("stage");
     const noteEl = document.getElementById("pattern-note");
+
+    function activeOrders(n, conds) {
+      if (!conds) return null;
+      const on = [];
+      for (let order = 1; order <= n; order++) {
+        const rate = (100 * order) / n;
+        const ok = conds.every((c) => {
+          if (c.sign === ">=") return rate >= c.value;
+          if (c.sign === "<=") return rate <= c.value;
+          if (c.sign === ">") return rate > c.value;
+          if (c.sign === "<") return rate < c.value;
+          return true;
+        });
+        if (ok) on.push(order);
+      }
+      return on;
+    }
 
     function badgeHtml(s) {
       if (!s.badge) return '<span class="badge-slot"></span>';
       return `<span class="badge badge--${s.badgeKind}">${s.badge}</span>`;
     }
 
-    function dotsHtml(cm) {
-      let html = '<div class="cm-dots" aria-label="チャンミ9頭の順位">';
-      for (let n = 1; n <= 9; n++) {
-        const on = n >= cm.from && n <= cm.to;
-        html += `<span class="cm-dot${on ? " is-on" : ""}">${n}</span>`;
+    function dotsHtml(orders, n) {
+      const set = new Set(orders);
+      let html = `<div class="cm-dots${n === 12 ? " is-12" : ""}">`;
+      for (let i = 1; i <= n; i++) {
+        html += `<span class="cm-dot${set.has(i) ? " is-on" : ""}">${i}</span>`;
       }
       return html + "</div>";
     }
 
     function rankBlock(s) {
-      if (!s.cm) return "";
-      if (rankMode === "text") {
-        return `<div class="cm-line">
-          <span class="cm-label">チャンミ条件</span>
-          <span class="cm-text">${s.cm.from}位 〜 ${s.cm.to}位</span>
-        </div>`;
-      }
-      return `<div class="cm-line">${dotsHtml(s.cm)}</div>`;
+      const orders = activeOrders(fieldSize, s.rateConds);
+      if (!orders) return "";
+      const kind = fieldSize === 9 ? "チャンミ条件" : "リグヒ条件";
+      const label =
+        labelMode === "row" ? `<span class="cm-label">${kind}</span>` : "";
+      return `<div class="cm-line">${label}${dotsHtml(orders, fieldSize)}</div>`;
     }
 
     function chipsHtml(s) {
@@ -312,13 +361,23 @@
       </div>`;
     }
 
+    function listBar() {
+      return `<div class="list-bar">
+        <div class="seg" id="field-seg">
+          <button type="button" data-n="9" class="${fieldSize === 9 ? "is-on" : ""}">チャンミ</button>
+          <button type="button" data-n="12" class="${fieldSize === 12 ? "is-on" : ""}">リグヒ</button>
+        </div>
+        <span class="list-bar__hint">${fieldSize}頭換算</span>
+      </div>`;
+    }
+
     function render() {
       noteEl.textContent =
-        rankMode === "dots"
-          ? "詳細先頭が 1〜9。円は直径約20px。390幅の内側でも1行に収まります。閉じた行には置きません。"
-          : "詳細先頭が「チャンミ条件 4位 〜 9位」。幅は取らないが、何番が有効かは数字を読む必要がある。";
+        labelMode === "header"
+          ? "スマート寄り: 種別は一覧左上の切替だけ。ドットの個数（9/12）が換算を表す。各行に「チャンミ条件」を繰り返さない。"
+          : "各詳細の頭にチャンミ条件/リグヒ条件バッジ。切替と二重になるので、ラベルが長いだけになりやすい。";
       stage.innerHTML =
-        `<p class="hint-row">チップ順: 順位（上）→ 効果 → 局面 → 脚質/距離。行をタップ</p>` +
+        listBar() +
         SKILLS.map((s, i) => {
           const open = openId === i;
           return `<div class="row${open ? " is-open" : ""}" data-i="${i}">
@@ -333,6 +392,12 @@
     }
 
     stage.addEventListener("click", (e) => {
+      const seg = e.target.closest("#field-seg [data-n]");
+      if (seg) {
+        fieldSize = Number(seg.dataset.n);
+        render();
+        return;
+      }
       if (e.target.closest("[data-x]")) return;
       const row = e.target.closest("[data-i]");
       if (!row) return;
@@ -340,11 +405,11 @@
       openId = openId === i ? null : i;
       render();
     });
-    document.getElementById("rank-btns").addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-rank]");
+    document.getElementById("label-btns").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-label]");
       if (!btn) return;
-      rankMode = btn.dataset.rank;
-      document.querySelectorAll("#rank-btns button").forEach((b) =>
+      labelMode = btn.dataset.label;
+      document.querySelectorAll("#label-btns button").forEach((b) =>
         b.classList.toggle("is-on", b === btn)
       );
       if (openId == null) openId = 2;
