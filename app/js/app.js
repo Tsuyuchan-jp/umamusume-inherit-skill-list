@@ -388,7 +388,7 @@ function recalc() {
   lastResult = result;
 
   if (!result.top.length) {
-    listEl.innerHTML = '<li class="result-empty">先頭25件に残るスキルはありません。</li>';
+    listEl.innerHTML = '<li class="result-empty">不足しているかもしれないスキルはありません。</li>';
   } else {
     listEl.innerHTML = result.top
       .map((row, i) => rowHtml(row, i + 1, "exclude", "×"))
