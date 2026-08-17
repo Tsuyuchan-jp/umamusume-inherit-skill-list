@@ -1,3 +1,9 @@
+.inherit-main,
+.app-header {
+  position: relative;
+  z-index: 1;
+}
+
 .inherit-main {
   max-width: 1180px;
   margin: 0 auto;
