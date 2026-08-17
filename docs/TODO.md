@@ -4,14 +4,11 @@
 
 ## 次（合意済み）
 
-- [ ] **GitHub Pages 初回公開** — このタスクでは push してよい
-  - アカウント `Tsuyuchan-jp`。リポジトリ名はそのまま
-  - URL: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/
-  - リポジトリ全体を出す。`app/` だけをルートにしない
-  - remote 未設定。sp-calc の Actions Pages を参考にする
+なし。v1 は公開済み。機能追加・見た目の作り直しはしない。
 
 ## 完了
 
+- [x] **GitHub Pages 初回公開** — https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ 。`origin` は `Tsuyuchan-jp/umamusume-inherit-skill-list`。Actions でリポジトリ直下を配信
 - [x] **CSS 間引き** — `chrome.css`＋`inherit.css`。sp-calc の `style.css` / `foundation.css` は削除
 - [x] **公開前レビュー** — README 分離、非公式注記、Pages 入口、モック削除、未使用 JS/画像、テスト
 - [x] **v1 機能＋デザイン** — 実機OK。これ以上の機能追加・見た目の大きな変更はしない

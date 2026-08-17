@@ -10,7 +10,7 @@
 | パス | `C:\Users\PC1\Projects\umamusume-inherit-skill-list` |
 | 形態 | 静的 HTML/JS + JSON。公開は GitHub Pages（`/app/`）。ローカルは `npm run serve` |
 | 目的 | ウマ娘DBでレンタル継承親を探すとき、スキルを OR 条件で並べる元リストをコピーする。中身は任意コース・脚質の U-tools 有効スキル（白∩共通）から本育成で取れる分を除いた先頭25件。貼り付け先は [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) |
-| 公開 | まだ。**remote 未設定**。URL 予定: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ |
+| 公開 | 済み。https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ 。remote: `origin` → `Tsuyuchan-jp/umamusume-inherit-skill-list` |
 | 言語 | ユーザー向け応答・コードコメントは日本語 |
 
 **触らない:** `umamusume-sp-calc` 本体には機能追加しない。画像・ピッカー・JSON は流用済み。v1 の機能・見た目は完了。大きな UI 変更をしない。
@@ -55,15 +55,9 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** GitHub Pages 初回公開。機能追加・見た目の作り直しはしない。
+**いま:** v1 公開済み。合意済みの次タスクなし。機能追加・見た目の作り直しはしない。
 
-進め方の目安（sp-calc に合わせる）:
-
-1. GitHub に空リポジトリを作る（`Tsuyuchan-jp/umamusume-inherit-skill-list`。public。README は作らない）
-2. `origin` を足す（いま remote なし）
-3. Pages 用 workflow を sp-calc を参考に入れる（サイトルート＝リポジトリ直下）。このリポジトリに `npm run verify` は無い。`npm test` だけでよい
-4. Settings → Pages → Source を GitHub Actions
-5. `master` へ push → https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ を確認
+Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジトリ直下を配信）。Source は GitHub Actions。
 
 合意メモ:
 
@@ -75,6 +69,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 - README は利用者向け（Pages URL）。extract は `docs/DEVELOP.md`
 - CSS は `chrome.css`＋`inherit.css`。間引き後の編成カード重なりは直して実機OK
 - 公開前レビュー完了。モック削除済み。README は Pages URL 前提
+- GitHub Pages 初回公開済み（`master` / Actions）
 
 後回し:
 
@@ -94,13 +89,12 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
-| 公開入口 | ルート `index.html`（`/app/` へ） `.nojekyll` |
+| 公開入口 | ルート `index.html`（`/app/` へ） `.nojekyll` `.github/workflows/deploy-pages.yml` |
 
 ## 新チャットの最初のメッセージ例
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-v1 の機能・デザイン・公開前レビューは完了（実機OK）。
-次は GitHub Pages の初回公開です。このチャットでは push / Pages まで進めてよい。
-アカウントは Tsuyuchan-jp、リポジトリ名はこのまま。見た目の作り直しと機能追加はしない。
+GitHub Pages 公開済み: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/
+v1 完了。機能追加・見た目の作り直しはしない。
 ```

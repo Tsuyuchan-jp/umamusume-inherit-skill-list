@@ -34,9 +34,10 @@ parse effects（合成 HTML fixture）/ inherit list / parse courses / obtainabl
 
 ## GitHub Pages
 
+- 公開 URL: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/
 - アカウント: `Tsuyuchan-jp`。リポジトリ名はこのまま
 - ソースは **リポジトリ全体**（`app/` だけをルートにすると `data/` と `assets/` が切れる）
 - 公開 URL のトップは `/app/` へリダイレクトする
 - Jekyll を避けるためルートに `.nojekyll` を置く
-- 初回公開の手順は [AGENT_HANDOFF.md](./AGENT_HANDOFF.md) の「次にやること」
-- 参考: `C:\Users\PC1\Projects\umamusume-sp-calc\.github\workflows\deploy-pages.yml`
+- 配信は `.github/workflows/deploy-pages.yml`（`master` push / `workflow_dispatch`。CI は `npm test` のみ）
+- Settings → Pages → Source は GitHub Actions
