@@ -272,6 +272,7 @@ body {
 .inherit-copy {
   box-sizing: border-box;
   width: 100%;
+  max-width: 24rem;
   font: inherit;
   font-size: 1.12rem;
   font-weight: 900;
