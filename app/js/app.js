@@ -466,7 +466,7 @@ function bind() {
     const ok = await copyTextToClipboard(formatSkillLines(lastResult.top));
     copyBtn.textContent = ok ? "コピーしました" : "コピー失敗";
     setTimeout(() => {
-      copyBtn.textContent = `先頭${COPY_LIMIT}件をコピー`;
+      copyBtn.textContent = "スキルリストをコピー";
     }, 1600);
   });
   document.getElementById("open-db")?.addEventListener("click", () => {

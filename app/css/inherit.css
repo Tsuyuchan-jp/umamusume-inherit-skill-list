@@ -264,9 +264,42 @@ body {
 }
 
 .inherit-result__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  display: grid;
+  gap: 0.45rem;
+  justify-items: start;
+}
+
+.inherit-copy {
+  box-sizing: border-box;
+  width: 100%;
+  font: inherit;
+  font-size: 1.12rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  padding: 0.95rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8d984, #e8b84a);
+  color: #1a1630;
+  cursor: pointer;
+  box-shadow: 0 2px 0 #c4921f;
+}
+
+.inherit-copy:not(:disabled):hover {
+  filter: brightness(1.06);
+}
+
+.inherit-copy:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+  box-shadow: none;
+}
+
+.inherit-copy:focus-visible {
+  outline: 2px solid var(--ink-deep, #463f70);
+  outline-offset: 2px;
 }
 
 .inherit-action {
@@ -281,19 +314,8 @@ body {
   cursor: pointer;
 }
 
-.inherit-action--primary {
-  background: var(--ink-deep, #463f70);
-  color: #fff;
-  border-color: transparent;
-}
-
 .inherit-action:not(:disabled):hover {
   background: var(--surface-muted, #f5f3f8);
-}
-
-.inherit-action--primary:not(:disabled):hover {
-  background: var(--ink-mid, #5a5288);
-  color: #fff;
 }
 
 .inherit-action:disabled {
