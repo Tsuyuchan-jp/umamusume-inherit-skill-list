@@ -28,7 +28,7 @@
     }
     a { color: var(--gold); }
     .wrap {
-      max-width: 1120px;
+      max-width: 1440px;
       margin: 0 auto;
       padding: 1.25rem 1rem 3.5rem;
     }
@@ -54,6 +54,9 @@
       border-radius: 14px;
       padding: 0.85rem 1rem;
       margin: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 8;
     }
     .ctrl-row { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
     .ctrl-label {
@@ -80,10 +83,27 @@
     }
     .recipes { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
-    .stage-wrap { margin-top: 1rem; }
-    .phone {
-      width: min(390px, 100%);
-      margin: 0 auto;
+    .stage-board {
+      display: grid;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+    .stage-board[data-view="phone"] .frame--pc,
+    .stage-board[data-view="pc"] .frame--phone { display: none; }
+    @media (min-width: 1100px) {
+      .stage-board[data-view="both"] {
+        grid-template-columns: 390px minmax(0, 1fr);
+        align-items: start;
+      }
+    }
+    .frame { margin: 0; }
+    figcaption {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--doc-muted);
+      margin: 0 0 0.4rem;
+    }
+    .stage {
       border-radius: 18px;
       overflow: hidden;
       border: 1px solid #554d78;
@@ -91,16 +111,18 @@
       position: relative;
       isolation: isolate;
     }
-    .phone .world {
+    .stage--phone { width: min(390px, 100%); }
+    .stage--pc { width: 100%; min-height: 640px; }
+    .stage .world {
       position: absolute;
       inset: 0;
       z-index: 0;
       pointer-events: none;
     }
-    .phone .ui {
+    .stage .ui {
       position: relative;
       z-index: 1;
-      min-height: 520px;
+      min-height: inherit;
       display: flex;
       flex-direction: column;
     }
@@ -136,13 +158,18 @@
     }
     [data-bg="illust-dusk"] .world {
       background:
-        linear-gradient(180deg, rgba(20,12,8,.45), rgba(20,12,8,.18) 38%, rgba(20,12,8,.5)),
+        linear-gradient(180deg, rgba(20,12,8,.42), rgba(20,12,8,.16) 38%, rgba(20,12,8,.48)),
         url("./bg-dusk-track.png") center / cover no-repeat #1a120c;
     }
     [data-bg="illust-dust"] .world {
       background:
         linear-gradient(180deg, rgba(12,8,6,.35), rgba(12,8,6,.12) 40%, rgba(12,8,6,.45)),
         url("./bg-gold-dust.png") center / cover no-repeat #120e0c;
+    }
+    [data-bg="illust-pixai"] .world {
+      background:
+        linear-gradient(180deg, rgba(8,10,24,.4), rgba(8,10,24,.12) 40%, rgba(8,10,24,.5)),
+        url("./bg-pixai-try.png") center / cover no-repeat #0c1020;
     }
 
     /* ---- アクセント（色は未定。切替用） ---- */
@@ -204,6 +231,21 @@
       color: #ffe9a8;
       text-decoration: underline;
       padding: 0;
+    }
+
+    /* リードなしの文字だけ（検討中の「文字のみ」） */
+    [data-header="bare"] .hdr-bare {
+      display: flex;
+      padding: 0.85rem 0.9rem 0.35rem;
+    }
+    [data-header="bare"] .hdr-bare h1 {
+      color: var(--title);
+      text-shadow: 0 1px 12px rgba(0,0,0,.7), 0 0 20px rgba(0,0,0,.4);
+    }
+    [data-header="bare"] .hdr-bare .help {
+      border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+      background: rgba(0,0,0,.28);
+      color: var(--accent);
     }
 
     [data-header="chrome"] .ui > .hdr-bar,
@@ -309,6 +351,32 @@
       background: #ff3276;
       color: #fff;
     }
+    .extra-row { display: none; }
+
+    /* PC: 背景は画面幅。中身は本番と同じ最大1180 */
+    .stage--pc .hdr-now,
+    .stage--pc .hdr-bare,
+    .stage--pc .hdr-line,
+    .stage--pc .ui > .hdr-bar,
+    .stage--pc .attach,
+    .stage--pc .main {
+      max-width: 1180px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .stage--pc .hdr-bare,
+    .stage--pc .hdr-now { padding-inline: 1rem; }
+    .stage--pc .ui > .hdr-bar { padding-inline: 1rem; }
+    .stage--pc [data-header="glass"] .ui > .hdr-bar,
+    [data-header="glass"] .stage--pc .ui > .hdr-bar {
+      margin-inline: 1rem;
+      width: calc(100% - 2rem);
+      max-width: 1148px;
+    }
+    .stage--pc .hdr h1 { font-size: 1.28rem; }
+    .stage--pc .main { padding: 0.85rem 1rem 1.4rem; }
+    .stage--pc .extra-row { display: flex; }
 
     .grid-thumbs {
       display: grid;
@@ -317,7 +385,7 @@
       margin-top: 0.6rem;
     }
     @media (min-width: 800px) {
-      .grid-thumbs { grid-template-columns: 1fr 1fr; }
+      .grid-thumbs { grid-template-columns: 1fr 1fr 1fr; }
     }
     .thumb {
       border: 1px solid var(--line);
@@ -353,7 +421,7 @@
   <div class="wrap">
     <h1>背景とヘッダーの比較</h1>
     <p class="lead">
-      本体はまだ変えていません。色は未定なのでアクセントを切替えて見てください。
+      本体はまだ変えていません。スマホと PC を並べて見てください。
       実アプリは <a href="../../app/">/app/</a>。
     </p>
 
@@ -372,130 +440,89 @@
     <h2>組み合わせ（ライブ）</h2>
     <div class="controls">
       <div class="ctrl-row">
+        <span class="ctrl-label">画面</span>
+        <div id="view-btns">
+          <button type="button" data-view="both" class="is-on">並べる</button>
+          <button type="button" data-view="pc">PC だけ</button>
+          <button type="button" data-view="phone">スマホ だけ</button>
+        </div>
+      </div>
+      <div class="ctrl-row">
         <span class="ctrl-label">レシピ</span>
         <div class="recipes">
-          <button type="button" class="recipe is-on" data-recipe="rec">推奨たたき</button>
-          <button type="button" class="recipe" data-recipe="paper">紙の仕事場</button>
-          <button type="button" class="recipe" data-recipe="glass">ガラス夜</button>
+          <button type="button" class="recipe is-on" data-recipe="dusk-glass">夕暮れ×ガラス×ティール</button>
+          <button type="button" class="recipe" data-recipe="dusk-bare">夕暮れ×文字のみ×ティール</button>
+          <button type="button" class="recipe" data-recipe="rec">CSS夜×クロム</button>
           <button type="button" class="recipe" data-recipe="now">現状</button>
         </div>
       </div>
       <div class="ctrl-row" id="bg-btns">
         <span class="ctrl-label">背景</span>
         <button type="button" data-bg="now">現状 uma-world</button>
-        <button type="button" data-bg="css-night" class="is-on">CSS 金塵の夜</button>
+        <button type="button" data-bg="css-night">CSS 金塵の夜</button>
         <button type="button" data-bg="css-paper">CSS 紙</button>
         <button type="button" data-bg="css-track">CSS トラック</button>
-        <button type="button" data-bg="illust-dusk">挿絵 夕暮れ</button>
+        <button type="button" data-bg="illust-dusk" class="is-on">挿絵 夕暮れ</button>
         <button type="button" data-bg="illust-dust">挿絵 金塵</button>
+        <button type="button" data-bg="illust-pixai">PixAI 試行</button>
       </div>
       <div class="ctrl-row" id="hd-btns">
         <span class="ctrl-label">ヘッダー</span>
-        <button type="button" data-header="now">現状 文字のみ</button>
-        <button type="button" data-header="chrome" class="is-on">全幅クロム</button>
-        <button type="button" data-header="glass">ガラス帯</button>
+        <button type="button" data-header="now">現状（リード付き）</button>
+        <button type="button" data-header="bare">文字のみ（リードなし）</button>
+        <button type="button" data-header="chrome">全幅クロム</button>
+        <button type="button" data-header="glass" class="is-on">ガラス帯</button>
         <button type="button" data-header="line">金ラインのみ</button>
         <button type="button" data-header="attach">パネル食い込み</button>
       </div>
       <div class="ctrl-row" id="ac-btns">
         <span class="ctrl-label">色（未定）</span>
-        <button type="button" data-accent="gold" class="is-on">金アンバー</button>
-        <button type="button" data-accent="teal">ティール</button>
+        <button type="button" data-accent="gold">金アンバー</button>
+        <button type="button" data-accent="teal" class="is-on">ティール</button>
         <button type="button" data-accent="ink">紫インク</button>
       </div>
       <p class="note" id="combo-note"></p>
     </div>
 
-    <div class="stage-wrap">
-      <div class="phone" id="phone" data-bg="css-night" data-header="chrome" data-accent="gold">
-        <div class="world" aria-hidden="true"></div>
-        <div class="ui">
-          <header class="hdr hdr-now">
-            <h1>継承白因子リスト</h1>
-            <p>任意コースの有効スキル（白∩共通）から、本育成で取れる分を除いた先頭25件をコピーします。</p>
-            <button type="button" class="help">使い方</button>
-          </header>
-          <header class="hdr hdr-bar">
-            <h1>継承白因子リスト</h1>
-            <button type="button" class="help">使い方</button>
-          </header>
-          <header class="hdr hdr-line">
-            <h1>継承白因子リスト</h1>
-            <button type="button" class="help">使い方</button>
-          </header>
-          <div class="attach">
-            <header class="hdr hdr-bar">
-              <h1>継承白因子リスト</h1>
-              <button type="button" class="help">使い方</button>
-            </header>
-            <div class="attach-body">
-              <div class="chips">
-                <span class="chip on">東京</span>
-                <span class="chip">中山</span>
-                <span class="chip">阪神</span>
-              </div>
-            </div>
-          </div>
-          <div class="main">
-            <section class="panel fake-course">
-              <h2>場 / 距離 / 脚質</h2>
-              <div class="chips">
-                <span class="chip on">東京</span>
-                <span class="chip">中山</span>
-                <span class="chip">阪神</span>
-              </div>
-              <div class="chips" style="margin-top:0.35rem">
-                <span class="chip on">芝 1600 左</span>
-                <span class="chip">芝 2000 左</span>
-              </div>
-            </section>
-            <section class="panel">
-              <h2>先頭25件</h2>
-              <div class="row"><span>直線巧者</span><span>0.35 バ</span></div>
-              <div class="row"><span>コーナー回復○</span><span>0.22 バ</span></div>
-              <button type="button" class="copy">先頭25件をコピー</button>
-            </section>
-          </div>
+    <div id="board" class="stage-board" data-view="both" data-bg="illust-dusk" data-header="glass" data-accent="teal">
+      <figure class="frame frame--phone">
+        <figcaption>スマホ（390）</figcaption>
+        <div class="stage stage--phone">
+          <div class="world" aria-hidden="true"></div>
+          <div class="ui" data-mount></div>
         </div>
-      </div>
+      </figure>
+      <figure class="frame frame--pc">
+        <figcaption>PC（背景は画面幅。中身は本番と同じ最大1180・1カラム）</figcaption>
+        <div class="stage stage--pc">
+          <div class="world" aria-hidden="true"></div>
+          <div class="ui" data-mount></div>
+        </div>
+      </figure>
     </div>
 
-    <h2>いまの推奨（たたき・色は未定）</h2>
+    <h2>いまの見方</h2>
     <p class="verdict">
-      背景は <strong>CSS 金塵の夜</strong>、ヘッダーは <strong>全幅クロム</strong>。
-      挿絵の夕暮れは綺麗だが、白いパネルと競って視線が散る。金塵挿絵は CSS 夜と近いので、挿絵を使うなら夕暮れより金塵。
-      パネル食い込みは sp-calc と同じ骨格なので、差別化の主戦場にしない。
-      ガラス帯と金ラインは、明るい背景だと再び読みにくい。
+      PixAI 試行は縦構図で照明が強く、横長の夕暮れ挿絵の方が UI の下地向き、という判断で進める。
+      「文字のみ」はリードなしのタイトル＋使い方。PC 幅だとタイトルが空に溶けやすいので、ガラス帯の方が額縁になる。
+      ガラス帯×ティールを先に、文字のみは PC 並べでコントラストを見て決める。
     </p>
 
-    <h2>挿絵プレースホルダ（生成した比較用）</h2>
-    <p class="note">キャラなし・ロゴなし。本番採用ではなく方向の確認用。PixAI で取り直す前提。</p>
+    <h2>挿絵の比較</h2>
     <div class="grid-thumbs">
       <div>
         <div class="thumb" style="background-image:url('./bg-dusk-track.png'); height:160px"></div>
-        <p class="thumb-cap">夕暮れの空コース。世界観は強い。UI の下地にはコントラスト調整が要る。</p>
+        <p class="thumb-cap">夕暮れ挿絵（横長・空とコース）。いま有力。</p>
+      </div>
+      <div>
+        <div class="thumb" style="background-image:url('./bg-pixai-try.png'); height:160px"></div>
+        <p class="thumb-cap">PixAI 試行。縦の直線コースで、PC 幅に広げると端が切れる。</p>
       </div>
       <div>
         <div class="thumb" style="background-image:url('./bg-gold-dust.png'); height:160px"></div>
-        <p class="thumb-cap">抽象の金塵。因子の比喩に近い。CSS だけでも近似できる。</p>
+        <p class="thumb-cap">抽象の金塵。因子の比喩。CSS 夜でも近い。</p>
       </div>
     </div>
-
-    <h2>画像の探し方 / PixAI</h2>
-    <div class="thought">
-      <ul>
-        <li>公式 CG やゲーム画面の流用はしない（権利と、sp-calc との被り）。</li>
-        <li>パネルの幾何タイル（<code>bg.webp</code>）はカード面用。舞台にはしない。</li>
-        <li>探すなら「キャラが中央にいない横長の競馬場／夜空／紙」。人物がいるとカード画像と喧嘩する。</li>
-        <li>PixAI はこちらから操作できない。下のプロンプトを入れて、横長・人物なしで数枚出してからこのモックの挿絵枠に差し替えたい。</li>
-      </ul>
-    </div>
-    <p class="note">PixAI 用（英語。人物・文字・ロゴなし）</p>
-    <pre>Empty Japanese horse racetrack at night, no people, no horses, no text, no logo.
-Gold dust sparkles in the air, warm amber lights, indigo sky, elegant quiet atmosphere,
-cinematic wide landscape, 16:9, background plate for a mobile app.</pre>
-    <pre>Abstract luxury wallpaper, dark espresso and gold dust particles, faint oval track arc,
-silk paper grain, no characters, no text, calm, 16:9, UI background.</pre>
 
     <h2>本体に入れるとき（まだやらない）</h2>
     <ul class="note">
@@ -503,20 +530,83 @@ silk paper grain, no characters, no text, calm, 16:9, UI background.</pre>
       <li>コース選択の大きな作り直しはしない。</li>
     </ul>
   </div>
+
+  <template id="ui-tpl">
+    <header class="hdr hdr-now">
+      <h1>継承白因子リスト</h1>
+      <p>任意コースの有効スキル（白∩共通）から、本育成で取れる分を除いた先頭25件をコピーします。</p>
+      <button type="button" class="help">使い方</button>
+    </header>
+    <header class="hdr hdr-bare">
+      <h1>継承白因子リスト</h1>
+      <button type="button" class="help">使い方</button>
+    </header>
+    <header class="hdr hdr-bar">
+      <h1>継承白因子リスト</h1>
+      <button type="button" class="help">使い方</button>
+    </header>
+    <header class="hdr hdr-line">
+      <h1>継承白因子リスト</h1>
+      <button type="button" class="help">使い方</button>
+    </header>
+    <div class="attach">
+      <header class="hdr hdr-bar">
+        <h1>継承白因子リスト</h1>
+        <button type="button" class="help">使い方</button>
+      </header>
+      <div class="attach-body">
+        <div class="chips">
+          <span class="chip on">東京</span>
+          <span class="chip">中山</span>
+          <span class="chip">阪神</span>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <section class="panel fake-course">
+        <h2>場 / 距離 / 脚質</h2>
+        <div class="chips">
+          <span class="chip on">東京</span>
+          <span class="chip">中山</span>
+          <span class="chip">阪神</span>
+        </div>
+        <div class="chips" style="margin-top:0.35rem">
+          <span class="chip on">芝 1600 左</span>
+          <span class="chip">芝 2000 左</span>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>先頭25件</h2>
+        <div class="row"><span>直線巧者</span><span>0.35 バ</span></div>
+        <div class="row"><span>コーナー回復○</span><span>0.22 バ</span></div>
+        <div class="row extra-row"><span>末脚</span><span>0.18 バ</span></div>
+        <div class="row extra-row"><span>位置取り押し上げ</span><span>0.15 バ</span></div>
+        <button type="button" class="copy">先頭25件をコピー</button>
+      </section>
+    </div>
+  </template>
+
   <script>
-    const phone = document.getElementById("phone");
+    const board = document.getElementById("board");
     const note = document.getElementById("combo-note");
+    const tpl = document.getElementById("ui-tpl").content;
+    document.querySelectorAll("[data-mount]").forEach((el) => {
+      el.appendChild(tpl.cloneNode(true));
+    });
+
     const labels = {
       bg: {
         now: "現状の競馬場イラスト（差し替え対象）",
         "css-night": "CSS だけの金塵の夜",
         "css-paper": "CSS の紙・インク",
         "css-track": "CSS のトラック幾何",
-        "illust-dusk": "生成した夕暮れ挿絵",
-        "illust-dust": "生成した金塵挿絵",
+        "illust-dusk": "夕暮れ挿絵",
+        "illust-dust": "金塵挿絵",
+        "illust-pixai": "PixAI 試行",
       },
       header: {
-        now: "文字だけ（読みにくい）",
+        now: "現状（リード付き文字）",
+        bare: "文字のみ（リードなし）",
         chrome: "全幅クロム",
         glass: "ガラス帯",
         line: "金ラインのみ",
@@ -525,47 +615,60 @@ silk paper grain, no characters, no text, calm, 16:9, UI background.</pre>
       accent: { gold: "金アンバー", teal: "ティール", ink: "紫インク" },
     };
     const recipes = {
+      "dusk-glass": { bg: "illust-dusk", header: "glass", accent: "teal" },
+      "dusk-bare": { bg: "illust-dusk", header: "bare", accent: "teal" },
       rec: { bg: "css-night", header: "chrome", accent: "gold" },
-      paper: { bg: "css-paper", header: "chrome", accent: "gold" },
-      glass: { bg: "css-night", header: "glass", accent: "teal" },
       now: { bg: "now", header: "now", accent: "ink" },
     };
 
     function syncButtons() {
-      document.querySelectorAll("[data-bg]").forEach((b) => {
-        b.classList.toggle("is-on", b.dataset.bg === phone.dataset.bg);
+      document.querySelectorAll("#bg-btns [data-bg]").forEach((b) => {
+        b.classList.toggle("is-on", b.dataset.bg === board.dataset.bg);
       });
-      document.querySelectorAll("[data-header]").forEach((b) => {
-        b.classList.toggle("is-on", b.dataset.header === phone.dataset.header);
+      document.querySelectorAll("#hd-btns [data-header]").forEach((b) => {
+        b.classList.toggle("is-on", b.dataset.header === board.dataset.header);
       });
-      document.querySelectorAll("[data-accent]").forEach((b) => {
-        b.classList.toggle("is-on", b.dataset.accent === phone.dataset.accent);
+      document.querySelectorAll("#ac-btns [data-accent]").forEach((b) => {
+        b.classList.toggle("is-on", b.dataset.accent === board.dataset.accent);
+      });
+      document.querySelectorAll("#view-btns [data-view]").forEach((b) => {
+        b.classList.toggle("is-on", b.dataset.view === board.dataset.view);
       });
       note.textContent =
-        labels.bg[phone.dataset.bg] + " × " +
-        labels.header[phone.dataset.header] + " × " +
-        labels.accent[phone.dataset.accent];
+        labels.bg[board.dataset.bg] + " × " +
+        labels.header[board.dataset.header] + " × " +
+        labels.accent[board.dataset.accent];
+    }
+
+    function clearRecipe() {
+      document.querySelectorAll(".recipe").forEach((r) => r.classList.remove("is-on"));
     }
 
     document.getElementById("bg-btns").addEventListener("click", (e) => {
       const t = e.target.closest("[data-bg]");
       if (!t) return;
-      phone.dataset.bg = t.dataset.bg;
-      document.querySelectorAll(".recipe").forEach((r) => r.classList.remove("is-on"));
+      board.dataset.bg = t.dataset.bg;
+      clearRecipe();
       syncButtons();
     });
     document.getElementById("hd-btns").addEventListener("click", (e) => {
       const t = e.target.closest("[data-header]");
       if (!t) return;
-      phone.dataset.header = t.dataset.header;
-      document.querySelectorAll(".recipe").forEach((r) => r.classList.remove("is-on"));
+      board.dataset.header = t.dataset.header;
+      clearRecipe();
       syncButtons();
     });
     document.getElementById("ac-btns").addEventListener("click", (e) => {
       const t = e.target.closest("[data-accent]");
       if (!t) return;
-      phone.dataset.accent = t.dataset.accent;
-      document.querySelectorAll(".recipe").forEach((r) => r.classList.remove("is-on"));
+      board.dataset.accent = t.dataset.accent;
+      clearRecipe();
+      syncButtons();
+    });
+    document.getElementById("view-btns").addEventListener("click", (e) => {
+      const t = e.target.closest("[data-view]");
+      if (!t) return;
+      board.dataset.view = t.dataset.view;
       syncButtons();
     });
     document.querySelector(".recipes").addEventListener("click", (e) => {
@@ -573,9 +676,9 @@ silk paper grain, no characters, no text, calm, 16:9, UI background.</pre>
       if (!t) return;
       document.querySelectorAll(".recipe").forEach((r) => r.classList.toggle("is-on", r === t));
       const r = recipes[t.dataset.recipe];
-      phone.dataset.bg = r.bg;
-      phone.dataset.header = r.header;
-      phone.dataset.accent = r.accent;
+      board.dataset.bg = r.bg;
+      board.dataset.header = r.header;
+      board.dataset.accent = r.accent;
       syncButtons();
     });
     syncButtons();
