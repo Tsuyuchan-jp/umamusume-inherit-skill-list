@@ -183,11 +183,16 @@
     </dialog>
 
     <script type="module">
+      const helpDialog = document.getElementById("help-dialog");
       document.getElementById("help-open")?.addEventListener("click", () => {
-        document.getElementById("help-dialog")?.showModal();
+        helpDialog?.showModal();
       });
       document.getElementById("help-close")?.addEventListener("click", () => {
-        document.getElementById("help-dialog")?.close();
+        helpDialog?.close();
+      });
+      // ダイアログ外（backdrop）クリックで閉じる
+      helpDialog?.addEventListener("click", (e) => {
+        if (e.target === helpDialog) helpDialog.close();
       });
     </script>
     <script type="module" src="js/app.js"></script>
