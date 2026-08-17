@@ -48,16 +48,15 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
 
-**いま:** 背景差し替え + ヘッダー。本体未着手。比較モック [mocks/header-bg-options.html](./mocks/header-bg-options.html)（`npm run serve` → `/docs/mocks/header-bg-options.html`）。
+**いま:** 背景差し替え + ヘッダー。本体未着手。比較は [mocks/layout-band-vs-umatoo.html](./mocks/layout-band-vs-umatoo.html)（帯挿絵 vs UmaTools寄せ）。
 
 合意メモ:
 
 - コースチップ視認性は現状で足りる（「すべて見る」は常用しない）
-- 背景は差し替え必須。同じ `uma-world` の色変えでは足りない。夕暮れ挿絵が有力（PixAI 試行よりこちら）
-- 検討中: 夕暮れ × 文字のみ（リードなし）or ガラス帯 × ティール。PC 幅でも見る
+- 全面 `uma-world` はやめる。UmaToolsのシンプルでリッチな構成が近い、という感触
+- 比較中: A ヘッダー帯だけ夕暮れ挿絵 / B 画像なし・暗い作業面・金とピンク
 - ヘッダーのリード文は外す。使い方改修（後で）に同趣旨を入れる
-- 色は未定。モックで金 / ティール / 紫を切替
-- デザイン寄りはモック複数案比較で進める（スマホと PC を並べる）
+- デザイン寄りはモック複数案比較で進める
 
 後回し:
 
@@ -76,11 +75,11 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
-| 背景ヘッダー比較 | `docs/mocks/header-bg-options.html` |
+| 背景ヘッダー比較 | `docs/mocks/layout-band-vs-umatoo.html` `docs/mocks/header-bg-options.html` |
 
 ## 新チャットの最初のメッセージ例
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-背景＋ヘッダーはモック比較中（本体未着手）。docs/mocks/header-bg-options.html から続けて。
+背景＋ヘッダーはモック比較中（本体未着手）。docs/mocks/layout-band-vs-umatoo.html から続けて。
 ```

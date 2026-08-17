@@ -4,9 +4,10 @@
 
 ## 次（合意済み）
 
-- [ ] **背景差し替え + ヘッダー** — モック比較中。本体はまだ変えない。比較: [mocks/header-bg-options.html](./mocks/header-bg-options.html)（スマホと PC を並べる）
-  - 背景は差し替え必須。夕暮れ挿絵が有力（PixAI 試行より横長の方が UI 下地向き）
-  - 気になっている組み合わせ: 夕暮れ × 文字のみ（リードなし）or ガラス帯 × ティール
+- [ ] **背景差し替え + ヘッダー** — モック比較中。本体はまだ変えない
+  - いまの比較: [mocks/layout-band-vs-umatoo.html](./mocks/layout-band-vs-umatoo.html)（帯挿絵 vs UmaTools寄せ・画像なし）
+  - 全面壁紙の旧比較: [mocks/header-bg-options.html](./mocks/header-bg-options.html)
+  - UmaToolsの構成（細いナビ・暗いカード）＋ウマ娘色（金・ピンク）がイメージに近い、という方向
   - ヘッダーのリード文は外す（使い方改修で同趣旨を入れる）
   - コース選択の大きな作り直しはしない
 
