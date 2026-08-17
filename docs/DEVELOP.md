@@ -34,9 +34,9 @@ parse effects（合成 HTML fixture）/ inherit list / parse courses / obtainabl
 
 ## GitHub Pages
 
-push / Pages の実行はユーザーが明示したときだけ。README の使い方は公開 URL 前提。
-
 - アカウント: `Tsuyuchan-jp`。リポジトリ名はこのまま
 - ソースは **リポジトリ全体**（`app/` だけをルートにすると `data/` と `assets/` が切れる）
 - 公開 URL のトップは `/app/` へリダイレクトする
 - Jekyll を避けるためルートに `.nojekyll` を置く
+- 初回公開の手順は [AGENT_HANDOFF.md](./AGENT_HANDOFF.md) の「次にやること」
+- 参考: `C:\Users\PC1\Projects\umamusume-sp-calc\.github\workflows\deploy-pages.yml`

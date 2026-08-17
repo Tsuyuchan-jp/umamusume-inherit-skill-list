@@ -4,9 +4,11 @@
 
 ## 次（合意済み）
 
-- [ ] **GitHub Pages 公開** — ユーザー明示時のみ。push も明示時のみ
+- [ ] **GitHub Pages 初回公開** — このタスクでは push してよい
+  - アカウント `Tsuyuchan-jp`。リポジトリ名はそのまま
   - URL: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/
   - リポジトリ全体を出す。`app/` だけをルートにしない
+  - remote 未設定。sp-calc の Actions Pages を参考にする
 
 ## 完了
 

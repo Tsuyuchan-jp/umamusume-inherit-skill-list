@@ -10,7 +10,7 @@
 | パス | `C:\Users\PC1\Projects\umamusume-inherit-skill-list` |
 | 形態 | 静的 HTML/JS + JSON。公開は GitHub Pages（`/app/`）。ローカルは `npm run serve` |
 | 目的 | ウマ娘DBでレンタル継承親を探すとき、スキルを OR 条件で並べる元リストをコピーする。中身は任意コース・脚質の U-tools 有効スキル（白∩共通）から本育成で取れる分を除いた先頭25件。貼り付け先は [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) |
-| 公開 | まだ。remote 未設定。push / Pages はユーザー明示時のみ。URL 予定: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ |
+| 公開 | まだ。**remote 未設定**。URL 予定: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ |
 | 言語 | ユーザー向け応答・コードコメントは日本語 |
 
 **触らない:** `umamusume-sp-calc` 本体には機能追加しない。画像・ピッカー・JSON は流用済み。v1 の機能・見た目は完了。大きな UI 変更をしない。
@@ -29,7 +29,7 @@
 - 「U-tools の有効スキルを開く」→ `/race/courses/{courseId}/effects/{style}`。文言に場・距離（回り）・芝/ダ・脚質（例: 東京 2400m 左 芝・先行）
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
 - 背景 z-index 修正済み
-- **UI:** 全面イラストなし。暗い帽子ヘッダー＋白い机＋メッシュ下地（左上紫・右下金）。リード文はヘッダーに出さない
+- **UI:** 全面イラストなし。暗い帽子ヘッダー＋白い机＋メッシュ下地（左上紫・右下金）。リード文はヘッダーに出さない。**CSS 間引き後も実機OK**（編成カード重なりはメディアクエリ閉じ漏れで、直して確認済み）
 - **使い方:** 目的（ウマ娘DBでレンタル継承親を探すときの OR 元リスト）＋中身＋手順は常時表示。計上の前提・リストの見方は折りたたみ。extract は出さない。レンタル因子貼り付けへリンク。閉じるは×と外側クリック。非公式注記あり
 - **結果枠:** 見出しは「不足しているかもしれないスキルリスト」。コピーは金ボタン「スキルリストをコピー」（幅100%・上限24rem。スマホ全幅／PCは左寄せ）。ウマ娘DBは白枠の補助ボタン
 
@@ -44,8 +44,9 @@
 - シナリオ UI なし → トレセン軒の **自動付与のみ** 除外。リンク6択・ラーメン3択は見ない
 - コピー既定: 有効順の先頭25件（改行のスキル名。rental-factor-fill が解釈できる）。ボタン文言は「スキルリストをコピー」
 - ウマ娘DB入力は既存ユーザースクリプト。このアプリに入れない（別オリジンのため不可）
-- Git: 変更のたびコミット。PowerShell は `git add .` と `git commit` を別ステップ。push は明示時のみ
+- Git: 変更のたびコミット。PowerShell は `git add .` と `git commit` を別ステップ
 - Pages するときはリポジトリ全体。`app/` だけをルートにしない。ルート `index.html` が `/app/` へ飛ばす。`.nojekyll` 済み
+- アカウントは `Tsuyuchan-jp`。リポジトリ名は変更しない。sp-calc と同じく GitHub Actions で Pages（参考: `umamusume-sp-calc/.github/workflows/deploy-pages.yml`）
 
 U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/{style}`  
 脚質: `runner` / `leader` / `betweener` / `chaser`
@@ -54,7 +55,15 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** 公開前レビューは一通り完了。次は GitHub Pages 公開（ユーザー明示時）。機能追加・見た目の作り直しはしない。push も明示時のみ。
+**いま:** GitHub Pages 初回公開。機能追加・見た目の作り直しはしない。
+
+進め方の目安（sp-calc に合わせる）:
+
+1. GitHub に空リポジトリを作る（`Tsuyuchan-jp/umamusume-inherit-skill-list`。public。README は作らない）
+2. `origin` を足す（いま remote なし）
+3. Pages 用 workflow を sp-calc を参考に入れる（サイトルート＝リポジトリ直下）。このリポジトリに `npm run verify` は無い。`npm test` だけでよい
+4. Settings → Pages → Source を GitHub Actions
+5. `master` へ push → https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ を確認
 
 合意メモ:
 
@@ -64,13 +73,13 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 - v1 機能・デザインは完了（実機OK）
 - モック（`docs/mocks/`・`app/mock-course-ui.html`）は削除済み
 - README は利用者向け（Pages URL）。extract は `docs/DEVELOP.md`
-- CSS は `chrome.css`（トークン＋ピッカー＋編成）＋ `inherit.css`。sp-calc の `style.css` / `foundation.css` は削除済み
+- CSS は `chrome.css`＋`inherit.css`。間引き後の編成カード重なりは直して実機OK
+- 公開前レビュー完了。モック削除済み。README は Pages URL 前提
 
 後回し:
 
 - 全コース分の `extract:effects` 一括（やらない。金ドット36件）
 - アプリ内から extract
-- GitHub Pages 公開そのもの（ユーザー明示時）
 - フィルタ精密化
 
 コース選択の大きな作り直しはしない（v1）。
@@ -91,7 +100,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-v1 の機能とデザインは完了（実機OK）。公開前レビューも完了。
-次は GitHub Pages 公開。push / Pages は明示するまでやらない。
-見た目の作り直しと機能追加はしない。
+v1 の機能・デザイン・公開前レビューは完了（実機OK）。
+次は GitHub Pages の初回公開です。このチャットでは push / Pages まで進めてよい。
+アカウントは Tsuyuchan-jp、リポジトリ名はこのまま。見た目の作り直しと機能追加はしない。
 ```
