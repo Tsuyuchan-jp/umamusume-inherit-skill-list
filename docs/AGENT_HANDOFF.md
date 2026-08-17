@@ -48,13 +48,13 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
 
-**いま:** UmaTools寄せ。2（明るい計算機）と3（暗い帽子＋白い机）が有力。机のCSS下地 [mocks/umatoo-bg-texture.html](./mocks/umatoo-bg-texture.html)。本体未着手。
+**いま:** UmaTools寄せ。2と3が有力。メッシュ確認は [mocks/umatoo-mesh-preview.html](./mocks/umatoo-mesh-preview.html)（前回薄すぎた）。本体未着手。
 
 合意メモ:
 
 - コースチップ視認性は現状で足りる
 - 全面壁紙はやめる。構成は UmaTools 寄せ
-- 色は 2 と 3 がよい。下地を単色以外のCSSで少し凝る案を比較中
+- 色は 2 と 3 がよい。メッシュ下地は前回薄すぎたので確認用モックあり（`umatoo-mesh-preview.html`）
 - ヘッダーのリード文は外す。使い方改修（後で）に同趣旨を入れる
 
 後回し:
@@ -74,11 +74,11 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
-| 背景ヘッダー比較 | `docs/mocks/umatoo-bg-texture.html` `docs/mocks/umatoo-palettes.html` `docs/mocks/layout-band-vs-umatoo.html` |
+| 背景ヘッダー比較 | `docs/mocks/umatoo-mesh-preview.html` `docs/mocks/umatoo-bg-texture.html` `docs/mocks/umatoo-palettes.html` |
 
 ## 新チャットの最初のメッセージ例
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-背景＋ヘッダーは 2/3 の色と机のCSS下地を比較中（本体未着手）。docs/mocks/umatoo-bg-texture.html から続けて。
+背景＋ヘッダーは 2/3 と机の下地を比較中。メッシュ確認は docs/mocks/umatoo-mesh-preview.html。本体未着手。
 ```

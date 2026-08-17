@@ -5,7 +5,8 @@
 ## 次（合意済み）
 
 - [ ] **背景差し替え + ヘッダー** — モック比較中。本体はまだ変えない
-  - 方向は B（UmaTools寄せ・画像なし）。2と3が有力。机のCSS下地: [mocks/umatoo-bg-texture.html](./mocks/umatoo-bg-texture.html)
+  - 2と3が有力。机のCSS下地: [mocks/umatoo-bg-texture.html](./mocks/umatoo-bg-texture.html)
+  - メッシュ確認（濃いめ）: [mocks/umatoo-mesh-preview.html](./mocks/umatoo-mesh-preview.html)
   - 色の比較: [mocks/umatoo-palettes.html](./mocks/umatoo-palettes.html)
   - 帯挿絵との比較: [mocks/layout-band-vs-umatoo.html](./mocks/layout-band-vs-umatoo.html)
   - ヘッダーのリード文は外す（使い方改修で同趣旨を入れる）

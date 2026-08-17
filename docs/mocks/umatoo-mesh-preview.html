@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>モック: メッシュ下地を確認する</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --font: "Zen Maru Gothic", Meiryo, sans-serif;
+      --doc: #121018;
+      --muted: #a8a0b4;
+      --gold: #f5cf6f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--doc);
+      color: #f4f0e8;
+      line-height: 1.5;
+    }
+    a { color: var(--gold); }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 1.1rem 1rem 3rem; }
+    h1 { font-size: 1.2rem; margin: 0 0 0.3rem; font-weight: 900; }
+    .lead { margin: 0 0 0.9rem; color: var(--muted); font-size: 0.88rem; }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+      margin: 0 0 1rem;
+    }
+    .controls span { font-size: 0.75rem; color: var(--muted); font-weight: 700; margin-right: 0.15rem; }
+    .controls button, .controls label {
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid #554d78;
+      background: #2a2540;
+      color: #ddd8ef;
+      border-radius: 999px;
+      padding: 0.32rem 0.75rem;
+      cursor: pointer;
+    }
+    .controls button.is-on, .controls label:has(:checked) {
+      background: var(--gold);
+      color: #3a2a00;
+      border-color: transparent;
+    }
+    .controls label input { display: none; }
+
+    .split {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (min-width: 900px) {
+      .split { grid-template-columns: 1fr 1fr; }
+    }
+    .panel {
+      border: 1px solid #3a3448;
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .panel h2 {
+      margin: 0;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.78rem;
+      background: #1e1a28;
+      color: var(--gold);
+      border-bottom: 1px solid #3a3448;
+    }
+    .swatch {
+      min-height: 260px;
+      background-color: var(--page);
+    }
+
+    .stages { display: grid; gap: 0.85rem; }
+    @media (min-width: 900px) {
+      .stages { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    figure { margin: 0; }
+    figcaption {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 0 0 0.35rem;
+    }
+    figcaption span {
+      display: block;
+      font-weight: 500;
+      color: var(--muted);
+      font-size: 0.72rem;
+      margin-top: 0.1rem;
+    }
+    .frame {
+      border: 1px solid #3a3448;
+      border-radius: 14px;
+      overflow: hidden;
+      color: var(--text);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.55rem 0.85rem;
+      background: var(--nav);
+      color: var(--nav-text);
+      border-bottom: 1px solid var(--nav-line);
+    }
+    .nav strong { font-size: 0.85rem; }
+    .nav em { font-style: normal; color: var(--accent); }
+    .desk { min-height: 220px; padding: 0.75rem; background-color: var(--page); }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 0.65rem 0.75rem;
+      box-shadow: 0 4px 14px rgba(26,36,51,.08);
+      max-width: 22rem;
+    }
+    .card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 0.85rem;
+      border-bottom: 3px solid var(--accent);
+      display: inline-block;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      background: var(--row);
+      border-radius: 8px;
+      padding: 0.32rem 0.45rem;
+      font-size: 0.75rem;
+      margin-top: 0.22rem;
+    }
+    body.hide-cards .card { opacity: 0.12; }
+
+    [data-theme="calc"] {
+      --page: #f4f0ea;
+      --nav: #fffaf4;
+      --nav-line: rgba(70,63,112,.12);
+      --nav-text: #463f70;
+      --text: #703a13;
+      --accent: #c9a024;
+      --card: #fff;
+      --row: #f5f3f8;
+    }
+    [data-theme="hybrid"] {
+      --page: #f3eef6;
+      --nav: #1a1628;
+      --nav-line: transparent;
+      --nav-text: #f8fafc;
+      --text: #703a13;
+      --accent: #f5cf6f;
+      --card: #fff;
+      --row: #f5f3f8;
+    }
+    [data-theme="hybrid"] .nav em { color: #f5cf6f; }
+
+    /* 左上＝薄紫、右下＝金。確認しやすいよう前回より濃い */
+    .mesh-weak {
+      background:
+        radial-gradient(720px 340px at 0% 0%, rgba(90, 70, 160, 0.22), transparent 58%),
+        radial-gradient(680px 320px at 100% 100%, rgba(201, 160, 36, 0.24), transparent 55%),
+        var(--page);
+    }
+    .mesh-mid {
+      background:
+        radial-gradient(760px 360px at 0% 0%, rgba(90, 70, 160, 0.38), transparent 60%),
+        radial-gradient(700px 340px at 100% 100%, rgba(201, 160, 36, 0.4), transparent 56%),
+        var(--page);
+    }
+    .mesh-strong {
+      background:
+        radial-gradient(800px 380px at 0% 0%, rgba(90, 70, 160, 0.55), transparent 62%),
+        radial-gradient(740px 360px at 100% 100%, rgba(201, 160, 36, 0.58), transparent 58%),
+        var(--page);
+    }
+
+    .legend {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0 0 0.75rem;
+    }
+    .legend i {
+      display: inline-block;
+      width: 0.85rem;
+      height: 0.85rem;
+      border-radius: 4px;
+      vertical-align: -0.1rem;
+      margin-right: 0.25rem;
+    }
+    .legend .p { background: rgb(90, 70, 160); }
+    .legend .g { background: rgb(201, 160, 36); }
+    .note { color: var(--muted); font-size: 0.8rem; margin: 1rem 0 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>メッシュ下地を確認する</h1>
+    <p class="lead">
+      前回は透明度が低すぎて、カードの陰に消えていました。ここでは机を広く取り、紫（左上）と金（右下）をはっきり出しています。
+      他の下地は <a href="./umatoo-bg-texture.html">こちら</a>。
+    </p>
+    <p class="legend">
+      <span><i class="p"></i>薄紫の光（左上）</span>
+      <span><i class="g"></i>金の光（右下）</span>
+    </p>
+    <div class="controls">
+      <span>色</span>
+      <button type="button" data-theme="calc" class="is-on">2 明るい計算機</button>
+      <button type="button" data-theme="hybrid">3 暗い帽子＋白い机</button>
+      <span style="margin-left:0.6rem">カード</span>
+      <label><input type="checkbox" id="hide-cards" />机だけ見る</label>
+    </div>
+
+    <div class="split" id="bare">
+      <div class="panel" data-theme="calc">
+        <h2>単色（比較）</h2>
+        <div class="swatch" style="background: var(--page)"></div>
+      </div>
+      <div class="panel" data-theme="calc">
+        <h2>メッシュ・確認用（カードなし）</h2>
+        <div class="swatch mesh-mid"></div>
+      </div>
+    </div>
+
+    <div class="stages" id="stages"></div>
+    <p class="note">
+      「弱い」が本番候補に近い濃さです。「確認用」「強め」は見分けるための強調で、このまま本体に入れると主張が強すぎます。
+    </p>
+  </div>
+  <template id="ui">
+    <header class="nav"><strong>継承白因子<em>リスト</em></strong><span style="font-size:0.7rem">使い方</span></header>
+    <div class="desk">
+      <section class="card">
+        <h3>先頭25件</h3>
+        <div class="row"><span>直線巧者</span><span>0.35 バ</span></div>
+        <div class="row"><span>コーナー回復○</span><span>0.22 バ</span></div>
+      </section>
+    </div>
+  </template>
+  <script>
+    const levels = [
+      { cls: "mesh-weak", title: "弱い（本番候補）", cap: "端が少し色づく程度。" },
+      { cls: "mesh-mid", title: "確認用", cap: "紫と金がはっきり分かる。" },
+      { cls: "mesh-strong", title: "強め", cap: "やりすぎの上限。雰囲気の確認用。" },
+    ];
+    const tpl = document.getElementById("ui").content;
+    const stages = document.getElementById("stages");
+    const themed = [...document.querySelectorAll("[data-theme]")];
+    for (const lv of levels) {
+      const fig = document.createElement("figure");
+      fig.innerHTML = "<figcaption>" + lv.title + "<span>" + lv.cap + "</span></figcaption>";
+      const frame = document.createElement("div");
+      frame.className = "frame";
+      frame.dataset.theme = "calc";
+      frame.appendChild(tpl.cloneNode(true));
+      frame.querySelector(".desk").classList.add(lv.cls);
+      fig.appendChild(frame);
+      stages.appendChild(fig);
+      themed.push(frame);
+    }
+    document.querySelector(".controls").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-theme]");
+      if (!b) return;
+      document.querySelectorAll(".controls [data-theme]").forEach((x) => x.classList.toggle("is-on", x === b));
+      themed.forEach((el) => { el.dataset.theme = b.dataset.theme; });
+    });
+    document.getElementById("hide-cards").addEventListener("change", (e) => {
+      document.body.classList.toggle("hide-cards", e.target.checked);
+    });
+  </script>
+</body>
+</html>
