@@ -857,6 +857,7 @@ body {
   .deck-slot--character {
     width: 4.75rem;
   }
+}
 
 .deck-slot {
   display: block;
