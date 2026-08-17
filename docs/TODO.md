@@ -5,9 +5,8 @@
 ## 次（合意済み）
 
 - [ ] **背景差し替え + ヘッダー** — モック比較中。本体はまだ変えない
-  - いまの比較: [mocks/layout-band-vs-umatoo.html](./mocks/layout-band-vs-umatoo.html)（帯挿絵 vs UmaTools寄せ・画像なし）
-  - 全面壁紙の旧比較: [mocks/header-bg-options.html](./mocks/header-bg-options.html)
-  - UmaToolsの構成（細いナビ・暗いカード）＋ウマ娘色（金・ピンク）がイメージに近い、という方向
+  - 方向は B（UmaTools寄せ・画像なし）。色の比較: [mocks/umatoo-palettes.html](./mocks/umatoo-palettes.html)
+  - 帯挿絵との比較: [mocks/layout-band-vs-umatoo.html](./mocks/layout-band-vs-umatoo.html)
   - ヘッダーのリード文は外す（使い方改修で同趣旨を入れる）
   - コース選択の大きな作り直しはしない
 
