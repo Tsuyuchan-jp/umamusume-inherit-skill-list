@@ -46,18 +46,22 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ## 次にやること（この順・1つずつ）
 
-正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。合意済みの extract とコース絞り込みは完了（実機OK）。
+正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
 
-**次チャットの最初は実装しない。** [TODO.md](./TODO.md) の「後回しでよい」から優先順位を提案・相談して、1つ決めてから着手する。
+**いま:** 背景差し替え + ヘッダー。本体未着手。比較モック [mocks/header-bg-options.html](./mocks/header-bg-options.html)（`npm run serve` → `/docs/mocks/header-bg-options.html`）。
 
-後回しの現状メモ:
+合意メモ:
 
-- コースチップの視認性: 既定は36件なので密は和らいだ。「すべて見る」はまだ密。芝/ダート行分けや区分ラベル削除は1手。大きく詰めない。モック往復に戻らない
-- 背景を sp-calc と差別化: 世界観は残しつつ別物に見えること。未公開のうちは後回しでも可
-- 全コース分の `extract:effects` 一括: 今もやらない（U-tools 金ドットは36件。140×4 は負荷）
-- アプリ内から extract: いまは手動コマンド
-- GitHub Pages 公開: push / Pages はユーザー明示時のみ
-- フィルタ近似の精密化: 手動除外で足りる想定。突き合わせは実機OK
+- コースチップ視認性は現状で足りる（「すべて見る」は常用しない）
+- 背景は差し替え必須。同じ `uma-world` の色変えでは足りない
+- ヘッダーのリード文は外す。使い方改修（後で）に同趣旨を入れる
+- 色は未定。モックで金 / ティール / 紫を切替
+- デザイン寄りはモック複数案比較で進める
+
+後回し:
+
+- 全コース分の `extract:effects` 一括（やらない。金ドット36件）
+- アプリ内から extract / GitHub Pages / フィルタ精密化
 
 コース選択の大きな作り直しはしない（v1）。
 
@@ -71,11 +75,11 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
+| 背景ヘッダー比較 | `docs/mocks/header-bg-options.html` |
 
 ## 新チャットの最初のメッセージ例
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-データありコースの extract と、既定はデータありのみ（全件トグル）は実機OKで完了。
-次は TODO の後回し項目に優先順位をつけて1つずつ。いきなり実装に入らず提案と相談から。
+背景＋ヘッダーはモック比較中（本体未着手）。docs/mocks/header-bg-options.html から続けて。
 ```

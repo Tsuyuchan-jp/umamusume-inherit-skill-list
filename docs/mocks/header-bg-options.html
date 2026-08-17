@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>モック: 背景とヘッダー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --font: "Zen Maru Gothic", Meiryo, sans-serif;
+      --doc-bg: #16141c;
+      --doc-text: #f4f0e8;
+      --doc-muted: #a8a0b4;
+      --card: #221e2c;
+      --line: #3a3448;
+      --gold: #f5cf6f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      font-weight: 500;
+      background: var(--doc-bg);
+      color: var(--doc-text);
+      line-height: 1.55;
+    }
+    a { color: var(--gold); }
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3.5rem;
+    }
+    h1 { font-size: 1.25rem; margin: 0 0 0.35rem; font-weight: 900; }
+    .lead { margin: 0 0 1.25rem; color: var(--doc-muted); font-size: 0.9rem; }
+    h2 { font-size: 0.95rem; color: var(--gold); margin: 1.4rem 0 0.5rem; }
+    .thought {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      font-size: 0.88rem;
+    }
+    .thought ul { margin: 0.4rem 0 0; padding-left: 1.15rem; }
+    .thought li { margin: 0.25rem 0; }
+    .note { font-size: 0.8rem; color: var(--doc-muted); margin: 0.5rem 0 0; }
+
+    .controls {
+      display: grid;
+      gap: 0.65rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+    }
+    .ctrl-row { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+    .ctrl-label {
+      flex: 0 0 5.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--doc-muted);
+    }
+    .ctrl-row button, .recipe {
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid #554d78;
+      background: #2a2540;
+      color: #ddd8ef;
+      border-radius: 999px;
+      padding: 0.32rem 0.75rem;
+      cursor: pointer;
+    }
+    .ctrl-row button.is-on, .recipe.is-on {
+      background: var(--gold);
+      color: #3a2a00;
+      border-color: transparent;
+    }
+    .recipes { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .stage-wrap { margin-top: 1rem; }
+    .phone {
+      width: min(390px, 100%);
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid #554d78;
+      min-height: 520px;
+      position: relative;
+      isolation: isolate;
+    }
+    .phone .world {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .phone .ui {
+      position: relative;
+      z-index: 1;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- 背景 ---- */
+    [data-bg="now"] .world {
+      background:
+        linear-gradient(180deg, rgba(70,63,112,.12), rgba(70,63,112,.04) 40%, rgba(70,63,112,.28)),
+        url("../../assets/ui/uma-world.png") center / cover no-repeat #463f70;
+    }
+    [data-bg="css-night"] .world {
+      background:
+        radial-gradient(1200px 500px at 70% -10%, rgba(245,207,111,.22), transparent 55%),
+        radial-gradient(800px 400px at 10% 110%, rgba(180,90,40,.28), transparent 50%),
+        repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.015) 3px 4px),
+        radial-gradient(2px 2px at 20% 30%, rgba(255,232,170,.7), transparent 2px),
+        radial-gradient(1.5px 1.5px at 70% 18%, rgba(255,232,170,.55), transparent 2px),
+        radial-gradient(1.5px 1.5px at 40% 72%, rgba(255,232,170,.4), transparent 2px),
+        radial-gradient(1px 1px at 85% 60%, rgba(255,232,170,.5), transparent 2px),
+        linear-gradient(165deg, #1a1410 0%, #2a1c18 42%, #3d2a1c 100%);
+    }
+    [data-bg="css-paper"] .world {
+      background:
+        radial-gradient(900px 420px at 50% -20%, rgba(255,244,220,.35), transparent 60%),
+        repeating-linear-gradient(90deg, rgba(90,50,20,.04) 0 1px, transparent 1px 18px),
+        linear-gradient(180deg, #cbb79a 0%, #b79a78 45%, #8a6a4a 100%);
+    }
+    [data-bg="css-track"] .world {
+      background:
+        radial-gradient(ellipse 80% 36% at 50% 78%, transparent 42%, rgba(20,16,28,.55) 43% 48%, transparent 49%),
+        radial-gradient(ellipse 62% 24% at 50% 78%, rgba(90,140,70,.18), transparent 70%),
+        linear-gradient(180deg, #1e2438 0%, #2a3348 40%, #1a2218 100%);
+    }
+    [data-bg="illust-dusk"] .world {
+      background:
+        linear-gradient(180deg, rgba(20,12,8,.45), rgba(20,12,8,.18) 38%, rgba(20,12,8,.5)),
+        url("./bg-dusk-track.png") center / cover no-repeat #1a120c;
+    }
+    [data-bg="illust-dust"] .world {
+      background:
+        linear-gradient(180deg, rgba(12,8,6,.35), rgba(12,8,6,.12) 40%, rgba(12,8,6,.45)),
+        url("./bg-gold-dust.png") center / cover no-repeat #120e0c;
+    }
+
+    /* ---- アクセント（色は未定。切替用） ---- */
+    [data-accent="gold"] {
+      --chrome0: #4a3a22;
+      --chrome1: #2e2418;
+      --accent: #f5cf6f;
+      --title: #fff8e8;
+      --ghost: rgba(255,248,232,.88);
+    }
+    [data-accent="teal"] {
+      --chrome0: #2a4a4a;
+      --chrome1: #163232;
+      --accent: #7ee0d0;
+      --title: #f3fffc;
+      --ghost: rgba(243,255,252,.88);
+    }
+    [data-accent="ink"] {
+      --chrome0: #5a5288;
+      --chrome1: #463f70;
+      --accent: #f5cf6f;
+      --title: #fff;
+      --ghost: rgba(255,255,255,.88);
+    }
+
+    .attach { display: none; }
+    .hdr {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .hdr h1 {
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+    .hdr .help {
+      font: inherit;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.28rem 0.65rem;
+      cursor: default;
+    }
+    [data-header="now"] .hdr-now { display: block; padding: 0.85rem 0.9rem 0.4rem; }
+    [data-header="now"] .hdr-now h1 { color: #f8fafc; font-size: 1.15rem; }
+    [data-header="now"] .hdr-now p {
+      margin: 0.3rem 0 0;
+      color: rgba(248,250,252,.82);
+      font-size: 0.72rem;
+      line-height: 1.4;
+    }
+    [data-header="now"] .hdr-now .help {
+      margin-top: 0.4rem;
+      background: transparent;
+      border: 0;
+      color: #ffe9a8;
+      text-decoration: underline;
+      padding: 0;
+    }
+
+    [data-header="chrome"] .ui > .hdr-bar,
+    [data-header="glass"] .ui > .hdr-bar,
+    [data-header="attach"] .attach > .hdr-bar {
+      display: flex;
+      background: linear-gradient(180deg, var(--chrome0), var(--chrome1));
+      border-bottom: 3px solid var(--accent);
+    }
+    [data-header="chrome"] .ui > .hdr-bar {
+      padding: 0.55rem 0.85rem;
+    }
+    [data-header="chrome"] .hdr-bar h1,
+    [data-header="glass"] .hdr-bar h1,
+    [data-header="attach"] .hdr-bar h1 { color: var(--title); }
+    [data-header="chrome"] .hdr-bar .help,
+    [data-header="glass"] .hdr-bar .help,
+    [data-header="attach"] .hdr-bar .help {
+      border: 1px solid color-mix(in srgb, var(--title) 35%, transparent);
+      background: transparent;
+      color: var(--ghost);
+    }
+
+    [data-header="glass"] .ui > .hdr-bar {
+      margin: 0.55rem 0.55rem 0;
+      padding: 0.5rem 0.75rem;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--chrome1) 62%, transparent);
+      backdrop-filter: blur(10px);
+      border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+
+    [data-header="line"] .hdr-line {
+      display: flex;
+      margin: 0.7rem 0.85rem 0.15rem;
+      padding: 0 0 0.4rem;
+      border-bottom: 2px solid var(--accent);
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    [data-header="line"] .hdr-line h1 {
+      color: var(--title);
+      text-shadow: 0 1px 8px rgba(0,0,0,.55);
+    }
+    [data-header="line"] .hdr-line .help {
+      border: 0;
+      background: transparent;
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    [data-header="attach"] .ui { padding-top: 0.55rem; }
+    [data-header="attach"] .attach {
+      display: block;
+      margin: 0 0.65rem;
+      border-radius: 12px 12px 0 0;
+      overflow: hidden;
+      background: #fff;
+    }
+    [data-header="attach"] .attach > .hdr-bar { padding: 0.5rem 0.75rem; }
+    [data-header="attach"] .attach > .hdr-bar h1 { font-size: 0.98rem; }
+    [data-header="attach"] .attach-body { padding: 0.55rem 0.7rem 0.7rem; }
+    [data-header="attach"] .fake-course { display: none; }
+
+    .main { padding: 0.65rem; display: grid; gap: 0.55rem; }
+    .panel {
+      background: rgba(255,255,255,.94);
+      border-radius: 12px;
+      padding: 0.65rem 0.7rem;
+      color: #703a13;
+      box-shadow: 0 4px 14px rgba(26,36,51,.12);
+    }
+    .panel h2 { color: #703a13; margin: 0 0 0.4rem; font-size: 0.88rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+    .chip {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.22rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid #ddd6e8;
+      background: #fff;
+    }
+    .chip.on { background: #463f70; color: #fff; border-color: transparent; }
+    .row {
+      font-size: 0.78rem;
+      background: #f5f3f8;
+      border-radius: 8px;
+      padding: 0.38rem 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.28rem;
+    }
+    .copy {
+      margin-top: 0.45rem;
+      width: 100%;
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 0;
+      border-radius: 8px;
+      padding: 0.45rem;
+      background: #ff3276;
+      color: #fff;
+    }
+
+    .grid-thumbs {
+      display: grid;
+      gap: 0.7rem;
+      grid-template-columns: 1fr;
+      margin-top: 0.6rem;
+    }
+    @media (min-width: 800px) {
+      .grid-thumbs { grid-template-columns: 1fr 1fr; }
+    }
+    .thumb {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111;
+      min-height: 120px;
+      background-size: cover;
+      background-position: center;
+    }
+    .thumb-cap {
+      font-size: 0.78rem;
+      color: var(--doc-muted);
+      margin: 0.35rem 0 0;
+    }
+    pre {
+      background: #110f16;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      font-size: 0.75rem;
+      white-space: pre-wrap;
+      color: #e8e2d4;
+    }
+    .verdict {
+      border-left: 3px solid var(--gold);
+      padding-left: 0.75rem;
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>背景とヘッダーの比較</h1>
+    <p class="lead">
+      本体はまだ変えていません。色は未定なのでアクセントを切替えて見てください。
+      実アプリは <a href="../../app/">/app/</a>。
+    </p>
+
+    <h2>一から設計するときの思想</h2>
+    <div class="thought">
+      <p style="margin:0">このアプリの仕事は「借りる白因子25件を決めてコピーする」こと。SPを積む計算器ではない。</p>
+      <ul>
+        <li><strong>家族</strong> — 丸ゴシック、白カード、編成ピッカー、チップは sp-calc と同じ言葉。乗り換えで迷わせない。</li>
+        <li><strong>別物</strong> — 見分けは「舞台（背景）」と「額縁（ヘッダー）」で付ける。紫クロムが編成に食い込む形は sp-calc のシルエットなので借りない。</li>
+        <li><strong>主役</strong> — 25件とコピー。ヘッダーは名前と使い方だけ。説明文は使い方へ（合意済み）。</li>
+        <li><strong>比喩</strong> — 白因子＝紙片、金＝価値の点。夜の金塵か、紙の仕事場。昼の競馬場イラストは「計算アプリ」側の舞台。</li>
+        <li><strong>背景は差し替え必須</strong> — 同じ <code>uma-world</code> を色変えても、別ページにしか見えない。</li>
+      </ul>
+    </div>
+
+    <h2>組み合わせ（ライブ）</h2>
+    <div class="controls">
+      <div class="ctrl-row">
+        <span class="ctrl-label">レシピ</span>
+        <div class="recipes">
+          <button type="button" class="recipe is-on" data-recipe="rec">推奨たたき</button>
+          <button type="button" class="recipe" data-recipe="paper">紙の仕事場</button>
+          <button type="button" class="recipe" data-recipe="glass">ガラス夜</button>
+          <button type="button" class="recipe" data-recipe="now">現状</button>
+        </div>
+      </div>
+      <div class="ctrl-row" id="bg-btns">
+        <span class="ctrl-label">背景</span>
+        <button type="button" data-bg="now">現状 uma-world</button>
+        <button type="button" data-bg="css-night" class="is-on">CSS 金塵の夜</button>
+        <button type="button" data-bg="css-paper">CSS 紙</button>
+        <button type="button" data-bg="css-track">CSS トラック</button>
+        <button type="button" data-bg="illust-dusk">挿絵 夕暮れ</button>
+        <button type="button" data-bg="illust-dust">挿絵 金塵</button>
+      </div>
+      <div class="ctrl-row" id="hd-btns">
+        <span class="ctrl-label">ヘッダー</span>
+        <button type="button" data-header="now">現状 文字のみ</button>
+        <button type="button" data-header="chrome" class="is-on">全幅クロム</button>
+        <button type="button" data-header="glass">ガラス帯</button>
+        <button type="button" data-header="line">金ラインのみ</button>
+        <button type="button" data-header="attach">パネル食い込み</button>
+      </div>
+      <div class="ctrl-row" id="ac-btns">
+        <span class="ctrl-label">色（未定）</span>
+        <button type="button" data-accent="gold" class="is-on">金アンバー</button>
+        <button type="button" data-accent="teal">ティール</button>
+        <button type="button" data-accent="ink">紫インク</button>
+      </div>
+      <p class="note" id="combo-note"></p>
+    </div>
+
+    <div class="stage-wrap">
+      <div class="phone" id="phone" data-bg="css-night" data-header="chrome" data-accent="gold">
+        <div class="world" aria-hidden="true"></div>
+        <div class="ui">
+          <header class="hdr hdr-now">
+            <h1>継承白因子リスト</h1>
+            <p>任意コースの有効スキル（白∩共通）から、本育成で取れる分を除いた先頭25件をコピーします。</p>
+            <button type="button" class="help">使い方</button>
+          </header>
+          <header class="hdr hdr-bar">
+            <h1>継承白因子リスト</h1>
+            <button type="button" class="help">使い方</button>
+          </header>
+          <header class="hdr hdr-line">
+            <h1>継承白因子リスト</h1>
+            <button type="button" class="help">使い方</button>
+          </header>
+          <div class="attach">
+            <header class="hdr hdr-bar">
+              <h1>継承白因子リスト</h1>
+              <button type="button" class="help">使い方</button>
+            </header>
+            <div class="attach-body">
+              <div class="chips">
+                <span class="chip on">東京</span>
+                <span class="chip">中山</span>
+                <span class="chip">阪神</span>
+              </div>
+            </div>
+          </div>
+          <div class="main">
+            <section class="panel fake-course">
+              <h2>場 / 距離 / 脚質</h2>
+              <div class="chips">
+                <span class="chip on">東京</span>
+                <span class="chip">中山</span>
+                <span class="chip">阪神</span>
+              </div>
+              <div class="chips" style="margin-top:0.35rem">
+                <span class="chip on">芝 1600 左</span>
+                <span class="chip">芝 2000 左</span>
+              </div>
+            </section>
+            <section class="panel">
+              <h2>先頭25件</h2>
+              <div class="row"><span>直線巧者</span><span>0.35 バ</span></div>
+              <div class="row"><span>コーナー回復○</span><span>0.22 バ</span></div>
+              <button type="button" class="copy">先頭25件をコピー</button>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>いまの推奨（たたき・色は未定）</h2>
+    <p class="verdict">
+      背景は <strong>CSS 金塵の夜</strong>、ヘッダーは <strong>全幅クロム</strong>。
+      挿絵の夕暮れは綺麗だが、白いパネルと競って視線が散る。金塵挿絵は CSS 夜と近いので、挿絵を使うなら夕暮れより金塵。
+      パネル食い込みは sp-calc と同じ骨格なので、差別化の主戦場にしない。
+      ガラス帯と金ラインは、明るい背景だと再び読みにくい。
+    </p>
+
+    <h2>挿絵プレースホルダ（生成した比較用）</h2>
+    <p class="note">キャラなし・ロゴなし。本番採用ではなく方向の確認用。PixAI で取り直す前提。</p>
+    <div class="grid-thumbs">
+      <div>
+        <div class="thumb" style="background-image:url('./bg-dusk-track.png'); height:160px"></div>
+        <p class="thumb-cap">夕暮れの空コース。世界観は強い。UI の下地にはコントラスト調整が要る。</p>
+      </div>
+      <div>
+        <div class="thumb" style="background-image:url('./bg-gold-dust.png'); height:160px"></div>
+        <p class="thumb-cap">抽象の金塵。因子の比喩に近い。CSS だけでも近似できる。</p>
+      </div>
+    </div>
+
+    <h2>画像の探し方 / PixAI</h2>
+    <div class="thought">
+      <ul>
+        <li>公式 CG やゲーム画面の流用はしない（権利と、sp-calc との被り）。</li>
+        <li>パネルの幾何タイル（<code>bg.webp</code>）はカード面用。舞台にはしない。</li>
+        <li>探すなら「キャラが中央にいない横長の競馬場／夜空／紙」。人物がいるとカード画像と喧嘩する。</li>
+        <li>PixAI はこちらから操作できない。下のプロンプトを入れて、横長・人物なしで数枚出してからこのモックの挿絵枠に差し替えたい。</li>
+      </ul>
+    </div>
+    <p class="note">PixAI 用（英語。人物・文字・ロゴなし）</p>
+    <pre>Empty Japanese horse racetrack at night, no people, no horses, no text, no logo.
+Gold dust sparkles in the air, warm amber lights, indigo sky, elegant quiet atmosphere,
+cinematic wide landscape, 16:9, background plate for a mobile app.</pre>
+    <pre>Abstract luxury wallpaper, dark espresso and gold dust particles, faint oval track arc,
+silk paper grain, no characters, no text, calm, 16:9, UI background.</pre>
+
+    <h2>本体に入れるとき（まだやらない）</h2>
+    <ul class="note">
+      <li>リード文はヘッダーから外す。使い方改修時に同趣旨を入れる。</li>
+      <li>コース選択の大きな作り直しはしない。</li>
+    </ul>
+  </div>
+  <script>
+    const phone = document.getElementById("phone");
+    const note = document.getElementById("combo-note");
+    const labels = {
+      bg: {
+        now: "現状の競馬場イラスト（差し替え対象）",
+        "css-night": "CSS だけの金塵の夜",
+        "css-paper": "CSS の紙・インク",
+        "css-track": "CSS のトラック幾何",
+        "illust-dusk": "生成した夕暮れ挿絵",
+        "illust-dust": "生成した金塵挿絵",
+      },
+      header: {
+        now: "文字だけ（読みにくい）",
+        chrome: "全幅クロム",
+        glass: "ガラス帯",
+        line: "金ラインのみ",
+        attach: "先頭パネルに食い込み（sp-calc 型）",
+      },
+      accent: { gold: "金アンバー", teal: "ティール", ink: "紫インク" },
+    };
+    const recipes = {
+      rec: { bg: "css-night", header: "chrome", accent: "gold" },
+      paper: { bg: "css-paper", header: "chrome", accent: "gold" },
+      glass: { bg: "css-night", header: "glass", accent: "teal" },
+      now: { bg: "now", header: "now", accent: "ink" },
+    };
+
+    function syncButtons() {
+      document.querySelectorAll("[data-bg]").forEach((b) => {
+        b.classList.toggle("is-on", b.dataset.bg === phone.dataset.bg);
+      });
+      document.querySelectorAll("[data-header]").forEach((b) => {
+        b.classList.toggle("is-on", b.dataset.header === phone.dataset.header);
+      });
+      document.querySelectorAll("[data-accent]").forEach((b) => {
+        b.classList.toggle("is-on", b.dataset.accent === phone.dataset.accent);
+      });
+      note.textContent =
+        labels.bg[phone.dataset.bg] + " × " +
+        labels.header[phone.dataset.header] + " × " +
+        labels.accent[phone.dataset.accent];
+    }
+
+    document.getElementById("bg-btns").addEventListener("click", (e) => {
+      const t = e.target.closest("[data-bg]");
+      if (!t) return;
+      phone.dataset.bg = t.dataset.bg;
+      document.querySelectorAll(".recipe").forEach((r) => r.classList.remove("is-on"));
+      syncButtons();
+    });
+    document.getElementById("hd-btns").addEventListener("click", (e) => {
+      const t = e.target.closest("[data-header]");
+      if (!t) return;
+      phone.dataset.header = t.dataset.header;
+      document.querySelectorAll(".recipe").forEach((r) => r.classList.remove("is-on"));
+      syncButtons();
+    });
+    document.getElementById("ac-btns").addEventListener("click", (e) => {
+      const t = e.target.closest("[data-accent]");
+      if (!t) return;
+      phone.dataset.accent = t.dataset.accent;
+      document.querySelectorAll(".recipe").forEach((r) => r.classList.remove("is-on"));
+      syncButtons();
+    });
+    document.querySelector(".recipes").addEventListener("click", (e) => {
+      const t = e.target.closest("[data-recipe]");
+      if (!t) return;
+      document.querySelectorAll(".recipe").forEach((r) => r.classList.toggle("is-on", r === t));
+      const r = recipes[t.dataset.recipe];
+      phone.dataset.bg = r.bg;
+      phone.dataset.header = r.header;
+      phone.dataset.accent = r.accent;
+      syncButtons();
+    });
+    syncButtons();
+  </script>
+</body>
+</html>
