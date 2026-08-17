@@ -4,7 +4,7 @@
 
 コピー結果は [umamusume-rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) に貼り、ウマ娘DBの高度フレンド検索へ入れます。
 
-非公式・非商用です。画像・データの権利は各権利者に帰属します。
+開発者の新チャットは [docs/AGENT_HANDOFF.md](docs/AGENT_HANDOFF.md) から。次タスクは [docs/TODO.md](docs/TODO.md)。
 
 ## 使い方
 

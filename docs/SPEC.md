@@ -1,5 +1,7 @@
 # 仕様（仮）
 
+詳細な会話引継ぎは [AGENT_HANDOFF.md](./AGENT_HANDOFF.md)。次タスクは [TODO.md](./TODO.md)。
+
 ## 目的
 
 任意コース・脚質の U-tools 有効スキルから、本育成で取れるスキルを除いた **白因子（共通）** を有効順に出し、先頭25件を rental-factor-fill へコピーする。
