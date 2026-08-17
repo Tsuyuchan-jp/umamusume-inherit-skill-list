@@ -225,8 +225,10 @@ function rowHtml(row, index, action, label) {
   return `<li class="result-item${open ? " is-open" : ""}" data-skill-id="${row.id}">
     <div class="result-row">
       <span class="result-rank">${index}</span>
-      <span class="result-name">${escapeHtml(row.name)}</span>
-      ${badgeHtml}
+      <span class="result-main">
+        <span class="result-name">${escapeHtml(row.name)}</span>
+        ${badgeHtml}
+      </span>
       <span class="result-stats">
         <span class="result-stat" title="獲得バ身">${escapeHtml(stats.bashaNum)}<span class="result-stat__unit">[バ]</span></span>
         <span class="result-stat" title="100Ptあたり">${escapeHtml(stats.perNum)}<span class="result-stat__unit">[バ/Pt]</span></span>

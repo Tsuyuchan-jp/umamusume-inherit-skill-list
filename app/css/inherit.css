@@ -128,7 +128,7 @@
 
 .result-row {
   display: grid;
-  grid-template-columns: 1.35rem minmax(0, 1fr) auto max-content 1.75rem;
+  grid-template-columns: 1.35rem minmax(0, 1fr) max-content 1.75rem;
   align-items: center;
   gap: 0.28rem 0.3rem;
   padding: 0.4rem 0.32rem;
@@ -141,8 +141,17 @@
   border-radius: 8px 8px 0 0;
 }
 
+.result-main {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
 .result-name {
   min-width: 0;
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -153,6 +162,7 @@
   align-items: baseline;
   gap: 0.32rem;
   justify-content: flex-end;
+  flex-shrink: 0;
 }
 
 .result-stat {
@@ -173,6 +183,7 @@
 }
 
 .rank-badge {
+  flex: 0 0 auto;
   font-size: 0.68rem;
   font-weight: 700;
   padding: 0.12rem 0.4rem;
