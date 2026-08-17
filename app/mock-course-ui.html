@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>モック: コース選択</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/inherit.css" />
+    <style>
+      /* モック専用。本体へ入れる前の見た目確認用 */
+      .mock-banner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0.75rem 1rem 0;
+        color: var(--text-on-dark);
+        font-size: 0.85rem;
+      }
+      .mock-banner strong {
+        color: var(--accent-total-bright);
+      }
+      .place-chips,
+      .dist-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .place-chip,
+      .dist-chip {
+        font: inherit;
+        cursor: pointer;
+        border: 1px solid var(--border-default);
+        background: #fff;
+        color: var(--text-primary);
+      }
+      .place-chip {
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--radius-pill);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .dist-chip {
+        padding: 0.4rem 0.65rem;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        text-align: left;
+      }
+      .place-chip.is-on,
+      .dist-chip.is-on {
+        background: var(--ink-deep);
+        color: #fff;
+        border-color: transparent;
+      }
+      .place-chip.is-on .data-dot,
+      .dist-chip.is-on .data-dot {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+      }
+      .chip-main {
+        font-weight: 700;
+        font-size: 0.92rem;
+      }
+      .chip-sub {
+        font-size: 0.72rem;
+        opacity: 0.78;
+        font-weight: 500;
+      }
+      .ground-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 0.12rem 0.35rem;
+        border-radius: 6px;
+        line-height: 1.2;
+      }
+      .ground-badge--turf {
+        background: #68bb09;
+        color: #fff;
+      }
+      .ground-badge--dirt {
+        background: #b45309;
+        color: #fff;
+      }
+      .dist-chip.is-on .ground-badge--turf,
+      .dist-chip.is-on .ground-badge--dirt {
+        outline: 1px solid rgba(255, 255, 255, 0.45);
+      }
+      /* データ有り: 金ドット。無し側は印なし（有りが少数なので） */
+      .data-dot {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: var(--c-gold);
+        flex: 0 0 auto;
+      }
+      .legend {
+        margin: 0;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .result-preview {
+        margin: 0;
+        padding: 0.7rem 0.8rem;
+        border-radius: 10px;
+        background: var(--surface-muted);
+        font-size: 0.88rem;
+      }
+      .result-preview.is-empty {
+        color: var(--text-secondary);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="world-bg" aria-hidden="true"></div>
+    <p class="mock-banner">
+      これは<strong>コース選択のモック</strong>です。本体アプリにはまだ入っていません。localStorage も書きません。
+    </p>
+    <header class="app-header">
+      <div class="app-header__inner">
+        <h1 class="app-title">継承白因子リスト（モック）</h1>
+        <p class="app-lead">場チップ → その場の距離チップ。脚質はそのまま。</p>
+      </div>
+    </header>
+
+    <main class="inherit-main">
+      <section class="panel inherit-course" aria-label="コースと脚質">
+        <span class="field-label" id="place-label">場</span>
+        <div id="place-chips" class="place-chips" role="group" aria-labelledby="place-label"></div>
+
+        <span class="field-label" id="dist-label">距離</span>
+        <div id="dist-chips" class="dist-chips" role="group" aria-labelledby="dist-label"></div>
+        <p class="legend"><span class="data-dot" aria-hidden="true"></span>有効スキル JSON あり（いまは東京 2400 芝のみ）</p>
+
+        <span class="field-label">脚質</span>
+        <div class="style-seg" role="group" aria-label="脚質">
+          <button type="button" data-style="runner" aria-pressed="false">逃げ</button>
+          <button type="button" class="is-on" data-style="leader" aria-pressed="true">先行</button>
+          <button type="button" data-style="betweener" aria-pressed="false">差し</button>
+          <button type="button" data-style="chaser" aria-pressed="false">追込</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="選択結果のプレビュー">
+        <h2 class="inherit-result__head" style="font-size: 1.05rem; margin: 0 0 0.5rem">いまの選択</h2>
+        <p id="selection-line" class="inherit-result__meta"></p>
+        <p id="result-preview" class="result-preview"></p>
+      </section>
+    </main>
+
+    <script>
+      const HAS_EFFECTS = new Set([10606]);
+      const STYLE_LABELS = { runner: "逃げ", leader: "先行", betweener: "差し", chaser: "追込" };
+
+      const ui = { courseId: 10606, style: "leader", place: "東京" };
+      let courses = [];
+
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function uniquePlaces() {
+        const seen = [];
+        for (const c of courses) {
+          if (c.place && !seen.includes(c.place)) seen.push(c.place);
+        }
+        return seen;
+      }
+
+      function placeHasData(place) {
+        return courses.some((c) => c.place === place && HAS_EFFECTS.has(c.id));
+      }
+
+      function coursesForPlace(place) {
+        return courses.filter((c) => c.place === place);
+      }
+
+      function currentCourse() {
+        return courses.find((c) => c.id === ui.courseId);
+      }
+
+      function distLabel(c) {
+        // 同じ距離・芝ダが並ぶ場（新潟2000など）向けに回りも出す
+        return `${c.distance}m ${c.turn || ""}`.trim();
+      }
+
+      function renderPlaces() {
+        const root = document.getElementById("place-chips");
+        root.innerHTML = uniquePlaces()
+          .map((place) => {
+            const on = place === ui.place ? " is-on" : "";
+            const dot = placeHasData(place)
+              ? '<span class="data-dot" title="この場にデータあり"></span>'
+              : "";
+            return `<button type="button" class="place-chip${on}" data-place="${escapeHtml(place)}" aria-pressed="${place === ui.place}">${escapeHtml(place)}${dot}</button>`;
+          })
+          .join("");
+      }
+
+      function renderDists() {
+        const root = document.getElementById("dist-chips");
+        const list = coursesForPlace(ui.place);
+        root.innerHTML = list
+          .map((c) => {
+            const on = c.id === ui.courseId ? " is-on" : "";
+            const groundClass = c.ground === "ダート" ? "ground-badge--dirt" : "ground-badge--turf";
+            const groundText = c.ground === "ダート" ? "ダ" : "芝";
+            const dot = HAS_EFFECTS.has(c.id)
+              ? '<span class="data-dot" title="有効スキルデータあり"></span>'
+              : "";
+            return `<button type="button" class="dist-chip${on}" data-id="${c.id}" aria-pressed="${c.id === ui.courseId}">
+              <span class="chip-main">${escapeHtml(distLabel(c))}</span>
+              <span class="chip-sub">${escapeHtml(c.distClass || "")}</span>
+              <span class="ground-badge ${groundClass}">${groundText}</span>
+              ${dot}
+            </button>`;
+          })
+          .join("");
+      }
+
+      function renderPreview() {
+        const c = currentCourse();
+        const has = c && HAS_EFFECTS.has(c.id);
+        document.getElementById("selection-line").textContent = c
+          ? `${c.name} ／ ${STYLE_LABELS[ui.style]} ／ courseId ${c.id}`
+          : "未選択";
+        const el = document.getElementById("result-preview");
+        if (!c) {
+          el.textContent = "";
+          return;
+        }
+        el.classList.toggle("is-empty", !has);
+        el.textContent = has
+          ? "このコース・脚質は有効スキル JSON があります（本体ではリスト表示）。"
+          : "このコース・脚質の有効スキルデータがまだありません。（本体と同じ「データなし」）";
+      }
+
+      function render() {
+        renderPlaces();
+        renderDists();
+        renderPreview();
+        document.querySelectorAll("[data-style]").forEach((btn) => {
+          const on = btn.dataset.style === ui.style;
+          btn.classList.toggle("is-on", on);
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      }
+
+      document.getElementById("place-chips").addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-place]");
+        if (!btn) return;
+        ui.place = btn.dataset.place;
+        const inPlace = coursesForPlace(ui.place);
+        if (!inPlace.some((c) => c.id === ui.courseId)) {
+          const withData = inPlace.find((c) => HAS_EFFECTS.has(c.id));
+          ui.courseId = (withData || inPlace[0]).id;
+        }
+        render();
+      });
+
+      document.getElementById("dist-chips").addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-id]");
+        if (!btn) return;
+        ui.courseId = Number(btn.dataset.id);
+        render();
+      });
+
+      document.querySelector(".style-seg").addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-style]");
+        if (!btn) return;
+        ui.style = btn.dataset.style;
+        render();
+      });
+
+      fetch("../data/courses.json")
+        .then((r) => r.json())
+        .then((doc) => {
+          courses = doc.courses || [];
+          const cur = currentCourse();
+          if (cur) ui.place = cur.place;
+          render();
+        });
+    </script>
+  </body>
+</html>
