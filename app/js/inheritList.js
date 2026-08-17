@@ -79,11 +79,15 @@ export function ptEfficiencyPer100(expectedEffect, needSkillPoint) {
 }
 
 export function formatEffectStats(row) {
-  const basha =
-    row.expectedEffect == null || !Number.isFinite(Number(row.expectedEffect))
-      ? "—"
-      : `${Number(row.expectedEffect).toFixed(2)}バ`;
+  const hasBasha =
+    row.expectedEffect != null && Number.isFinite(Number(row.expectedEffect));
   const per = ptEfficiencyPer100(row.expectedEffect, row.needSkillPoint);
-  const perPt = per == null ? "—" : `${per.toFixed(2)}バ/Pt`;
-  return { basha, perPt };
+  const bashaNum = hasBasha ? Number(row.expectedEffect).toFixed(2) : "—";
+  const perNum = per == null ? "—" : per.toFixed(2);
+  return {
+    basha: hasBasha ? `${bashaNum}バ` : "—",
+    perPt: per == null ? "—" : `${perNum}バ/Pt`,
+    bashaNum,
+    perNum,
+  };
 }
