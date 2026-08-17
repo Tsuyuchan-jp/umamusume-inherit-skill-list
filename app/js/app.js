@@ -156,8 +156,9 @@ function renderCourseChips() {
   distRoot.innerHTML = coursesForPlace(place)
     .map((c) => {
       const on = c.id === state.ui.courseId;
-      const groundClass = c.ground === "ダート" ? "ground-badge--dirt" : "ground-badge--turf";
-      const groundText = c.ground === "ダート" ? "ダ" : "芝";
+      const isDirt = c.ground === "ダート" || c.ground === "ダ";
+      const groundClass = isDirt ? "ground-badge--dirt" : "ground-badge--turf";
+      const groundText = isDirt ? "ダ" : "芝";
       const dot = courseHasEffects(c.id)
         ? '<span class="data-dot" title="有効スキルデータあり"></span>'
         : "";

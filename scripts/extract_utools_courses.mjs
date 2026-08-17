@@ -29,7 +29,11 @@ async function loadHtml(cacheOnly) {
   return html;
 }
 
-function parseCourses(html) {
+function normalizeGround(raw) {
+  return raw === "芝" ? "芝" : "ダート";
+}
+
+export function parseCourses(html) {
   const joined = decodeRscChunks(html) + html;
   const headers = [...joined.matchAll(/header__name__[^"]*","children":"([^"]+)"/g)];
   const courses = [];
@@ -40,22 +44,24 @@ function parseCourses(html) {
     const start = headers[i].index;
     const end = i + 1 < headers.length ? headers[i + 1].index : joined.length;
     const block = joined.slice(start, end);
+    // U-tools の距離チップは芝が「芝」、ダートが「ダ」（場ヘッダだけ「ダート」）
     const courseRe =
-      /pathname":"\/race\/courses\/(\d+)"[\s\S]{0,500}?children":\[(\d+),"（","([^"]+)","）","([^"]+)"\][\s\S]{0,400}?children":"(芝|ダート)"/g;
+      /pathname":"\/race\/courses\/(\d+)"[\s\S]{0,500}?children":\[(\d+),"（","([^"]+)","）","([^"]+)"\][\s\S]{0,400}?children":"(芝|ダート|ダ)"/g;
     let m;
     while ((m = courseRe.exec(block))) {
       const id = Number(m[1]);
       if (seen.has(id)) continue;
       seen.add(id);
       const distance = Number(m[2]);
+      const ground = normalizeGround(m[5]);
       courses.push({
         id,
-        name: `${place} ${distance}m（${m[5]}）`,
+        name: `${place} ${distance}m（${ground}）`,
         place,
         distance,
         distClass: m[3],
         turn: m[4],
-        ground: m[5],
+        ground,
       });
     }
   }
@@ -77,7 +83,10 @@ async function main() {
   console.log(`courses: ${courses.length} → ${dest}`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+const thisFile = fileURLToPath(import.meta.url);
+if (process.argv[1] && path.resolve(process.argv[1]) === thisFile) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
