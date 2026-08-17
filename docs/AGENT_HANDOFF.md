@@ -19,7 +19,8 @@
 
 ## いま動いていること（実機OK）
 
-- コースは場チップ → 距離チップ（芝/ダート・回り）。データありは距離チップの金ドット。脚質（逃/先/差/追）
+- コースは場チップ → 距離チップ（芝緑 / ダ茶・回り・距離区分）。データありは距離チップの金ドット（場チップには付けない）。脚質（逃/先/差/追）
+- 一覧は 140 件（芝80 + ダート60）。U-tools のダート表記は「ダ」。`extract:courses` は「ダ」を取り `ground: "ダート"` に正規化する
 - 育成ウマ娘（全カード画像）＋サポカ優先40種（タイプ絞込のみ）
 - 白∩共通 − 本育成取得可能（金チェーン含む）→ 先頭25件コピー
 - 先頭25件を行ごとに手動除外。下に「除外中」（戻す）。コピーは残件の先頭25件。除外はコース＋脚質ごとに localStorage
@@ -29,7 +30,7 @@
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
 - 背景 z-index 修正済み（コース選択・結果が隠れていた）
 
-有効スキル JSON が入っているのは **東京 2400 芝（courseId 10606）の4脚質のみ**。他コースは `npm run extract:effects -- --course ID`。起動時に U-tools へ取りに行かない。
+有効スキル JSON が入っているのは **東京 2400 芝（courseId 10606）の4脚質のみ**。他コースは `npm run extract:effects -- --course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`（extract:effects が更新）。選んだ courseId は従来どおり localStorage。
 
 ## 確定仕様
 
@@ -47,9 +48,11 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
 
-1. 背景を sp-calc と差別化 ← 次
+1. **使うコースの `extract:effects` を増やす** ← 次。対象は対話で決めてから。140件×4脚質の一括はしない（遅延 800ms・負荷）
+2. 背景を sp-calc と差別化（後回し可）
+3. コースチップの視認性（芝/ダートを行分け、区分ラベルを外す等。詰めない。やるなら1手）
 
-コース選択: 場チップ → 距離チップ。金ドットは距離の「データあり」側のみ（場バッジには付けない）。データ無しも選べて結果は「データなし」。courseId は従来どおり localStorage。有無一覧は `data/effects/available.json`（extract:effects が更新）。
+コース選択 UI は実機OK。チップが密で見づらいが、v1 として先に進める合意済み。モック往復に戻らない。
 
 手動除外の合意: コース＋脚質ごと。見える25件から外す。除外中は下に有効順。戻すは行のみ。コピーは残件の先頭25件。IDは残し、本育成で取れなくなった行は除外中に出さない。
 
@@ -66,5 +69,5 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-次は背景を sp-calc と差別化（TODO）。実装前に方針を確認してから。
+次は使うコースの extract:effects を増やす（TODO の1）。全件一括はしない。対象を決めてから実行。
 ```
