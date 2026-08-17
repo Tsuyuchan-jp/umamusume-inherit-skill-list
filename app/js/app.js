@@ -29,8 +29,10 @@ const state = {
   courses: [],
   priorityIds: new Set(),
   effects: null,
+  effectCourseIds: new Set(),
   ui: {
     courseId: 10606,
+    place: "東京",
     style: "leader",
     characterId: 100101,
     supportIds: [null, null, null, null, null, null],
@@ -44,6 +46,8 @@ let deckUi = null;
 let saveTimer = null;
 let lastResult = null;
 let openSkillId = null;
+// コース切替の古い fetch が後から上書きしないため
+let effectsLoadSeq = 0;
 
 function dataUrl(name) {
   return new URL(name, DATA_BASE).href;
@@ -103,19 +107,68 @@ function restoreSession() {
   }
 }
 
-function fillCourseSelect() {
-  const sel = document.getElementById("course-select");
-  if (!sel) return;
-  sel.innerHTML = state.courses
-    .map((c) => {
-      const label = c.name || `コース ${c.id}`;
-      return `<option value="${c.id}">${escapeHtml(label)}</option>`;
+function currentCourse() {
+  return state.courses.find((c) => c.id === state.ui.courseId);
+}
+
+function uniquePlaces() {
+  const seen = [];
+  for (const c of state.courses) {
+    if (c.place && !seen.includes(c.place)) seen.push(c.place);
+  }
+  return seen;
+}
+
+function coursesForPlace(place) {
+  return state.courses.filter((c) => c.place === place);
+}
+
+function distChipLabel(c) {
+  // 新潟2000など同距離が並ぶ場向けに回りも出す
+  return `${c.distance}m ${c.turn || ""}`.trim();
+}
+
+function courseHasEffects(id) {
+  return state.effectCourseIds.has(Number(id));
+}
+
+function ensureCourseInList() {
+  if (!state.courses.some((c) => c.id === state.ui.courseId) && state.courses[0]) {
+    state.ui.courseId = state.courses[0].id;
+  }
+  const cur = currentCourse();
+  if (cur?.place) state.ui.place = cur.place;
+  else if (!state.ui.place && uniquePlaces()[0]) state.ui.place = uniquePlaces()[0];
+}
+
+function renderCourseChips() {
+  const placeRoot = document.getElementById("place-chips");
+  const distRoot = document.getElementById("dist-chips");
+  if (!placeRoot || !distRoot) return;
+  ensureCourseInList();
+  const place = state.ui.place;
+  placeRoot.innerHTML = uniquePlaces()
+    .map((p) => {
+      const on = p === place;
+      return `<button type="button" class="place-chip${on ? " is-on" : ""}" data-place="${escapeHtml(p)}" aria-pressed="${on}">${escapeHtml(p)}</button>`;
     })
     .join("");
-  if (![...sel.options].some((o) => Number(o.value) === state.ui.courseId)) {
-    if (state.courses[0]) state.ui.courseId = state.courses[0].id;
-  }
-  sel.value = String(state.ui.courseId);
+  distRoot.innerHTML = coursesForPlace(place)
+    .map((c) => {
+      const on = c.id === state.ui.courseId;
+      const groundClass = c.ground === "ダート" ? "ground-badge--dirt" : "ground-badge--turf";
+      const groundText = c.ground === "ダート" ? "ダ" : "芝";
+      const dot = courseHasEffects(c.id)
+        ? '<span class="data-dot" title="有効スキルデータあり"></span>'
+        : "";
+      return `<button type="button" class="dist-chip${on ? " is-on" : ""}" data-course-id="${c.id}" aria-pressed="${on}">
+        <span class="chip-main">${escapeHtml(distChipLabel(c))}</span>
+        <span class="chip-sub">${escapeHtml(c.distClass || "")}</span>
+        <span class="ground-badge ${groundClass}">${groundText}</span>
+        ${dot}
+      </button>`;
+    })
+    .join("");
 }
 
 function syncStyleButtons() {
@@ -172,13 +225,17 @@ function syncUtoolsLink() {
 }
 
 async function loadEffects() {
+  const seq = ++effectsLoadSeq;
   const { courseId, style } = state.ui;
   const res = await fetch(dataUrl(`effects/${courseId}/${style}.json`));
+  if (seq !== effectsLoadSeq) return false;
   if (!res.ok) {
     state.effects = null;
-    return;
+    return true;
   }
   state.effects = await res.json();
+  if (seq !== effectsLoadSeq) return false;
+  return true;
 }
 
 function rowHtml(row, index, action, label) {
@@ -310,14 +367,32 @@ function recalc() {
 
 async function onCourseOrStyleChange() {
   syncUtoolsLink();
-  await loadEffects();
+  const applied = await loadEffects();
+  if (!applied) return;
   recalc();
   scheduleSessionSave();
 }
 
 function bind() {
-  document.getElementById("course-select")?.addEventListener("change", async (e) => {
-    state.ui.courseId = Number(e.target.value);
+  document.getElementById("place-chips")?.addEventListener("click", async (e) => {
+    const btn = e.target.closest("[data-place]");
+    if (!btn || btn.dataset.place === state.ui.place) return;
+    state.ui.place = btn.dataset.place;
+    const inPlace = coursesForPlace(state.ui.place);
+    if (!inPlace.some((c) => c.id === state.ui.courseId)) {
+      const withData = inPlace.find((c) => courseHasEffects(c.id));
+      state.ui.courseId = (withData || inPlace[0]).id;
+    }
+    renderCourseChips();
+    await onCourseOrStyleChange();
+  });
+  document.getElementById("dist-chips")?.addEventListener("click", async (e) => {
+    const btn = e.target.closest("[data-course-id]");
+    if (!btn) return;
+    const id = Number(btn.dataset.courseId);
+    if (id === state.ui.courseId) return;
+    state.ui.courseId = id;
+    renderCourseChips();
     await onCourseOrStyleChange();
   });
   document.querySelectorAll("[data-style]").forEach((btn) => {
@@ -381,7 +456,7 @@ function bind() {
 
 async function init() {
   restoreSession();
-  const [skills, supports, characters, events, scenario, priority, coursesDoc] =
+  const [skills, supports, characters, events, scenario, priority, coursesDoc, availableDoc] =
     await Promise.all([
       loadJson("skills.json"),
       loadJson("supports.json"),
@@ -389,7 +464,8 @@ async function init() {
       loadJson("events.json"),
       loadJson("scenarios/toresenken.json"),
       loadJson("priority-supports.json"),
-      loadJson("courses.json").catch(() => ({ courses: [{ id: 10606, name: "東京 2400m（芝）" }] })),
+      loadJson("courses.json").catch(() => ({ courses: [{ id: 10606, name: "東京 2400m（芝）", place: "東京" }] })),
+      loadJson("effects/available.json").catch(() => ({ courseIds: [10606] })),
     ]);
   state.skills = skills;
   state.supports = supports;
@@ -399,9 +475,12 @@ async function init() {
   state.priorityIds = new Set((priority.supports || []).map((s) => s.id));
   state.courses = coursesDoc.courses?.length
     ? coursesDoc.courses
-    : [{ id: 10606, name: "東京 2400m（芝）" }];
+    : [{ id: 10606, name: "東京 2400m（芝）", place: "東京" }];
+  state.effectCourseIds = new Set(
+    (availableDoc.courseIds || []).map(Number).filter((n) => Number.isFinite(n))
+  );
 
-  fillCourseSelect();
+  renderCourseChips();
   syncStyleButtons();
   syncFieldSeg();
   syncUtoolsLink();

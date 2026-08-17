@@ -19,7 +19,7 @@
 
 ## いま動いていること（実機OK）
 
-- コース（80場）＋脚質（逃/先/差/追）
+- コースは場チップ → 距離チップ（芝/ダート・回り）。データありは距離チップの金ドット。脚質（逃/先/差/追）
 - 育成ウマ娘（全カード画像）＋サポカ優先40種（タイプ絞込のみ）
 - 白∩共通 − 本育成取得可能（金チェーン含む）→ 先頭25件コピー
 - 先頭25件を行ごとに手動除外。下に「除外中」（戻す）。コピーは残件の先頭25件。除外はコース＋脚質ごとに localStorage
@@ -47,10 +47,9 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
 
-1. **コース選択を U-tools の [コース一覧](https://xn--gck1f423k.xn--1bvt37a.tools/race/tracks) に近い UI へ** ← 次
-2. 背景を sp-calc と差別化
+1. 背景を sp-calc と差別化 ← 次
 
-コース選択の合意: 巨大セレクトをやめる。場チップ → その場の距離チップ（芝/ダート付き）。脚質はそのまま。データ無しコースも選べるが、チップ時点で有無が分かるアイコンを付ける（有り側でも無し側でも可。意味は学習でよい）。選んだコースは localStorage。実装前にモック1本で確認してから本体へ。
+コース選択: 場チップ → 距離チップ。金ドットは距離の「データあり」側のみ（場バッジには付けない）。データ無しも選べて結果は「データなし」。courseId は従来どおり localStorage。有無一覧は `data/effects/available.json`（extract:effects が更新）。
 
 手動除外の合意: コース＋脚質ごと。見える25件から外す。除外中は下に有効順。戻すは行のみ。コピーは残件の先頭25件。IDは残し、本育成で取れなくなった行は除外中に出さない。
 
@@ -61,11 +60,11 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 | UI | `app/index.html` `app/js/app.js` `app/js/deckUi.js` `app/css/inherit.css` |
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
-| データ | `data/effects/{courseId}/{style}.json` `data/courses.json` |
+| データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
 
 ## 新チャットの最初のメッセージ例
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-次はコース選択 UI（TODO の1）。実装にいきなり入らず、合意済みの場→距離チップをモックで確認してから本体へ。
+次は背景を sp-calc と差別化（TODO）。実装前に方針を確認してから。
 ```

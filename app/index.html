@@ -29,8 +29,12 @@
 
     <main class="inherit-main">
       <section class="panel inherit-course" aria-label="コースと脚質">
-        <label class="field-label" for="course-select">コース</label>
-        <select id="course-select" class="course-select"></select>
+        <span class="field-label" id="place-label">場</span>
+        <div id="place-chips" class="place-chips" role="group" aria-labelledby="place-label"></div>
+        <span class="field-label" id="dist-label">距離</span>
+        <div id="dist-chips" class="dist-chips" role="group" aria-labelledby="dist-label"></div>
+        <p class="chip-legend"><span class="data-dot" aria-hidden="true"></span>有効スキル JSON あり</p>
+        <span class="field-label">脚質</span>
         <div class="style-seg" role="group" aria-label="脚質">
           <button type="button" data-style="runner" aria-pressed="false">逃げ</button>
           <button type="button" class="is-on" data-style="leader" aria-pressed="true">先行</button>

@@ -88,6 +88,22 @@ function writeEffectJson(courseId, style, ranked) {
   return out;
 }
 
+function refreshAvailableIndex() {
+  const effectsRoot = path.join(DATA_DIR, "effects");
+  if (!fs.existsSync(effectsRoot)) return;
+  const courseIds = fs
+    .readdirSync(effectsRoot, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && /^\d+$/.test(d.name))
+    .filter((d) => {
+      const dir = path.join(effectsRoot, d.name);
+      return fs.readdirSync(dir).some((f) => f.endsWith(".json"));
+    })
+    .map((d) => Number(d.name))
+    .sort((a, b) => a - b);
+  const dest = path.join(effectsRoot, "available.json");
+  fs.writeFileSync(dest, `${JSON.stringify({ courseIds }, null, 2)}\n`);
+}
+
 async function main() {
   const opts = parseArgs(process.argv);
   const courseId = opts.course || 10606;
@@ -104,6 +120,7 @@ async function main() {
       `${courseId}/${style}: ranked=${out.rankedCount} white∩共通=${out.whiteCommonCount}`
     );
   }
+  refreshAvailableIndex();
 }
 
 main().catch((err) => {

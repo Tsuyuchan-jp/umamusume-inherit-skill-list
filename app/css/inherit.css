@@ -56,11 +56,96 @@
   color: var(--text-secondary);
 }
 
-.course-select {
+.place-chips,
+.dist-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.place-chip,
+.dist-chip {
   font: inherit;
-  padding: 0.45rem 0.6rem;
-  border-radius: 8px;
+  cursor: pointer;
   border: 1px solid var(--border-default);
+  background: #fff;
+  color: var(--text-primary);
+}
+
+.place-chip {
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-pill);
+}
+
+.dist-chip {
+  padding: 0.4rem 0.65rem;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: left;
+}
+
+.place-chip.is-on,
+.dist-chip.is-on {
+  background: var(--ink-deep, #463f70);
+  color: #fff;
+  border-color: transparent;
+}
+
+.dist-chip.is-on .data-dot {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.chip-main {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.chip-sub {
+  font-size: 0.72rem;
+  opacity: 0.78;
+  font-weight: 500;
+}
+
+.ground-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.12rem 0.35rem;
+  border-radius: 6px;
+  line-height: 1.2;
+}
+
+.ground-badge--turf {
+  background: #68bb09;
+  color: #fff;
+}
+
+.ground-badge--dirt {
+  background: #b45309;
+  color: #fff;
+}
+
+.dist-chip.is-on .ground-badge--turf,
+.dist-chip.is-on .ground-badge--dirt {
+  outline: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.data-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--c-gold, #f5cf6f);
+  flex: 0 0 auto;
+}
+
+.chip-legend {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .style-seg {

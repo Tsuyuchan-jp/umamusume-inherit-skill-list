@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/inherit.css" />
     <style>
-      /* モック専用。本体へ入れる前の見た目確認用 */
       .mock-banner {
         max-width: 1180px;
         margin: 0 auto;
@@ -24,89 +23,6 @@
       }
       .mock-banner strong {
         color: var(--accent-total-bright);
-      }
-      .place-chips,
-      .dist-chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-      }
-      .place-chip,
-      .dist-chip {
-        font: inherit;
-        cursor: pointer;
-        border: 1px solid var(--border-default);
-        background: #fff;
-        color: var(--text-primary);
-      }
-      .place-chip {
-        padding: 0.4rem 0.8rem;
-        border-radius: var(--radius-pill);
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-      }
-      .dist-chip {
-        padding: 0.4rem 0.65rem;
-        border-radius: 10px;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        text-align: left;
-      }
-      .place-chip.is-on,
-      .dist-chip.is-on {
-        background: var(--ink-deep);
-        color: #fff;
-        border-color: transparent;
-      }
-      .place-chip.is-on .data-dot,
-      .dist-chip.is-on .data-dot {
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
-      }
-      .chip-main {
-        font-weight: 700;
-        font-size: 0.92rem;
-      }
-      .chip-sub {
-        font-size: 0.72rem;
-        opacity: 0.78;
-        font-weight: 500;
-      }
-      .ground-badge {
-        font-size: 0.68rem;
-        font-weight: 700;
-        padding: 0.12rem 0.35rem;
-        border-radius: 6px;
-        line-height: 1.2;
-      }
-      .ground-badge--turf {
-        background: #68bb09;
-        color: #fff;
-      }
-      .ground-badge--dirt {
-        background: #b45309;
-        color: #fff;
-      }
-      .dist-chip.is-on .ground-badge--turf,
-      .dist-chip.is-on .ground-badge--dirt {
-        outline: 1px solid rgba(255, 255, 255, 0.45);
-      }
-      /* データ有り: 金ドット。無し側は印なし（有りが少数なので） */
-      .data-dot {
-        width: 0.55rem;
-        height: 0.55rem;
-        border-radius: 50%;
-        background: var(--c-gold);
-        flex: 0 0 auto;
-      }
-      .legend {
-        margin: 0;
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
       }
       .result-preview {
         margin: 0;
@@ -123,7 +39,7 @@
   <body>
     <div class="world-bg" aria-hidden="true"></div>
     <p class="mock-banner">
-      これは<strong>コース選択のモック</strong>です。本体アプリにはまだ入っていません。localStorage も書きません。
+      確認用モック。本体は <a href="./" style="color: var(--accent-total-bright)">/app/</a>。金ドットは距離チップのみ。
     </p>
     <header class="app-header">
       <div class="app-header__inner">
@@ -139,7 +55,7 @@
 
         <span class="field-label" id="dist-label">距離</span>
         <div id="dist-chips" class="dist-chips" role="group" aria-labelledby="dist-label"></div>
-        <p class="legend"><span class="data-dot" aria-hidden="true"></span>有効スキル JSON あり（いまは東京 2400 芝のみ）</p>
+        <p class="chip-legend"><span class="data-dot" aria-hidden="true"></span>有効スキル JSON あり</p>
 
         <span class="field-label">脚質</span>
         <div class="style-seg" role="group" aria-label="脚質">
@@ -180,10 +96,6 @@
         return seen;
       }
 
-      function placeHasData(place) {
-        return courses.some((c) => c.place === place && HAS_EFFECTS.has(c.id));
-      }
-
       function coursesForPlace(place) {
         return courses.filter((c) => c.place === place);
       }
@@ -193,7 +105,6 @@
       }
 
       function distLabel(c) {
-        // 同じ距離・芝ダが並ぶ場（新潟2000など）向けに回りも出す
         return `${c.distance}m ${c.turn || ""}`.trim();
       }
 
@@ -202,10 +113,7 @@
         root.innerHTML = uniquePlaces()
           .map((place) => {
             const on = place === ui.place ? " is-on" : "";
-            const dot = placeHasData(place)
-              ? '<span class="data-dot" title="この場にデータあり"></span>'
-              : "";
-            return `<button type="button" class="place-chip${on}" data-place="${escapeHtml(place)}" aria-pressed="${place === ui.place}">${escapeHtml(place)}${dot}</button>`;
+            return `<button type="button" class="place-chip${on}" data-place="${escapeHtml(place)}" aria-pressed="${place === ui.place}">${escapeHtml(place)}</button>`;
           })
           .join("");
       }
