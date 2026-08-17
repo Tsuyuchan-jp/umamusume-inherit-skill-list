@@ -141,6 +141,38 @@ header p {
   border-radius: 0 0 8px 8px;
 }
 
+.help-lead,
+.help-steps {
+  margin: 0 0 0.9rem;
+}
+
+.help-lead__title,
+.help-steps__title {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.help-lead p,
+.help-steps ol {
+  margin: 0 0 0.55rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.help-lead p:last-child,
+.help-steps ol {
+  margin-bottom: 0;
+}
+
+.help-steps ol {
+  padding-left: 1.25rem;
+}
+
+.help-steps li + li {
+  margin-top: 0.35rem;
+}
+
 .help-section {
   border: 1px solid #e8e8e8;
   border-radius: 6px;

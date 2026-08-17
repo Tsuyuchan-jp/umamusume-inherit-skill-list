@@ -9,7 +9,7 @@
 | 名前 | umamusume-inherit-skill-list（継承白因子リスト） |
 | パス | `C:\Users\PC1\Projects\umamusume-inherit-skill-list` |
 | 形態 | 静的 HTML/JS + JSON。ルートで `npm run serve` → `/app/` |
-| 目的 | 任意コース・脚質の U-tools 有効スキル（白∩共通）から本育成で取れる分を除き、先頭25件を [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) へコピーする |
+| 目的 | ウマ娘DBでレンタル継承親を探すとき、スキルを OR 条件で並べる元リストをコピーする。中身は任意コース・脚質の U-tools 有効スキル（白∩共通）から本育成で取れる分を除いた先頭25件。貼り付け先は [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) |
 | 公開 | まだ。push / Pages はユーザー明示時のみ |
 | 言語 | ユーザー向け応答・コードコメントは日本語 |
 
@@ -30,6 +30,7 @@
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
 - 背景 z-index 修正済み（コース選択・結果が隠れていた）
 - **UI:** 全面イラストなし。暗い帽子ヘッダー＋白い机＋メッシュ下地（左上紫・右下金、濃さ調整済み）。リード文はヘッダーに出さない。背景関連は完了（実機OK）
+- **使い方:** 目的（ウマ娘DBでレンタル継承親を探すときの OR 元リスト）＋中身の説明＋手順は常時表示。計上の前提・リストの見方は折りたたみ。extract は出さない。レンタル因子貼り付けへリンク
 
 有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。追加・更新は `npm run extract:effects -- --from-tracks`（既存はスキップ）または `--course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
 
@@ -49,13 +50,13 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。
 
-**いま:** 使い方ダイアログの改修。いきなり実装しない。案を出してから着手。
+**いま:** 次の1件は未定。後回しは TODO。
 
 合意メモ:
 
 - コースチップ視認性は現状で足りる
 - 全面壁紙はやめた。UmaTools寄せ。3（暗い帽子＋白い机）＋メッシュ採用・濃さOK。背景関連は完了
-- ヘッダーのリード文は外した。使い方に同趣旨を入れる。中身の整理もこの改修でまとめる
+- ヘッダーのリード文は外した。使い方へ移し、目的（OR 元リスト）と中身の整理まで完了
 
 後回し:
 
@@ -80,7 +81,5 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-背景関連は完了（暗い帽子＋白い机＋メッシュ、実機OK）。
-次は使い方ダイアログの改修。いきなり実装せず、案と相談から。
-ヘッダーから外したリード文（白∩共通から本育成分を除いて先頭25件をコピー）を入れ、中身の整理もこの改修でまとめる。
+使い方ダイアログ改修まで完了。次の1件は未定（後回しは TODO）。
 ```

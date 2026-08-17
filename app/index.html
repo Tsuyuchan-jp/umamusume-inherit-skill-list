@@ -104,19 +104,46 @@
         <button type="button" id="help-close" class="help-dialog__close" aria-label="閉じる">×</button>
       </div>
       <div class="help-dialog__body">
-        <p>U-tools の有効スキルを、白スキルかつ共通スキルに絞ったリストから、本育成（ウマ娘・サポカ・シナリオ自動）で取れるスキルを除きます。</p>
-        <ul>
-          <li>コースは、U-tools に有効スキルがあるものだけ出します。「すべてのコースを見る」で一覧全体も確認できます</li>
-          <li>サポカは優先40種のみ。絞り込みはタイプだけです</li>
-          <li>イベントは全選択肢を「取れる」とみなします（UIなし）</li>
-          <li>シナリオは自動付与だけ除外します。リンクとラーメン選択は見ません</li>
-          <li>金が取れるスキルは、対応する白も除外します</li>
-          <li>先頭25件の行からスキルを外せます。コピーは残した先頭25件です。除外はこのブラウザに、コースと脚質ごとに残ります</li>
-          <li>各行の獲得バ身とバ/Ptは U-tools と同じ値です（バ/Pt は 100Pt あたり）</li>
-          <li>行をタップすると順位（チャンミ9頭 / リグヒ12頭）と効果・局面が出ます。閉じた行の前/中後は順位条件があるときだけです</li>
-          <li>有効スキルデータの更新は <code>npm run extract:effects</code> です</li>
-          <li>突き合わせは「U-tools の有効スキルを開く」から、同じコース・脚質のページを見られます（白と共通にチェック）</li>
-        </ul>
+        <section class="help-lead" aria-labelledby="help-lead-title">
+          <h3 id="help-lead-title" class="help-lead__title">このツール</h3>
+          <p>ウマ娘DBでレンタルの継承親を探すとき、スキルを OR 条件で並べる元リストをコピーします。</p>
+          <p>任意コースの U-tools 有効スキル（白スキル ∩ 共通スキル）から、本育成で取れる分を除いた先頭25件です。</p>
+          <p>
+            コピーした名前は
+            <a href="https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill" target="_blank" rel="noopener">レンタル因子貼り付け</a>
+            に貼ると、ウマ娘DBの検索欄へ入ります（検索ボタンは押さない）。別ツールです。
+          </p>
+        </section>
+        <section class="help-steps" aria-labelledby="help-steps-title">
+          <h3 id="help-steps-title" class="help-steps__title">手順</h3>
+          <ol>
+            <li>場と距離、脚質を選ぶ（既定はデータがあるコースだけ。「すべてのコースを見る」で全件）</li>
+            <li>育成ウマ娘とサポカ（優先40種）を選ぶ</li>
+            <li>いらないスキルは行から外す。下の「除外中」から戻せます。除外はこのブラウザに、コースと脚質ごとに残ります</li>
+            <li>「先頭25件をコピー」→ レンタル因子貼り付けへ貼る</li>
+            <li>必要なら「U-tools の有効スキルを開く」で同じコース・脚質を突き合わせる（白と共通にチェック）</li>
+          </ol>
+        </section>
+        <details class="help-section">
+          <summary>計上の前提</summary>
+          <div class="help-section__content">
+            <ul>
+              <li>白かつ共通だけ。継承固有の白は出さない</li>
+              <li>サポカは優先40種。絞り込みはタイプだけ。イベントは全選択肢を「取れる」とみなします（UIなし）</li>
+              <li>シナリオはトレセン軒の自動付与だけ除外します。リンクとラーメン選択は見ません</li>
+              <li>金が取れるスキルは、対応する白も除外します</li>
+            </ul>
+          </div>
+        </details>
+        <details class="help-section">
+          <summary>リストの見方</summary>
+          <div class="help-section__content">
+            <ul>
+              <li>獲得バ身とバ/Pt は U-tools と同じ値です（バ/Pt は 100Pt あたり）</li>
+              <li>行をタップすると順位（チャンミ9頭 / リグヒ12頭）と効果・局面が出ます。閉じた行の前/中後は順位条件があるときだけです</li>
+            </ul>
+          </div>
+        </details>
       </div>
     </dialog>
 
