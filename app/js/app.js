@@ -272,7 +272,13 @@ function syncUtoolsLink() {
   const style = STYLE_LABELS[state.ui.style] ? state.ui.style : "leader";
   a.href = utoolsEffectsUrl(state.ui.courseId, style);
   const styleLabel = STYLE_LABELS[style] || style;
-  a.textContent = `U-tools の有効スキルを開く（${styleLabel}）`;
+  const course = currentCourse();
+  if (!course) {
+    a.textContent = `U-tools の有効スキルを開く（${styleLabel}）`;
+    return;
+  }
+  const ground = course.ground === "ダート" || course.ground === "ダ" ? "ダ" : "芝";
+  a.textContent = `U-tools の有効スキルを開く（${course.place} ${distChipLabel(course)} ${ground}・${styleLabel}）`;
 }
 
 async function loadEffects() {

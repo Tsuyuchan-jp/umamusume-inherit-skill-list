@@ -239,6 +239,8 @@ body {
   font-size: 0.85rem;
   color: var(--ink-mid, #5a5288);
   width: fit-content;
+  max-width: 100%;
+  line-height: 1.45;
 }
 
 .inherit-result__head {
