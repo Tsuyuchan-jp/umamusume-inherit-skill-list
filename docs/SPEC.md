@@ -1,6 +1,6 @@
 # 仕様（仮）
 
-詳細な会話引継ぎは [AGENT_HANDOFF.md](./AGENT_HANDOFF.md)。次タスクは [TODO.md](./TODO.md)。
+詳細な会話引継ぎは [AGENT_HANDOFF.md](./AGENT_HANDOFF.md)。開発手順は [DEVELOP.md](./DEVELOP.md)。次タスクは [TODO.md](./TODO.md)。
 
 ## 目的
 
@@ -26,4 +26,4 @@ U-tools 有効スキルページで **白スキル ∩ 共通スキル** をオ�
 
 ## 更新
 
-起動時フェッチはしない。`npm run extract:courses` / `extract:effects` を手動実行。
+起動時フェッチはしない。手順は [DEVELOP.md](./DEVELOP.md)。

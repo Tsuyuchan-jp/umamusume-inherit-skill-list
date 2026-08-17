@@ -1,41 +1,29 @@
 # 継承白因子リスト
 
-任意コースの U-tools 有効スキル（**白スキル ∩ 共通スキル**）から、本育成で取れるスキルを除いた先頭25件をコピーするブラウザツールです。
+ウマ娘DBでレンタルの継承親を探すとき、スキルを OR 条件で並べる元リストをコピーするブラウザツールです。
 
-コピー結果は [umamusume-rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) に貼り、ウマ娘DBの高度フレンド検索へ入れます。
+任意コースの U-tools 有効スキル（**白スキル ∩ 共通スキル**）から、本育成で取れる分を除いた先頭25件を出します。コピー結果は [レンタル因子貼り付け](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) に貼り、ウマ娘DBの高度フレンド検索へ入れます。
 
-開発者の新チャットは [docs/AGENT_HANDOFF.md](docs/AGENT_HANDOFF.md) から。次タスクは [docs/TODO.md](docs/TODO.md)。
+非公式・非商用です。ウマ娘プリティーダービー、U-tools、ウマ娘DB およびゲームの権利は各権利者に帰属します。
 
 ## 使い方
 
-リポジトリのルートで HTTP サーバーを起動し、`/app/` を開きます。
+GitHub Pages はまだ公開していません。ローカルではリポジトリのルートで HTTP サーバーを起動します。
 
 ```powershell
 npm run serve
 ```
 
+ブラウザで `http://localhost:5173/` を開くと `/app/` へ入ります。
+
 1. コースと脚質を選ぶ
 2. 必要なら「U-tools の有効スキルを開く」で同じ条件のページと突き合わせる（白と共通にチェック）
 3. 育成ウマ娘と本育成サポカ（優先40種）を選ぶ
-4. 「スキルリストをコピー」→ レンタル因子貼り付けへ貼る → ウマ娘DBで人が検索する
-
-## データ更新（手動）
-
-起動のたびに U-tools へ取りに行きません。見たいコースを増やすときだけ実行します。
-
-```powershell
-npm run extract:courses
-npm run extract:effects -- --from-tracks
-npm run extract:effects -- --course 10606
-```
-
-`--from-tracks` は U-tools コース一覧の金ドット分を取り、既存はスキップします。`--cache-only` で `.cache/` の HTML だけ再パースできます。
-
-## 計上ルール（手軽さ優先）
-
-- サポカ: トレヒント + イベント全選択肢
-- 育成ウマ娘: 覚醒最大の所持スキル
-- シナリオ（トレセン軒）: 自動付与のみ。リンク6択とラーメン3択は見ない
-- 金が取れるスキルは、同じチェーンの白も除外
+4. いらないスキルは行から外す
+5. 「スキルリストをコピー」→ レンタル因子貼り付けへ貼る → ウマ娘DBで人が検索する
 
 編成 UI とカード画像は `umamusume-sp-calc` から流用しています。
+
+## 開発者向け
+
+データ更新（extract）は [docs/DEVELOP.md](docs/DEVELOP.md)。新チャットの引継ぎは [docs/AGENT_HANDOFF.md](docs/AGENT_HANDOFF.md)。次タスクは [docs/TODO.md](docs/TODO.md)。

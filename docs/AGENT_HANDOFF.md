@@ -1,6 +1,6 @@
 # AGENT_HANDOFF — 新チャット最初に読むこと
 
-会話履歴なしで続けるための最短ブリーフ。詳細は [SPEC.md](./SPEC.md) とリポジトリ直下 [README.md](../README.md)。
+会話履歴なしで続けるための最短ブリーフ。利用者向けは [README.md](../README.md)。開発手順は [DEVELOP.md](./DEVELOP.md)。詳細仕様は [SPEC.md](./SPEC.md)。
 
 ## プロジェクト
 
@@ -8,7 +8,7 @@
 |------|------|
 | 名前 | umamusume-inherit-skill-list（継承白因子リスト） |
 | パス | `C:\Users\PC1\Projects\umamusume-inherit-skill-list` |
-| 形態 | 静的 HTML/JS + JSON。ルートで `npm run serve` → `/app/` |
+| 形態 | 静的 HTML/JS + JSON。ルートで `npm run serve` → `/` が `/app/` へ飛ぶ |
 | 目的 | ウマ娘DBでレンタル継承親を探すとき、スキルを OR 条件で並べる元リストをコピーする。中身は任意コース・脚質の U-tools 有効スキル（白∩共通）から本育成で取れる分を除いた先頭25件。貼り付け先は [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) |
 | 公開 | まだ。remote 未設定。push / Pages はユーザー明示時のみ |
 | 言語 | ユーザー向け応答・コードコメントは日本語 |
@@ -30,12 +30,12 @@
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
 - 背景 z-index 修正済み
 - **UI:** 全面イラストなし。暗い帽子ヘッダー＋白い机＋メッシュ下地（左上紫・右下金）。リード文はヘッダーに出さない
-- **使い方:** 目的（ウマ娘DBでレンタル継承親を探すときの OR 元リスト）＋中身＋手順は常時表示。計上の前提・リストの見方は折りたたみ。extract は出さない。レンタル因子貼り付けへリンク。閉じるは×と外側クリック
+- **使い方:** 目的（ウマ娘DBでレンタル継承親を探すときの OR 元リスト）＋中身＋手順は常時表示。計上の前提・リストの見方は折りたたみ。extract は出さない。レンタル因子貼り付けへリンク。閉じるは×と外側クリック。非公式注記あり
 - **結果枠:** 見出しは「不足しているかもしれないスキルリスト」。コピーは金ボタン「スキルリストをコピー」（幅100%・上限24rem。スマホ全幅／PCは左寄せ）。ウマ娘DBは白枠の補助ボタン
 
 有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。追加・更新は `npm run extract:effects -- --from-tracks`（既存はスキップ）または `--course ID`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
 
-テスト: `npm test`（parse effects / inherit list / parse courses）。
+テスト: `npm test`（parse effects / inherit list / parse courses / obtainable）。
 
 ## 確定仕様
 
@@ -45,6 +45,7 @@
 - コピー既定: 有効順の先頭25件（改行のスキル名。rental-factor-fill が解釈できる）。ボタン文言は「スキルリストをコピー」
 - ウマ娘DB入力は既存ユーザースクリプト。このアプリに入れない（別オリジンのため不可）
 - Git: 変更のたびコミット。PowerShell は `git add .` と `git commit` を別ステップ。push は明示時のみ
+- Pages するときはリポジトリ全体。`app/` だけをルートにしない。ルート `index.html` が `/app/` へ飛ばす。`.nojekyll` 済み
 
 U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/{style}`  
 脚質: `runner` / `leader` / `betweener` / `chaser`
@@ -53,22 +54,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** 公開に向けたレビューとリファクタ。機能追加・見た目の作り直しはしない。
-
-進め方:
-
-1. リポジトリを読んで問題と候補を洗い出す（実装はしない）
-2. 案を出して優先を相談する
-3. 合意した1件だけ直す
-
-レビューで見てほしい目安（確定ではない）:
-
-- sp-calc から借りた未使用 CSS/JS（`app/css/style.css` は大きい。`share-card-btn` は既にやめた）
-- `docs/mocks/` と `app/mock-course-ui.html` を公開物に残すか
-- 公開用 README（利用者向け）と開発者向け（extract / HANDOFF）の分離
-- GitHub Pages にしたときのパス（`/app/`、`data/`、カード画像）
-- 非公式・非商用の注記
-- `npm test` の範囲
+**いま:** 公開前レビューの残りは CSS 間引きだけ。機能追加・見た目の作り直しはしない。push / Pages はユーザー明示時のみ。
 
 合意メモ:
 
@@ -76,12 +62,15 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 - 全面壁紙はやめた。UmaTools寄せ。3（暗い帽子＋白い机）＋メッシュ採用・濃さOK
 - ヘッダーのリード文は外し、使い方へ移した
 - v1 機能・デザインは完了（実機OK）
+- モック（`docs/mocks/`・`app/mock-course-ui.html`）は削除済み
+- README は利用者向け。extract は `docs/DEVELOP.md`
 
 後回し:
 
+- **CSS 間引き**（`style.css` / `foundation.css` は sp-calc 由来が多い。ピッカー見た目が依存するので実機確認必須）
 - 全コース分の `extract:effects` 一括（やらない。金ドット36件）
 - アプリ内から extract
-- GitHub Pages 公開そのもの（レビュー後、ユーザー明示時）
+- GitHub Pages 公開そのもの（ユーザー明示時）
 - フィルタ精密化
 
 コース選択の大きな作り直しはしない（v1）。
@@ -96,13 +85,13 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
-| 比較モック（開発用） | `docs/mocks/` `app/mock-course-ui.html` |
+| 公開入口 | ルート `index.html`（`/app/` へ） `.nojekyll` |
 
 ## 新チャットの最初のメッセージ例
 
 ```
 C:\Users\PC1\Projects\umamusume-inherit-skill-list をワークスペースにして、docs/AGENT_HANDOFF.md を読んでから続けてください。
-v1 の機能とデザインは完了（実機OK）。次は公開に向けてのレビューとリファクタリング。
-いきなり実装せず、問題の洗い出しと案から。見た目の作り直しと機能追加はしない。
+v1 の機能とデザインは完了（実機OK）。公開前レビューの残りは CSS 間引き。
+いきなり実装せず、案から。見た目の作り直しと機能追加はしない。
 push / GitHub Pages はまだ。明示するまでやらない。
 ```

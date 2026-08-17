@@ -5,9 +5,6 @@
  * - シナリオ: 自動付与のみ（リンク・ラーメン選択は含めない）
  */
 
-const TRAINING_HINT = 5;
-const CHARA_HINT = 3;
-
 function skillNameNormalize(name) {
   return String(name || "").replace(/◯/g, "○").trim();
 }
@@ -73,7 +70,5 @@ export function collectObtainableSkillIds({
     for (const sk of entry.skills || []) addSkillRef(out, sk, nameToId);
   }
 
-  void TRAINING_HINT;
-  void CHARA_HINT;
   return out;
 }
