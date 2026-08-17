@@ -174,8 +174,8 @@ function rowHtml(row, index, action, label) {
   return `<li>
     <span class="result-rank">${index}</span>
     <span class="result-name">${escapeHtml(row.name)}</span>
-    <span class="result-stat" title="獲得バ身">${escapeHtml(stats.bashaNum)}<span class="result-stat__unit">バ</span></span>
-    <span class="result-stat" title="100Ptあたり">${escapeHtml(stats.perNum)}<span class="result-stat__unit">バ/Pt</span></span>
+    <span class="result-stat" title="獲得バ身">${escapeHtml(stats.bashaNum)}<span class="result-stat__unit">[バ]</span></span>
+    <span class="result-stat" title="100Ptあたり">${escapeHtml(stats.perNum)}<span class="result-stat__unit">[バ/Pt]</span></span>
     <button type="button" class="result-row-btn result-row-btn--${kind}" data-${action}-id="${row.id}"${aria}>${label}</button>
   </li>`;
 }

@@ -85,8 +85,8 @@ export function formatEffectStats(row) {
   const bashaNum = hasBasha ? Number(row.expectedEffect).toFixed(2) : "—";
   const perNum = per == null ? "—" : per.toFixed(2);
   return {
-    basha: hasBasha ? `${bashaNum}バ` : "—",
-    perPt: per == null ? "—" : `${perNum}バ/Pt`,
+    basha: hasBasha ? `${bashaNum}[バ]` : "—",
+    perPt: per == null ? "—" : `${perNum}[バ/Pt]`,
     bashaNum,
     perNum,
   };

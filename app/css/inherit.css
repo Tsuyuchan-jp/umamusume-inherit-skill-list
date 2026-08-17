@@ -122,7 +122,7 @@
 
 .result-list li {
   display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr) 4.4rem 5.8rem auto;
+  grid-template-columns: 2rem minmax(0, 1fr) 4.8rem 6.6rem auto;
   align-items: center;
   gap: 0.45rem;
   padding: 0.4rem 0.45rem;

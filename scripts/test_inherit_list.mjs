@@ -80,7 +80,7 @@ const stats = formatEffectStats({
   expectedEffect: 1.27062995,
   needSkillPoint: 120,
 });
-if (stats.basha !== "1.27バ" || stats.perPt !== "1.06バ/Pt") {
+if (stats.basha !== "1.27[バ]" || stats.perPt !== "1.06[バ/Pt]") {
   throw new Error(`format mismatch: ${JSON.stringify(stats)}`);
 }
 
