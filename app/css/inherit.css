@@ -135,10 +135,28 @@
   font-size: 0.75rem;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
-  border: 1px solid var(--border-default);
-  background: #fff;
+  border: 1px solid transparent;
   cursor: pointer;
   white-space: nowrap;
+}
+
+/* くすんだ赤み。縦書きにならないよう正方形 */
+.result-row-btn--exclude {
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: #8d5a5f;
+  background: #f4ecec;
+  border-color: #e4d4d5;
+}
+
+/* くすんだ緑み。戻すは文言のまま */
+.result-row-btn--restore {
+  color: #3f6a62;
+  background: #e8f1ee;
+  border-color: #c9ddd7;
 }
 
 .excluded-block {

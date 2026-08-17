@@ -166,10 +166,13 @@ async function loadEffects() {
 }
 
 function rowHtml(row, index, action, label) {
+  const kind = action === "exclude" ? "exclude" : "restore";
+  const aria =
+    action === "exclude" ? ' aria-label="外す"' : ' aria-label="戻す"';
   return `<li>
     <span class="result-rank">${index}</span>
     <span class="result-name">${escapeHtml(row.name)}</span>
-    <button type="button" class="result-row-btn" data-${action}-id="${row.id}">${label}</button>
+    <button type="button" class="result-row-btn result-row-btn--${kind}" data-${action}-id="${row.id}"${aria}>${label}</button>
   </li>`;
 }
 
@@ -217,7 +220,7 @@ function recalc() {
     listEl.innerHTML = '<li class="result-empty">先頭25件に残るスキルはありません。</li>';
   } else {
     listEl.innerHTML = result.top
-      .map((row, i) => rowHtml(row, i + 1, "exclude", "外す"))
+      .map((row, i) => rowHtml(row, i + 1, "exclude", "×"))
       .join("");
   }
 
