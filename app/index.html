@@ -72,6 +72,13 @@
             <button type="button" id="open-db" class="share-card-btn">ウマ娘DBを開く</button>
           </div>
         </div>
+        <div class="list-bar">
+          <div class="seg" id="field-seg" role="group" aria-label="頭数換算">
+            <button type="button" data-n="9">チャンミ</button>
+            <button type="button" data-n="12">リグヒ</button>
+          </div>
+          <span id="field-hint" class="list-bar__hint">9頭換算</span>
+        </div>
         <ol id="result-list" class="result-list"></ol>
         <div id="excluded-block" class="excluded-block" hidden>
           <h3 class="excluded-block__title">除外中</h3>
@@ -99,6 +106,7 @@
           <li>金が取れるスキルは、対応する白も除外します</li>
           <li>先頭25件の行からスキルを外せます。コピーは残した先頭25件です。除外はこのブラウザに、コースと脚質ごとに残ります</li>
           <li>各行の獲得バ身とバ/Ptは U-tools と同じ値です（バ/Pt は 100Pt あたり）</li>
+          <li>行をタップすると順位（チャンミ9頭 / リグヒ12頭）と効果・局面が出ます。閉じた行の前/中後は順位条件があるときだけです</li>
           <li>有効スキルデータの更新は <code>npm run extract:effects</code> です</li>
           <li>突き合わせは「U-tools の有効スキルを開く」から、同じコース・脚質のページを見られます（白と共通にチェック）</li>
         </ul>

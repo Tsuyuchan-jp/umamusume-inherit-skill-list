@@ -2,7 +2,7 @@
   "courseId": 10606,
   "style": "leader",
   "source": "https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/10606/effects/leader",
-  "fetchedAt": "2026-08-17T04:11:01.143Z",
+  "fetchedAt": "2026-08-17T13:30:20.598Z",
   "rankedCount": 497,
   "whiteCommonCount": 133,
   "skills": [
@@ -10,799 +10,2403 @@
       "id": 204082,
       "name": "余勢を駆って",
       "expectedEffect": 1.27062995,
-      "needSkillPoint": 120
+      "needSkillPoint": 120,
+      "desc": "上り坂で速度がわずかに上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "上り坂"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203442,
       "name": "憧れを越えて",
       "expectedEffect": 1.2431963,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "レース終盤始めの方早めに\n前方にいると加速力がわずかに上がる\n＜先行・中距離＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "先行",
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 202712,
       "name": "会心の一歩",
       "expectedEffect": 1.166555425,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "終盤以降の最終コーナーで\n中団以前にいる時ゴールまで遠いと\n加速力がわずかに上がる＜先行/差し＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "終盤"
+      ],
+      "aptTags": [
+        "先行",
+        "差し"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 70
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 70
+          }
+        ]
+      ]
     },
     {
       "id": 201591,
       "name": "ウマ好み",
       "expectedEffect": 1.024036975,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "近くにウマ娘がたくさんいると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 202082,
       "name": "ワンチャンス",
       "expectedEffect": 0.9307266750000001,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース終盤始めの方で中団以降にいると\n加速力がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "終盤前半"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ]
+      ]
     },
     {
       "id": 203112,
       "name": "正面突破",
       "expectedEffect": 0.9307266750000001,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース終盤始めの方で前方にいると\n加速力がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "終盤前半"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 201902,
       "name": "真っ向勝負",
       "expectedEffect": 0.9307266750000001,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤始めの方で前方にいると\n加速力がわずかに上がる＜作戦・先行＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "終盤前半"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 201101,
       "name": "中距離直線◎",
       "expectedEffect": 0.8931596500000001,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "直線で速度が少し上がる＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "直線"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 201311,
       "name": "先行直線◎",
       "expectedEffect": 0.8931596500000001,
-      "needSkillPoint": 140
+      "needSkillPoint": 140,
+      "desc": "直線で速度が少し上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "直線"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204012,
       "name": "力業",
       "expectedEffect": 0.885196325,
-      "needSkillPoint": 190
+      "needSkillPoint": 190,
+      "desc": "レース中盤に速度がわずかに上がる\n先頭から4バ身以上離れていると\n速度が少し上がる＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 200271,
       "name": "おひとり様◎",
       "expectedEffect": 0.880002,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "自分と同じ作戦のウマ娘がいないと\n能力をすごく発揮しやすい",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201111,
       "name": "中距離コーナー◎",
       "expectedEffect": 0.7559627250000001,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "コーナーで速度が少し上がる\n＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 201321,
       "name": "先行コーナー◎",
       "expectedEffect": 0.7559627250000001,
-      "needSkillPoint": 140
+      "needSkillPoint": 140,
+      "desc": "コーナーで速度が少し上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203222,
       "name": "アグレッシブ",
       "expectedEffect": 0.71208165,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤に持久力を少し使って\n速度を少し上げる＜作戦・先行＞",
+      "effectTags": [
+        "速度",
+        "回復"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204322,
       "name": "阿吽の呼吸",
       "expectedEffect": 0.71208165,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に速度がわずかに上がる\n「阿吽の呼吸」を持つウマ娘が2人以上\nいるレースだと少し上がる\n＜マイル/中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 204362,
       "name": "大立ち回り",
       "expectedEffect": 0.71208165,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に持久力を少し使って\n速度を少し上げる＜先行/差し＞",
+      "effectTags": [
+        "速度",
+        "回復"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 202522,
       "name": "型破り",
       "expectedEffect": 0.672078175,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "最終コーナー前の第3コーナーで\n後ろの方にいるとわずかに前に出る\n＜中距離/長距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 50
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 202742,
       "name": "品行方正",
       "expectedEffect": 0.672078175,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "最終コーナー前の第3コーナーで\n前の方にいるとわずかに前に出る\n＜マイル/中距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "マイル",
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 203792,
       "name": "好戦的",
       "expectedEffect": 0.672078175,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "最終コーナー前の第3コーナーで\n中団以降にいるとわずかに前に出る\n＜マイル/中距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "マイル",
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ]
+      ]
     },
     {
       "id": 204472,
       "name": "奮い立つ心",
       "expectedEffect": 0.672078175,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "最終コーナー前の第3コーナーで\n前方にいるとわずかに前に出る\n＜中距離/長距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 200021,
       "name": "左回り◎",
       "expectedEffect": 0.663198,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "左回りコースが得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200191,
       "name": "秋ウマ娘◎",
       "expectedEffect": 0.663198,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "秋のレースが得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200301,
       "name": "伏兵◎",
       "expectedEffect": 0.663198,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "4番人気以下のレースで\n能力を発揮しやすい",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200272,
       "name": "おひとり様○",
       "expectedEffect": 0.663198,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "自分と同じ作戦のウマ娘がいないと\n能力を発揮しやすい",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200492,
       "name": "垂れウマ回避",
       "expectedEffect": 0.654493925,
-      "needSkillPoint": 150
+      "needSkillPoint": 150,
+      "desc": "ラストスパートの最中なら\n前が塞がれた時加速力がわずかに上がり\nコース取りがちょっとうまくなる",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "ラストスパート"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201102,
       "name": "中距離直線○",
       "expectedEffect": 0.62735535,
-      "needSkillPoint": 100
+      "needSkillPoint": 100,
+      "desc": "直線で速度がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "直線"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 201312,
       "name": "先行直線○",
       "expectedEffect": 0.62735535,
-      "needSkillPoint": 130
+      "needSkillPoint": 130,
+      "desc": "直線で速度がわずかに上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "直線"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 200362,
       "name": "直線巧者",
       "expectedEffect": 0.62735535,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "直線で速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "直線"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 204262,
       "name": "星の煌き",
       "expectedEffect": 0.594163575,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "全開スパート中に少し前に出て\nちょっと伸びを見せる",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 203502,
       "name": "比類なき",
       "expectedEffect": 0.546661125,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "レース中盤にわずかに前に出る",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201611,
       "name": "尻尾上がり",
       "expectedEffect": 0.54078275,
-      "needSkillPoint": 100
+      "needSkillPoint": 100,
+      "desc": "レース中盤にスキルを多く発動すると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 203122,
       "name": "さらなる高みへ",
       "expectedEffect": 0.53532895,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "レース中盤に前方にいると\n速度がわずかに上がる＜先行・中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行",
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 203132,
       "name": "決定打",
       "expectedEffect": 0.5235907,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "最終直線で先頭にいるか\n先頭から1バ身以内にいると\n速度が少し上がる＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "最終直線"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204122,
       "name": "勝負を懸けて",
       "expectedEffect": 0.5235907,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "ラストスパートの最中なら最終直線で\n速度がわずかに上がる\n余力十分なら少し上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "最終直線",
+        "ラストスパート"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 203862,
       "name": "気ままな足取り",
       "expectedEffect": 0.5123168,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース序盤または中盤に\n追い抜かれるか競り合うと\nわずかに前に出る＜中距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204002,
       "name": "意地っ張り",
       "expectedEffect": 0.5123168,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース序盤または中盤に\n追い抜かれるか競り合うと\nわずかに前に出る＜作戦・先行＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204453,
       "name": "聖女の挑戦",
       "expectedEffect": 0.4989968000000001,
-      "needSkillPoint": 140
+      "needSkillPoint": 140,
+      "desc": "レース中盤始めの方に\n速度がちょっと上がる\n中団以降に控え続けていると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤前半"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 203512,
       "name": "覇気十分",
       "expectedEffect": 0.4989968000000001,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "レース中盤始めの方に中団以降にいると\n速度がわずかに上がり持久力を\nほんのわずかに回復する\n＜中距離/長距離＞",
+      "effectTags": [
+        "速度",
+        "回復"
+      ],
+      "phaseTags": [
+        "中盤前半"
+      ],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ]
+      ]
     },
     {
       "id": 203052,
       "name": "揺るがぬ信念",
       "expectedEffect": 0.46408452499999997,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース終盤が迫ったとき前方にいると\n速度がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤後半"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 203572,
       "name": "足がかり",
       "expectedEffect": 0.46408452499999997,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース終盤が迫ったとき\n中団以降にいると速度がわずかに上がる\n＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤後半"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ]
+      ]
     },
     {
       "id": 202982,
       "name": "飛躍の予感",
       "expectedEffect": 0.46408452499999997,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤が迫ったとき\n前方にいると速度がわずかに上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤後半"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 204072,
       "name": "気持ちを乗せて",
       "expectedEffect": 0.46408452499999997,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤が迫ったとき前方にいると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤後半"
+      ],
+      "aptTags": [],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 204372,
       "name": "流れに任せて",
       "expectedEffect": 0.46408452499999997,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤が迫ったとき\n速度がわずかに上がる＜先行/差し＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤後半"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201112,
       "name": "中距離コーナー○",
       "expectedEffect": 0.45765947500000004,
-      "needSkillPoint": 100
+      "needSkillPoint": 100,
+      "desc": "コーナーで速度がわずかに上がる\n＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 201322,
       "name": "先行コーナー○",
       "expectedEffect": 0.45765947500000004,
-      "needSkillPoint": 130
+      "needSkillPoint": 130,
+      "desc": "コーナーで速度がわずかに上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203632,
       "name": "夢への挑戦",
       "expectedEffect": 0.45104387500000004,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース後半にわずかに前に出る\n＜中距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202552,
       "name": "快速",
       "expectedEffect": 0.45104387500000004,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "レース後半にわずかに前に出て\n持久力をほんのわずかに回復する",
+      "effectTags": [
+        "現在速度",
+        "回復"
+      ],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201631,
       "name": "シンパシー",
       "expectedEffect": 0.44429,
-      "needSkillPoint": 70
+      "needSkillPoint": 70,
+      "desc": "「シンパシー」を持つウマ娘が多い\nレースだとスピードが少し上がる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201641,
       "name": "一匹狼",
       "expectedEffect": 0.44429,
-      "needSkillPoint": 70
+      "needSkillPoint": 70,
+      "desc": "自分だけが「一匹狼」を持つレースだと\nスピードが少し上がる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200022,
       "name": "左回り○",
       "expectedEffect": 0.44429,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "左回りコースが少し得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200192,
       "name": "秋ウマ娘○",
       "expectedEffect": 0.44429,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "秋のレースが少し得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200302,
       "name": "伏兵○",
       "expectedEffect": 0.44429,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "4番人気以下のレースで\n能力を少し発揮しやすい",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 202702,
       "name": "探求心",
       "expectedEffect": 0.44429,
-      "needSkillPoint": 120
+      "needSkillPoint": 120,
+      "desc": "スピードが十二分に高いとスピードが\nわずかに上がる、賢さも十二分なら\nスピードが少し上がる＜先行・中距離＞",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [
+        "先行",
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203992,
       "name": "目覚めの時",
       "expectedEffect": 0.442500575,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に速度がわずかに上がる\nスキル発動時、前方にいると\n効果が変わりわずかに前に出る\n＜作戦・先行＞",
+      "effectTags": [
+        "現在速度",
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 200722,
       "name": "テンポアップ",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤に前の方だと\n速度がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 202102,
       "name": "前のめり",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤に後ろの方にいると\n速度がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 202372,
       "name": "攻めの姿勢",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に速度がわずかに上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202532,
       "name": "しとやかな足取り",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に速度がわずかに上がる\n＜マイル/中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "マイル",
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203032,
       "name": "素直な一歩",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に前方にいると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 203362,
       "name": "一歩ずつ前へ",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に中団以降にいると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ]
+      ]
     },
     {
       "id": 203652,
       "name": "活路を拓く！",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に速度がわずかに上がる\n＜中距離/長距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203852,
       "name": "心惹かれて",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 204112,
       "name": "淀みなし",
       "expectedEffect": 0.43116562500000005,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に速度がわずかに上がる\n＜先行/差し＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行",
+        "差し"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202662,
       "name": "込み上げる熱",
       "expectedEffect": 0.4269985,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤始めの方に中団にいると\nわずかに前に出る＜中距離/長距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "終盤前半"
+      ],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 30
+          },
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 80
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 30
+          },
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 80
+          }
+        ]
+      ]
     },
     {
       "id": 203252,
       "name": "急襲",
       "expectedEffect": 0.4269985,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤始めの方に中団以降にいると\nわずかに前に出る＜中距離/長距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "終盤前半"
+      ],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ]
+      ]
     },
     {
       "id": 203642,
       "name": "光明",
       "expectedEffect": 0.4269985,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤始めの方に前方にいると\nわずかに前に出る＜中距離/長距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "終盤前半"
+      ],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 203172,
       "name": "切り替え上手",
       "expectedEffect": 0.42202662500000004,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤が迫ったとき\n速度をわずかに落とす\nその後レース終盤始めの方に\n少し前に出る＜中距離＞",
+      "effectTags": [
+        "回復",
+        "現在速度"
+      ],
+      "phaseTags": [
+        "序盤後半",
+        "終盤前半"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202172,
       "name": "下り坂巧者",
       "expectedEffect": 0.42022287500000005,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "下り坂で速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "下り坂"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 204042,
       "name": "華麗な足取り",
       "expectedEffect": 0.4140152,
-      "needSkillPoint": 120
+      "needSkillPoint": 120,
+      "desc": "追い抜くとわずかに前に出る＜中距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202602,
       "name": "イグニッション",
       "expectedEffect": 0.41331312500000006,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中にスキルを13回発動すると\nわずかに前に出る＜中距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 200342,
       "name": "コーナー加速○",
       "expectedEffect": 0.40494372500000003,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "華麗なコーナーワークで\n加速力がわずかに上がる",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 203232,
       "name": "逸る足取り",
       "expectedEffect": 0.40227417500000007,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤が迫ったとき\n速度がわずかに上がる＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "序盤後半"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202432,
       "name": "確かな足取り",
       "expectedEffect": 0.402189075,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "終盤が迫ったとき先頭にいるか\n先頭から4バ身以内だと速度と加速力が\nちょっと上がる＜先行・中距離＞",
+      "effectTags": [
+        "速度",
+        "加速"
+      ],
+      "phaseTags": [
+        "中盤後半"
+      ],
+      "aptTags": [
+        "先行",
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204182,
       "name": "巨歩",
       "expectedEffect": 0.39850295,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に追い抜くか先頭にいると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": [
+        [
+          {
+            "kind": "order",
+            "sign": "==",
+            "value": 1
+          }
+        ]
+      ]
     },
     {
       "id": 204412,
       "name": "憂いなし",
       "expectedEffect": 0.39824765,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤始めの方に前方にいると\n速度がわずかに上がる＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤前半"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 201702,
       "name": "ありったけ",
       "expectedEffect": 0.397515975,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "終盤以降の最終直線で好位置にいると\n速度がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "終盤",
+        "最終直線"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 20
+          },
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 60
+          }
+        ]
+      ]
     },
     {
       "id": 203432,
       "name": "躍動",
       "expectedEffect": 0.39253855000000004,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "レース最終盤始めの方で\nラストスパートの最中なら\n速度がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "ラストスパート"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203422,
       "name": "己を信じて",
       "expectedEffect": 0.39253855000000004,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース最終盤始めの方で\nラストスパートの最中なら\n速度がわずかに上がる＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "ラストスパート"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202032,
       "name": "あやしげな作戦",
       "expectedEffect": 0.3919595,
-      "needSkillPoint": 120
+      "needSkillPoint": 120,
+      "desc": "レース後半に速度が少し上がるが\nすごく疲れてしまうことがある",
+      "effectTags": [
+        "速度",
+        "回復"
+      ],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200261,
       "name": "外枠得意◎",
       "expectedEffect": 0.38686527893399997,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "枠番が6～8のレースが得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 202472,
       "name": "食らいつき",
       "expectedEffect": 0.378932725,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース後半に追い抜こうとすると\n速度がわずかに上がる＜先行/差し＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "先行",
+        "差し"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204052,
       "name": "灯を胸に",
       "expectedEffect": 0.37637787500000003,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤始めの方にわずかに前に出る\n＜マイル/中距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "終盤前半"
+      ],
+      "aptTags": [
+        "マイル",
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202412,
       "name": "向上心",
       "expectedEffect": 0.375809,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース終盤目前、2番手以降に控えて\n先頭から2バ身以内だとしばらくの間\n速度がちょっと上がる＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "order",
+            "sign": ">=",
+            "value": 2
+          }
+        ]
+      ]
     },
     {
       "id": 200332,
       "name": "コーナー巧者○",
       "expectedEffect": 0.36447867500000003,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "コーナーが得意になり\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200732,
       "name": "食い下がり",
       "expectedEffect": 0.36314297500000003,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "最終コーナー以降に詰め寄られると\n速度がわずかに上がり、加速力が\nほんのちょっと上がる＜中距離＞",
+      "effectTags": [
+        "速度",
+        "加速"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202092,
       "name": "闘争心",
       "expectedEffect": 0.3594365,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤に中団で競り合うと\n持久力がちょっと回復し\n速度がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "速度",
+        "回復"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 80
+          },
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 30
+          }
+        ]
+      ]
     },
     {
       "id": 204222,
       "name": "もう一踏ん張り",
       "expectedEffect": 0.35196065000000004,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "全開スパート中にわずかに伸びを見せる\n＜中距離＞",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203802,
       "name": "想い焦がれて",
       "expectedEffect": 0.33029345000000004,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "レース中盤に速度がちょっと上がる\nその後レース終盤にちょっと前に出る\n＜マイル/中距離＞",
+      "effectTags": [
+        "速度",
+        "現在速度"
+      ],
+      "phaseTags": [
+        "中盤",
+        "終盤"
+      ],
+      "aptTags": [
+        "マイル",
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202652,
       "name": "自信家",
       "expectedEffect": 0.325642,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "スピードとパワーが十分に強いと\nスピードとパワーがわずかに上がる\n＜マイル/中距離＞",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [
+        "マイル",
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204202,
       "name": "戦略家",
       "expectedEffect": 0.325642,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "スピードとパワーが十分に高いと\nスピードとパワーがわずかに上がる\n＜中距離/長距離＞",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203312,
       "name": "光差す方へ",
       "expectedEffect": 0.3246824,
-      "needSkillPoint": 140
+      "needSkillPoint": 140,
+      "desc": "レース中盤に速度がわずかに上がる\n＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204332,
       "name": "実直な走り",
       "expectedEffect": 0.3246824,
-      "needSkillPoint": 140
+      "needSkillPoint": 140,
+      "desc": "レース中盤に速度がわずかに上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202792,
       "name": "中盤巧者",
       "expectedEffect": 0.3246824,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤に速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 203472,
       "name": "みなぎる闘志",
       "expectedEffect": 0.32384250000000003,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "追い比べをしていると\n残り200mを切ってから\nわずかに前に出る＜逃げ/先行＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "逃げ",
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 201651,
       "name": "スリップストリーム",
       "expectedEffect": 0.32052545,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "前のウマ娘のすぐ後ろに付けると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201661,
       "name": "遊びはおしまいっ！",
       "expectedEffect": 0.32052545,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "すぐ後ろにウマ娘が長くいると\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200512,
       "name": "末脚",
       "expectedEffect": 0.31261855,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "レース最終盤始めの方で\nラストスパートの最中なら\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "ラストスパート"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201601,
       "name": "地固め",
       "expectedEffect": 0.31260375,
-      "needSkillPoint": 100
+      "needSkillPoint": 100,
+      "desc": "レース序盤にスキルを多く発動すると\n加速力がわずかに上がる",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201132,
       "name": "イナズマステップ",
       "expectedEffect": 0.303504525,
-      "needSkillPoint": 140
+      "needSkillPoint": 140,
+      "desc": "レース中盤にしばらくの間\nコース取りが少し上手くなり\n加速力がわずかに上がる＜中距離＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 202802,
       "name": "序盤巧者",
       "expectedEffect": 0.300159725,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤が迫ったとき\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "序盤後半"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200151,
       "name": "良バ場◎",
       "expectedEffect": 0.298611,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "「良」のバ場状態が得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200281,
       "name": "対抗意識◎",
       "expectedEffect": 0.298611,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "自分と同じ作戦のウマ娘が多いと\n能力を発揮しやすい",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200462,
       "name": "ペースアップ",
       "expectedEffect": 0.29778155,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "レース中盤に追い抜くと\n速度がわずかに上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200262,
       "name": "外枠得意○",
       "expectedEffect": 0.25916901857,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "枠番が6～8のレースが少し得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 204212,
       "name": "卓越する走り",
       "expectedEffect": 0.24585390000000004,
-      "needSkillPoint": 190
+      "needSkillPoint": 190,
+      "desc": "レース終盤が迫ったとき前方にいると\nしばらくの間速度がちょっと上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤後半"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 202722,
       "name": "折れない心",
       "expectedEffect": 0.24131492499999999,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤のコーナーで\nしばらくの間速度がちょっと上がる",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 204032,
       "name": "労を惜しまず",
       "expectedEffect": 0.24131492499999999,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤のコーナーで\nしばらくの間速度がちょっと上がる\n＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204152,
       "name": "前進あるのみ",
       "expectedEffect": 0.24131492499999999,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤のコーナーで前方にいると\nしばらくの間速度がちょっと上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "コーナー"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 203842,
       "name": "優等生",
       "expectedEffect": 0.234553175,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤に中団以降にいると\nしばらくの間速度がちょっと上がる\n＜中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ]
+      ]
     },
     {
       "id": 202762,
       "name": "勝利に向かって",
       "expectedEffect": 0.234553175,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に前の方にいると\nしばらくの間速度がちょっと上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 203662,
       "name": "健脚",
       "expectedEffect": 0.234553175,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レース中盤に\nしばらくの間速度がちょっと上がる\n＜中距離/長距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 203142,
       "name": "克己心",
       "expectedEffect": 0.234553175,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "レース中盤にしばらくの間\n速度がちょっと上がり\n持久力をちょっと回復する＜中距離＞",
+      "effectTags": [
+        "速度",
+        "回復"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204502,
       "name": "ダブルアクセル",
       "expectedEffect": 0.228953225,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "レース中盤始めの方に\n速度がちょっと上がり\nほんのわずかに前に出る＜中距離＞",
+      "effectTags": [
+        "速度",
+        "現在速度"
+      ],
+      "phaseTags": [
+        "中盤前半"
+      ],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 204302,
       "name": "個性的",
       "expectedEffect": 0.22368442500000002,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "レース中盤の直線で前方にいると\nしばらくの間速度がちょっと上がる\n＜先行・中距離＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "先行",
+        "中距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 202442,
       "name": "やまっけ",
       "expectedEffect": 0.2096877,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "レースでごくまれにさらなる力を発揮し\nスピード、パワー、根性が少し上がる\n人気が低いと力を発揮しやすくなる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201332,
       "name": "巧みなステップ",
       "expectedEffect": 0.207804025,
-      "needSkillPoint": 120
+      "needSkillPoint": 120,
+      "desc": "左右に移動するとき\n加速力がわずかに上がる＜作戦・先行＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 200152,
       "name": "良バ場○",
       "expectedEffect": 0.201327,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "「良」のバ場状態が少し得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200282,
       "name": "対抗意識○",
       "expectedEffect": 0.201327,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "自分と同じ作戦のウマ娘が多いと\n能力を少し発揮しやすい",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 201362,
       "name": "まき直し",
       "expectedEffect": 0.19844765,
-      "needSkillPoint": 120
+      "needSkillPoint": 120,
+      "desc": "レース中盤に後ろの方にいると\n加速力がわずかに上がる＜作戦・先行＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">",
+            "value": 40
+          }
+        ]
+      ]
     },
     {
       "id": 203372,
       "name": "切り返し",
       "expectedEffect": 0.1781809,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "終盤以降の最終コーナー以降にいるとき\nライバルのウマ娘が速度スキルを\n発動するとしばらくの間ちょっと\n前に出る＜中距離/長距離＞",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "終盤"
+      ],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 201581,
       "name": "登山家",
       "expectedEffect": 0.12371967500000002,
-      "needSkillPoint": 160
+      "needSkillPoint": 160,
+      "desc": "上り坂で加速力がわずかに上がる",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "上り坂"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 204392,
       "name": "息抜き上手",
       "expectedEffect": 0.09432317500000001,
-      "needSkillPoint": 190
+      "needSkillPoint": 190,
+      "desc": "レース中盤始めの方に持久力を\nわずかに回復しほんのわずかに前に出る\n＜中距離/長距離＞",
+      "effectTags": [
+        "回復",
+        "現在速度"
+      ],
+      "phaseTags": [
+        "中盤前半"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 203242,
       "name": "端緒",
       "expectedEffect": 0.09432317500000001,
-      "needSkillPoint": 200
+      "needSkillPoint": 200,
+      "desc": "中盤の直線に入ると持久力を\nわずかに回復しほんのわずかに前に出る",
+      "effectTags": [
+        "回復",
+        "現在速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200582,
       "name": "抜け出し準備",
       "expectedEffect": 0.09391525,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "最終コーナーで前方にいると\n速度がわずかに上がる＜作戦・先行＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
     },
     {
       "id": 201342,
       "name": "直滑降",
       "expectedEffect": 0.083852175,
-      "needSkillPoint": 120
+      "needSkillPoint": 120,
+      "desc": "下り坂で加速力がわずかに上がる\n＜作戦・先行＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "下り坂"
+      ],
+      "aptTags": [
+        "先行"
+      ],
+      "rateGroups": []
     },
     {
       "id": 200211,
       "name": "晴れの日◎",
       "expectedEffect": 0.076358,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "晴れの日のレースが得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200291,
       "name": "徹底マーク◎",
       "expectedEffect": 0.076358,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "1番人気のウマ娘と作戦が同じだと\n能力を発揮しやすい",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200212,
       "name": "晴れの日○",
       "expectedEffect": 0.051104,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "晴れの日のレースが少し得意になる",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200292,
       "name": "徹底マーク○",
       "expectedEffect": 0.051104,
-      "needSkillPoint": 90
+      "needSkillPoint": 90,
+      "desc": "1番人気のウマ娘と作戦が同じだと\n能力を少し発揮しやすい",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 200372,
       "name": "直線加速",
       "expectedEffect": 0.049220175000000005,
-      "needSkillPoint": 170
+      "needSkillPoint": 170,
+      "desc": "直線で加速力がわずかに上がる",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [
+        "直線"
+      ],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 202692,
       "name": "一番乗り",
       "expectedEffect": 0.03142965,
-      "needSkillPoint": 120
+      "needSkillPoint": 120,
+      "desc": "スタート時に加速力がわずかに上がる\n＜中距離＞",
+      "effectTags": [
+        "加速"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "中距離"
+      ],
+      "rateGroups": []
     },
     {
       "id": 201562,
       "name": "ラッキーセブン",
       "expectedEffect": 0.024972595144,
-      "needSkillPoint": 110
+      "needSkillPoint": 110,
+      "desc": "枠番が7の時に少し\n良いことが起きる場合がある",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     },
     {
       "id": 204142,
       "name": "あふれる活力",
       "expectedEffect": 0,
-      "needSkillPoint": 180
+      "needSkillPoint": 180,
+      "desc": "スタミナが十二分に高いとスタミナが\n少し上がる＜中距離/長距離＞",
+      "effectTags": [],
+      "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
     }
   ]
 }

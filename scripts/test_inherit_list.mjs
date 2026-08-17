@@ -4,6 +4,7 @@ import {
   formatEffectStats,
   ptEfficiencyPer100,
 } from "../app/js/inheritList.js";
+import { activeOrders, rankBadge } from "../app/js/skillDetail.js";
 import { getChainRoot, isChainMember } from "../app/js/goldLower.js";
 
 const skillById = new Map([
@@ -83,5 +84,14 @@ const stats = formatEffectStats({
 if (stats.basha !== "1.27[バ]" || stats.perPt !== "1.06[バ/Pt]") {
   throw new Error(`format mismatch: ${JSON.stringify(stats)}`);
 }
+
+const chanceOrders = activeOrders(9, [[{ kind: "rate", sign: ">=", value: 40 }]]);
+if (!chanceOrders || chanceOrders[0] !== 4 || chanceOrders.at(-1) !== 9) {
+  throw new Error(`チャンミ ≥40 → ${chanceOrders}`);
+}
+const front = rankBadge([1, 2, 3, 4], 9);
+if (front?.kind !== "front") throw new Error("前 badge");
+const back = rankBadge([4, 5, 6, 7, 8, 9], 9);
+if (back?.kind !== "back") throw new Error("中後 badge");
 
 console.log("ok inheritList");

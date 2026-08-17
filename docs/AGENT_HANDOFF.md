@@ -24,6 +24,7 @@
 - 白∩共通 − 本育成取得可能（金チェーン含む）→ 先頭25件コピー
 - 先頭25件を行ごとに手動除外。下に「除外中」（戻す）。コピーは残件の先頭25件。除外はコース＋脚質ごとに localStorage
 - 各行に獲得バ身と 100Pt あたりのバ/Pt（U-tools の expectedEffect / needSkillPoint）
+- 行タップで詳細（チャンミ9 / リグヒ12 の順位ドット、効果・局面・脚質距離）。閉じた行は順位条件があるときだけ前/中後/その他
 - 「U-tools の有効スキルを開く」→ `/race/courses/{courseId}/effects/{style}`
 - 突き合わせの結果、リスト内容は問題なし（フィルタ近似は実用十分）
 - 背景 z-index 修正済み（コース選択・結果が隠れていた）
@@ -56,7 +57,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 | 役割 | 場所 |
 |------|------|
 | UI | `app/index.html` `app/js/app.js` `app/js/deckUi.js` `app/css/inherit.css` |
-| 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` |
+| 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
 | 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/courses.json` |
 

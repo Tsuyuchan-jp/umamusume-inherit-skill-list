@@ -8,6 +8,7 @@ import {
 } from "./inheritList.js";
 import { copyTextToClipboard } from "./clipboard.js";
 import { escapeHtml } from "./htmlEscape.js";
+import { activeOrders, rankBadge } from "./skillDetail.js";
 
 const DATA_BASE = new URL("../../data/", import.meta.url);
 const SESSION_KEY = "umamusume-inherit-skill-list-v1";
@@ -35,12 +36,14 @@ const state = {
     supportIds: [null, null, null, null, null, null],
     // コースID:脚質 → 手動除外したスキルID
     excludedByKey: {},
+    fieldSize: 9,
   },
 };
 
 let deckUi = null;
 let saveTimer = null;
 let lastResult = null;
+let openSkillId = null;
 
 function dataUrl(name) {
   return new URL(name, DATA_BASE).href;
@@ -92,6 +95,9 @@ function restoreSession() {
       }
       state.ui.excludedByKey = next;
     }
+    if (saved.fieldSize === 9 || saved.fieldSize === 12) {
+      state.ui.fieldSize = saved.fieldSize;
+    }
   } catch {
     /* ignore */
   }
@@ -118,6 +124,15 @@ function syncStyleButtons() {
     btn.classList.toggle("is-on", on);
     btn.setAttribute("aria-pressed", on ? "true" : "false");
   });
+}
+
+function syncFieldSeg() {
+  const n = state.ui.fieldSize === 12 ? 12 : 9;
+  document.querySelectorAll("#field-seg [data-n]").forEach((btn) => {
+    btn.classList.toggle("is-on", Number(btn.dataset.n) === n);
+  });
+  const hint = document.getElementById("field-hint");
+  if (hint) hint.textContent = `${n}頭換算`;
 }
 
 function exclusionKey(courseId, style) {
@@ -171,12 +186,54 @@ function rowHtml(row, index, action, label) {
   const aria =
     action === "exclude" ? ' aria-label="外す"' : ' aria-label="戻す"';
   const stats = formatEffectStats(row);
-  return `<li>
-    <span class="result-rank">${index}</span>
-    <span class="result-name">${escapeHtml(row.name)}</span>
-    <span class="result-stat" title="獲得バ身">${escapeHtml(stats.bashaNum)}<span class="result-stat__unit">[バ]</span></span>
-    <span class="result-stat" title="100Ptあたり">${escapeHtml(stats.perNum)}<span class="result-stat__unit">[バ/Pt]</span></span>
-    <button type="button" class="result-row-btn result-row-btn--${kind}" data-${action}-id="${row.id}"${aria}>${label}</button>
+  const n = state.ui.fieldSize === 12 ? 12 : 9;
+  const orders = activeOrders(n, row.rateGroups);
+  const badge = rankBadge(orders, n);
+  const badgeHtml = badge
+    ? `<span class="rank-badge rank-badge--${badge.kind}">${escapeHtml(badge.label)}</span>`
+    : "";
+  const open = openSkillId === row.id;
+  const dots =
+    orders && orders.length
+      ? `<div class="cm-dots${n === 12 ? " is-12" : ""}">${[...Array(n)]
+          .map((_, i) => {
+            const num = i + 1;
+            const on = orders.includes(num);
+            return `<span class="cm-dot${on ? " is-on" : ""}">${num}</span>`;
+          })
+          .join("")}</div>`
+      : "";
+  const chips = [
+    ...(row.effectTags || []).map((t) => [t, "effect"]),
+    ...(row.phaseTags || []).map((t) => [t, "phase"]),
+    ...(row.aptTags || []).map((t) => [t, "apt"]),
+  ]
+    .map(
+      ([t, k]) =>
+        `<span class="detail-chip detail-chip--${k}">${escapeHtml(t)}</span>`
+    )
+    .join("");
+  const desc = (row.desc || "").replace(/\\n/g, "\n");
+  const detail =
+    dots || chips || desc
+      ? `<div class="result-detail"${open ? "" : " hidden"}>
+          ${dots ? `<div class="cm-line">${dots}</div>` : ""}
+          ${chips ? `<div class="detail-chips">${chips}</div>` : ""}
+          ${desc ? `<p class="result-desc">${escapeHtml(desc)}</p>` : ""}
+        </div>`
+      : "";
+  return `<li class="result-item${open ? " is-open" : ""}" data-skill-id="${row.id}">
+    <div class="result-row">
+      <span class="result-rank">${index}</span>
+      <span class="result-name">${escapeHtml(row.name)}</span>
+      ${badgeHtml}
+      <span class="result-stats">
+        <span class="result-stat" title="獲得バ身">${escapeHtml(stats.bashaNum)}<span class="result-stat__unit">[バ]</span></span>
+        <span class="result-stat" title="100Ptあたり">${escapeHtml(stats.perNum)}<span class="result-stat__unit">[バ/Pt]</span></span>
+      </span>
+      <button type="button" class="result-row-btn result-row-btn--${kind}" data-${action}-id="${row.id}"${aria}>${label}</button>
+    </div>
+    ${detail}
   </li>`;
 }
 
@@ -282,15 +339,39 @@ function bind() {
   });
   document.getElementById("result-list")?.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-exclude-id]");
-    if (!btn) return;
-    addManualExclude(btn.dataset.excludeId);
+    if (btn) {
+      addManualExclude(btn.dataset.excludeId);
+      recalc();
+      scheduleSessionSave();
+      return;
+    }
+    const row = e.target.closest(".result-row");
+    if (!row) return;
+    const id = Number(row.closest("[data-skill-id]")?.dataset.skillId);
+    if (!id) return;
+    openSkillId = openSkillId === id ? null : id;
     recalc();
-    scheduleSessionSave();
   });
   document.getElementById("excluded-list")?.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-restore-id]");
+    if (btn) {
+      removeManualExclude(btn.dataset.restoreId);
+      recalc();
+      scheduleSessionSave();
+      return;
+    }
+    const row = e.target.closest(".result-row");
+    if (!row) return;
+    const id = Number(row.closest("[data-skill-id]")?.dataset.skillId);
+    if (!id) return;
+    openSkillId = openSkillId === id ? null : id;
+    recalc();
+  });
+  document.getElementById("field-seg")?.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-n]");
     if (!btn) return;
-    removeManualExclude(btn.dataset.restoreId);
+    state.ui.fieldSize = Number(btn.dataset.n) === 12 ? 12 : 9;
+    syncFieldSeg();
     recalc();
     scheduleSessionSave();
   });
@@ -320,6 +401,7 @@ async function init() {
 
   fillCourseSelect();
   syncStyleButtons();
+  syncFieldSeg();
   syncUtoolsLink();
   bind();
 

@@ -46,6 +46,14 @@ if (!yosei) throw new Error("余勢を駆って missing");
 if (yosei.needSkillPoint !== 120) {
   throw new Error(`needSkillPoint ${yosei.needSkillPoint}`);
 }
+if ((yosei.rateGroups || []).length) {
+  throw new Error("余勢 should have no rank cond");
+}
+const chance = whiteCommon.find((s) => s.name === "ワンチャンス");
+if (!chance?.rateGroups?.length) throw new Error("ワンチャンス rank missing");
+if (!chance.effectTags.includes("加速")) {
+  throw new Error(`ワンチャンス effects ${chance.effectTags}`);
+}
 
 console.log(
   `ok ranked=${ranked.length} whiteCommon=${whiteCommon.length} inheritUniqueWhite=${inheritUniques.length}`

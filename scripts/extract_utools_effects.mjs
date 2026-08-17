@@ -76,6 +76,11 @@ function writeEffectJson(courseId, style, ranked) {
       name: s.name,
       expectedEffect: s.expectedEffect,
       needSkillPoint: s.needSkillPoint,
+      desc: s.desc || "",
+      effectTags: s.effectTags || [],
+      phaseTags: s.phaseTags || [],
+      aptTags: s.aptTags || [],
+      rateGroups: s.rateGroups || [],
     })),
   };
   const dest = path.join(dir, `${style}.json`);
