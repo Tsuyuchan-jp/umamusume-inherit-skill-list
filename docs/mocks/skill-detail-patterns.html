@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>モック: 順位バッジと詳細の見せ方</title>
+  <style>
+    :root {
+      --ink: #3d3860;
+      --muted: #6b6588;
+      --line: #e4dfeb;
+      --bg: #f4f1f7;
+      --card: #fff;
+      --row: #f5f3f8;
+      --front: #3f6a62;
+      --front-bg: #e8f1ee;
+      --back: #8d6a3d;
+      --back-bg: #f4ecdf;
+      --other: #5a5288;
+      --other-bg: #eceaf4;
+      --x: #8d5a5f;
+      --x-bg: #f4ecec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 15px/1.45 "Segoe UI", "Hiragino Sans", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    header {
+      padding: 1rem 1.1rem 0.6rem;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 1.15rem; margin: 0 0 0.35rem; }
+    .lead { margin: 0; color: var(--muted); font-size: 0.88rem; }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.85rem 0 0.5rem;
+    }
+    .controls button {
+      font: inherit;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      cursor: pointer;
+    }
+    .controls button.is-on {
+      background: var(--ink);
+      color: #fff;
+      border-color: transparent;
+    }
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0 0 0.75rem;
+    }
+    .stage-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 1rem 2.5rem;
+    }
+    .stage {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 0.85rem;
+      box-shadow: 0 8px 28px rgba(50, 40, 80, 0.08);
+      margin-inline: auto;
+      transition: width 0.2s;
+    }
+    .stage[data-width="phone"] { width: min(390px, 100%); }
+    .stage[data-width="tablet"] { width: min(720px, 100%); }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1.6rem minmax(0, 1fr) auto 4.4rem 5.8rem 1.75rem;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.42rem 0.4rem;
+      border-radius: 8px;
+      background: var(--row);
+      cursor: pointer;
+    }
+    .row + .row, .block + .row { margin-top: 0.28rem; }
+    .rank { color: #8a84a3; font-variant-numeric: tabular-nums; font-size: 0.85rem; }
+    .name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .stat { text-align: right; font-weight: 650; font-variant-numeric: tabular-nums; font-size: 0.92rem; }
+    .unit { margin-left: 0.12em; font-size: 0.65rem; font-weight: 500; color: var(--muted); }
+    .x {
+      width: 1.75rem; height: 1.75rem; border-radius: 999px; border: 1px solid #e4d4d5;
+      background: var(--x-bg); color: var(--x); font-size: 1.05rem; cursor: pointer;
+    }
+    .badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.12rem 0.4rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .badge--front { color: var(--front); background: var(--front-bg); }
+    .badge--back { color: var(--back); background: var(--back-bg); }
+    .badge--other { color: var(--other); background: var(--other-bg); }
+    .badge-slot { min-width: 2.4rem; }
+
+    .block {
+      background: #fbfafc;
+      border: 1px solid var(--line);
+      border-top: 0;
+      border-radius: 0 0 8px 8px;
+      padding: 0.7rem 0.75rem 0.8rem;
+      margin-top: -0.15rem;
+      font-size: 0.86rem;
+    }
+    .row.is-open {
+      border-radius: 8px 8px 0 0;
+    }
+    .desc { margin: 0 0 0.5rem; white-space: pre-line; }
+    dl { margin: 0; display: grid; grid-template-columns: 4.2rem 1fr; gap: 0.28rem 0.5rem; }
+    dt { color: var(--muted); font-size: 0.75rem; }
+    dd { margin: 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.15rem 0 0.45rem; }
+    .chip {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+      background: #ece8f3;
+    }
+    .chip.is-warn { background: var(--back-bg); color: var(--back); font-weight: 700; }
+
+    .sheet {
+      position: fixed;
+      inset: 0;
+      background: rgba(40, 32, 60, 0.35);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 5;
+    }
+    .sheet.is-on { display: flex; }
+    .sheet__panel {
+      width: min(390px, 100%);
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      padding: 0.9rem 1rem 1.2rem;
+      max-height: 70vh;
+      overflow: auto;
+    }
+    .sheet__grab {
+      width: 2.4rem; height: 4px; border-radius: 99px; background: #ddd; margin: 0 auto 0.7rem;
+    }
+    .hint-row { font-size: 0.75rem; color: var(--muted); margin: 0.35rem 0 0.8rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>順位バッジと詳細 — 見せ方モック</h1>
+    <p class="lead">本体未接続。行タップで詳細。× は除外のつもり（このモックでは反応しない）。バッジは順位条件がある行だけ。</p>
+    <div class="controls" id="pattern-btns">
+      <button type="button" data-pattern="a" class="is-on">A 行下・文章</button>
+      <button type="button" data-pattern="b">B 行下・チップ</button>
+      <button type="button" data-pattern="c">C 下からシート</button>
+    </div>
+    <div class="controls" id="width-btns">
+      <button type="button" data-width="phone" class="is-on">幅 390（スマホ）</button>
+      <button type="button" data-width="tablet">幅 720</button>
+    </div>
+    <p class="note" id="pattern-note"></p>
+  </header>
+  <div class="stage-wrap">
+    <div class="stage" id="stage" data-width="phone"></div>
+  </div>
+  <div class="sheet" id="sheet" hidden>
+    <div class="sheet__panel" id="sheet-panel"></div>
+  </div>
+
+  <script>
+    const SKILLS = [
+      {
+        name: "余勢を駆って",
+        basha: "1.27",
+        pt: "1.06",
+        badge: null,
+        desc: "上り坂で速度がわずかに上がる\n＜作戦・先行＞",
+        rank: "指定なし",
+        chips: ["先行", "上り坂", "速度"],
+        extra: { 局面: "上り坂", 効果: "速度がわずかに上がる", 脚質距離: "先行" },
+      },
+      {
+        name: "真っ向勝負",
+        basha: "0.93",
+        pt: "0.52",
+        badge: "前",
+        badgeKind: "front",
+        desc: "レース終盤始めの方で前方にいると\n加速力がわずかに上がる＜作戦・先行＞",
+        rank: "前方（order_rate ≤ 50）",
+        chips: ["前半", "終盤始め", "先行", "加速"],
+        extra: { 局面: "終盤の始め", 効果: "加速がわずかに上がる", 脚質距離: "先行" },
+      },
+      {
+        name: "ワンチャンス",
+        basha: "0.93",
+        pt: "0.52",
+        badge: "中後",
+        badgeKind: "back",
+        desc: "レース終盤始めの方で中団以降にいると\n加速力がわずかに上がる＜中距離＞",
+        rank: "中団以降（order_rate ≥ 40）",
+        chips: ["中団以降", "終盤始め", "中距離", "加速"],
+        extra: { 局面: "終盤の始め", 効果: "加速がわずかに上がる", 脚質距離: "中距離" },
+      },
+      {
+        name: "急襲",
+        basha: "0.71",
+        pt: "0.39",
+        badge: "中後",
+        badgeKind: "back",
+        desc: "レース終盤始めの方に中団以降にいると\nわずかに前に出る＜中距離/長距離＞",
+        rank: "中団以降（order_rate ≥ 40）",
+        chips: ["中団以降", "終盤始め", "中長距離", "前進"],
+        extra: { 局面: "終盤の始め", 効果: "わずかに前に出る", 脚質距離: "中距離 / 長距離" },
+      },
+      {
+        name: "会心の一歩",
+        basha: "1.17",
+        pt: "0.65",
+        badge: "その他",
+        badgeKind: "other",
+        desc: "終盤以降の最終コーナーで\n中団以前にいる時ゴールまで遠いと\n加速力がわずかに上がる＜先行/差し＞",
+        rank: "中団以前（order_rate ≤ 70）※前寄りだが前半専用ではない",
+        chips: ["中団以前", "終盤", "最終コーナー", "先行/差し"],
+        extra: { 局面: "終盤以降・最終コーナー・ゴールまで遠い", 効果: "加速がわずかに上がる", 脚質距離: "先行 / 差し" },
+      },
+      {
+        name: "闘争心",
+        basha: "0.55",
+        pt: "0.31",
+        badge: "中後",
+        badgeKind: "back",
+        desc: "レース中盤に中団で競り合うと\n持久力がちょっと回復し\n速度がわずかに上がる＜中距離＞",
+        rank: "中団（order_rate ≥ 50 など）",
+        chips: ["中団", "中盤", "中距離", "回復+速度"],
+        extra: { 局面: "中盤・競り合い", 効果: "持久力回復 + 速度", 脚質距離: "中距離" },
+      },
+    ];
+
+    const NOTES = {
+      a: "A: 行の下に説明文と項目。U-tools を開かずに読める。スマホでは縦に伸び、下のスキルが押し下がる。",
+      b: "B: 説明は短く、条件はチップ。中後だけ色を変えて除外判断を速くする。情報量は A より落ちる。",
+      c: "C: リストは動かさず、下からシート。スマホ向け。文章量は A と同じ。一覧との同時比較はしにくい。",
+    };
+
+    let pattern = "a";
+    let openId = 2;
+    const stage = document.getElementById("stage");
+    const sheet = document.getElementById("sheet");
+    const sheetPanel = document.getElementById("sheet-panel");
+    const noteEl = document.getElementById("pattern-note");
+
+    function badgeHtml(s) {
+      if (!s.badge) return '<span class="badge-slot"></span>';
+      return `<span class="badge badge--${s.badgeKind}">${s.badge}</span>`;
+    }
+
+    function statsHtml(s) {
+      return `
+        <span class="stat">${s.basha}<span class="unit">[バ]</span></span>
+        <span class="stat">${s.pt}<span class="unit">[バ/Pt]</span></span>
+        <button type="button" class="x" aria-label="外す" data-x>×</button>`;
+    }
+
+    function detailA(s) {
+      return `<div class="block">
+        <p class="desc">${s.desc}</p>
+        <dl>
+          <dt>順位</dt><dd>${s.rank}</dd>
+          <dt>局面</dt><dd>${s.extra.局面}</dd>
+          <dt>効果</dt><dd>${s.extra.効果}</dd>
+          <dt>脚質/距離</dt><dd>${s.extra.脚質距離}</dd>
+        </dl>
+      </div>`;
+    }
+
+    function detailB(s) {
+      const chips = s.chips
+        .map((c) => `<span class="chip${/中団|中後/.test(c) ? " is-warn" : ""}">${c}</span>`)
+        .join("");
+      return `<div class="block">
+        <div class="chips">${chips}</div>
+        <p class="desc">${s.desc}</p>
+      </div>`;
+    }
+
+    function detailC(s) {
+      return `<div class="sheet__grab"></div>
+        <strong>${s.name}</strong>
+        <p class="desc">${s.desc}</p>
+        <dl>
+          <dt>順位</dt><dd>${s.rank}</dd>
+          <dt>局面</dt><dd>${s.extra.局面}</dd>
+          <dt>効果</dt><dd>${s.extra.効果}</dd>
+          <dt>脚質/距離</dt><dd>${s.extra.脚質距離}</dd>
+        </dl>`;
+    }
+
+    function render() {
+      noteEl.textContent = NOTES[pattern];
+      stage.innerHTML = `<p class="hint-row">先頭25件（モック6件）・行をタップ</p>` +
+        SKILLS.map((s, i) => {
+          const open = pattern !== "c" && openId === i;
+          return `<div class="row${open ? " is-open" : ""}" data-i="${i}">
+            <span class="rank">${i + 1}</span>
+            <span class="name">${s.name}</span>
+            ${badgeHtml(s)}
+            ${statsHtml(s)}
+          </div>${open ? (pattern === "a" ? detailA(s) : detailB(s)) : ""}`;
+        }).join("");
+      if (pattern === "c" && openId != null) {
+        sheet.hidden = false;
+        sheet.classList.add("is-on");
+        sheetPanel.innerHTML = detailC(SKILLS[openId]);
+      } else {
+        sheet.classList.remove("is-on");
+        sheet.hidden = true;
+      }
+    }
+
+    stage.addEventListener("click", (e) => {
+      if (e.target.closest("[data-x]")) {
+        e.stopPropagation();
+        return;
+      }
+      const row = e.target.closest("[data-i]");
+      if (!row) return;
+      const i = Number(row.dataset.i);
+      openId = openId === i && pattern !== "c" ? null : i;
+      if (pattern === "c") openId = i;
+      render();
+    });
+    sheet.addEventListener("click", (e) => {
+      if (e.target === sheet) {
+        openId = null;
+        render();
+      }
+    });
+    document.getElementById("pattern-btns").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-pattern]");
+      if (!btn) return;
+      pattern = btn.dataset.pattern;
+      document.querySelectorAll("#pattern-btns button").forEach((b) =>
+        b.classList.toggle("is-on", b === btn)
+      );
+      if (openId == null) openId = 2;
+      render();
+    });
+    document.getElementById("width-btns").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-width]");
+      if (!btn) return;
+      stage.dataset.width = btn.dataset.width;
+      document.querySelectorAll("#width-btns button").forEach((b) =>
+        b.classList.toggle("is-on", b === btn)
+      );
+    });
+    render();
+  </script>
+</body>
+</html>
