@@ -39,6 +39,8 @@ const state = {
     // コースID:脚質 → 手動除外したスキルID
     excludedByKey: {},
     fieldSize: 9,
+    // 既定はデータありコースのみ。true で全140件
+    showAllCourses: false,
   },
 };
 
@@ -102,6 +104,9 @@ function restoreSession() {
     if (saved.fieldSize === 9 || saved.fieldSize === 12) {
       state.ui.fieldSize = saved.fieldSize;
     }
+    if (typeof saved.showAllCourses === "boolean") {
+      state.ui.showAllCourses = saved.showAllCourses;
+    }
   } catch {
     /* ignore */
   }
@@ -123,6 +128,22 @@ function coursesForPlace(place) {
   return state.courses.filter((c) => c.place === place);
 }
 
+function placeHasEffects(place) {
+  return coursesForPlace(place).some((c) => courseHasEffects(c.id));
+}
+
+function visiblePlaces() {
+  const all = uniquePlaces();
+  if (state.ui.showAllCourses) return all;
+  return all.filter((p) => placeHasEffects(p));
+}
+
+function visibleCoursesForPlace(place) {
+  const list = coursesForPlace(place);
+  if (state.ui.showAllCourses) return list;
+  return list.filter((c) => courseHasEffects(c.id));
+}
+
 function distChipLabel(c) {
   // 新潟2000など同距離が並ぶ場向けに回りも出す
   return `${c.distance}m ${c.turn || ""}`.trim();
@@ -136,9 +157,31 @@ function ensureCourseInList() {
   if (!state.courses.some((c) => c.id === state.ui.courseId) && state.courses[0]) {
     state.ui.courseId = state.courses[0].id;
   }
+  // データありのみのときは、未収録コースに留まらない
+  if (!state.ui.showAllCourses && !courseHasEffects(state.ui.courseId)) {
+    const inPlace = visibleCoursesForPlace(state.ui.place);
+    const fallback =
+      inPlace[0] || state.courses.find((c) => courseHasEffects(c.id)) || state.courses[0];
+    if (fallback) state.ui.courseId = fallback.id;
+  }
   const cur = currentCourse();
   if (cur?.place) state.ui.place = cur.place;
-  else if (!state.ui.place && uniquePlaces()[0]) state.ui.place = uniquePlaces()[0];
+  else if (!state.ui.place && visiblePlaces()[0]) state.ui.place = visiblePlaces()[0];
+}
+
+function syncCourseFilter() {
+  const hint = document.getElementById("course-filter-hint");
+  const btn = document.getElementById("show-all-courses");
+  const all = state.ui.showAllCourses;
+  if (hint) {
+    hint.textContent = all
+      ? "色が薄いコースは、U-tools に有効スキルがまだありません。"
+      : "使えるコースだけ出しています。出てこないコースは、U-tools に有効スキルがまだありません。";
+  }
+  if (btn) {
+    btn.setAttribute("aria-pressed", all ? "true" : "false");
+    btn.textContent = all ? "使えるコースだけにする" : "すべてのコースを見る";
+  }
 }
 
 function renderCourseChips() {
@@ -147,22 +190,28 @@ function renderCourseChips() {
   if (!placeRoot || !distRoot) return;
   ensureCourseInList();
   const place = state.ui.place;
-  placeRoot.innerHTML = uniquePlaces()
+  const showAll = state.ui.showAllCourses;
+  placeRoot.innerHTML = visiblePlaces()
     .map((p) => {
       const on = p === place;
-      return `<button type="button" class="place-chip${on ? " is-on" : ""}" data-place="${escapeHtml(p)}" aria-pressed="${on}">${escapeHtml(p)}</button>`;
+      const dim = showAll && !placeHasEffects(p) ? " is-dim" : "";
+      return `<button type="button" class="place-chip${on ? " is-on" : ""}${dim}" data-place="${escapeHtml(p)}" aria-pressed="${on}">${escapeHtml(p)}</button>`;
     })
     .join("");
-  distRoot.innerHTML = coursesForPlace(place)
+  distRoot.innerHTML = visibleCoursesForPlace(place)
     .map((c) => {
       const on = c.id === state.ui.courseId;
+      const hasData = courseHasEffects(c.id);
       const isDirt = c.ground === "ダート" || c.ground === "ダ";
       const groundClass = isDirt ? "ground-badge--dirt" : "ground-badge--turf";
       const groundText = isDirt ? "ダ" : "芝";
-      const dot = courseHasEffects(c.id)
-        ? '<span class="data-dot" title="有効スキルデータあり"></span>'
-        : "";
-      return `<button type="button" class="dist-chip${on ? " is-on" : ""}" data-course-id="${c.id}" aria-pressed="${on}">
+      const dim = showAll && !hasData ? " is-dim" : "";
+      // 金ドットは全件表示のときだけ。データありのみでは不要
+      const dot =
+        showAll && hasData
+          ? '<span class="data-dot" title="有効スキルデータあり"></span>'
+          : "";
+      return `<button type="button" class="dist-chip${on ? " is-on" : ""}${dim}" data-course-id="${c.id}" aria-pressed="${on}">
         <span class="chip-main">${escapeHtml(distChipLabel(c))}</span>
         <span class="chip-sub">${escapeHtml(c.distClass || "")}</span>
         <span class="ground-badge ${groundClass}">${groundText}</span>
@@ -170,6 +219,7 @@ function renderCourseChips() {
       </button>`;
     })
     .join("");
+  syncCourseFilter();
 }
 
 function syncStyleButtons() {
@@ -379,7 +429,7 @@ function bind() {
     const btn = e.target.closest("[data-place]");
     if (!btn || btn.dataset.place === state.ui.place) return;
     state.ui.place = btn.dataset.place;
-    const inPlace = coursesForPlace(state.ui.place);
+    const inPlace = visibleCoursesForPlace(state.ui.place);
     if (!inPlace.some((c) => c.id === state.ui.courseId)) {
       const withData = inPlace.find((c) => courseHasEffects(c.id));
       state.ui.courseId = (withData || inPlace[0]).id;
@@ -395,6 +445,13 @@ function bind() {
     state.ui.courseId = id;
     renderCourseChips();
     await onCourseOrStyleChange();
+  });
+  document.getElementById("show-all-courses")?.addEventListener("click", async () => {
+    state.ui.showAllCourses = !state.ui.showAllCourses;
+    const prevId = state.ui.courseId;
+    renderCourseChips();
+    if (state.ui.courseId !== prevId) await onCourseOrStyleChange();
+    else scheduleSessionSave();
   });
   document.querySelectorAll("[data-style]").forEach((btn) => {
     btn.addEventListener("click", async () => {

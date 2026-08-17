@@ -93,6 +93,16 @@
   border-color: transparent;
 }
 
+.place-chip.is-dim,
+.dist-chip.is-dim {
+  opacity: 0.42;
+}
+
+.place-chip.is-dim.is-on,
+.dist-chip.is-dim.is-on {
+  opacity: 0.88;
+}
+
 .dist-chip.is-on .data-dot {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
 }
@@ -143,9 +153,25 @@
   margin: 0;
   font-size: 0.75rem;
   color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
+  line-height: 1.45;
+}
+
+.course-filter {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.course-filter-toggle {
+  justify-self: start;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--ink-deep, #463f70);
+  cursor: pointer;
+  text-decoration: underline;
+  font: inherit;
+  font-size: 0.78rem;
 }
 
 .style-seg {
