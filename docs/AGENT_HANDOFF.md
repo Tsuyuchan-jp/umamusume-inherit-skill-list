@@ -6,10 +6,10 @@
 
 | 項目 | 内容 |
 |------|------|
-| 名前 | umamusume-inherit-skill-list（継承白因子リスト） |
+| 名前 | umamusume-inherit-skill-list（不足白スキルメーカー） |
 | パス | `C:\Users\PC1\Projects\umamusume-inherit-skill-list` |
 | 形態 | 静的 HTML/JS + JSON。公開は GitHub Pages（`/app/`）。ローカルは `npm run serve` |
-| 目的 | ウマ娘DBでレンタル継承親を探すとき、スキルを OR 条件で並べる元リストをコピーする。中身は任意コース・脚質の U-tools 有効スキル（白∩共通）から本育成で取れる分を除いた先頭25件。貼り付け先は [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill) |
+| 目的 | コース・脚質の有効白スキル（白∩共通）から本育成で取れる分を除いた先頭25件を出す。レンタル親探し（コピー先 [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill)）や因子周回の候補整理に使える |
 | 公開 | 済み。https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ 。remote: `origin` → `Tsuyuchan-jp/umamusume-inherit-skill-list` |
 | 言語 | ユーザー向け応答・コードコメントは日本語 |
 
