@@ -123,40 +123,73 @@ def compose_16x9():
     return canvas
 
 
+def scale_to_width(im, width):
+    """横幅に合わせて拡大縮小する（余白のレターボックスを付けない）。"""
+    w, h = im.size
+    nw = width
+    nh = max(1, round(h * (nw / w)))
+    return im.resize((nw, nh), Image.Resampling.LANCZOS)
+
+
+def crop_shot1_cards():
+    """コースパネルと編成パネルを別々に切り、隙間のページ余白を除く。"""
+    im = Image.open(SHOT1).convert("RGB")
+    # ページ端と U-tools リンク行を落とし、中身だけ残す
+    course = im.crop((10, 8, 1014, 248))
+    deck = im.crop((10, 304, 1014, 528))
+    return course, deck
+
+
+def crop_shot2_panel():
+    """結果パネルの左右余白を切り、コピーボタン〜リスト先頭を残す。"""
+    im = Image.open(SHOT2).convert("RGB")
+    return im.crop((10, 8, 1014, 508))
+
+
 def compose_3x4():
     W, H = 1080, 1440
     canvas = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(canvas)
-    draw_center_text(draw, 40, "不足白スキルメーカー", font(FONT_B, 48), INK)
+    draw_center_text(draw, 28, "不足白スキルメーカー", font(FONT_B, 46), INK)
     draw_center_text(
         draw,
-        108,
+        90,
         "選ぶだけで、本育成で取れない有効白スキルが一覧に",
-        font(FONT_M, 24),
+        font(FONT_M, 23),
         MUTED,
     )
 
-    shot1 = Image.open(SHOT1)
-    shot2 = Image.open(SHOT2)
-    inner_w = 980
+    inner_w = 992
+    course, deck = crop_shot1_cards()
+    result = crop_shot2_panel()
 
-    gold_badge(draw, (72, 188), 1)
-    draw.text((102, 170), "コースとサポカを選ぶ", font=font(FONT_B, 30), fill=INK)
-    p1 = shadow_card(fit_contain(shot1, inner_w, 430), radius=24)
-    canvas.paste(p1, ((W - p1.size[0]) // 2, 210), p1)
+    gold_badge(draw, (68, 160), 1, r=20)
+    draw.text((96, 144), "コースとサポカを選ぶ", font=font(FONT_B, 28), fill=INK)
 
-    # 下向き矢印
-    ax, ay = W // 2, 690
+    y = 178
+    for piece, radius in ((course, 22), (deck, 22)):
+        card = shadow_card(scale_to_width(piece, inner_w), radius=radius, pad=14, blur=10)
+        canvas.paste(card, ((W - card.size[0]) // 2, y), card)
+        y += card.size[1] + 2
+
+    ax, ay = W // 2, y + 10
     draw.polygon(
-        [(ax - 22, ay - 8), (ax + 22, ay - 8), (ax, ay + 28)],
+        [(ax - 20, ay), (ax + 20, ay), (ax, ay + 26)],
         fill=GOLD,
         outline=GOLD_DEEP,
     )
 
-    gold_badge(draw, (72, 748), 2)
-    draw.text((102, 730), "不足スキルが一覧表示", font=font(FONT_B, 30), fill=INK)
-    p2 = shadow_card(fit_contain(shot2, inner_w, 580, crop_top=True), radius=24)
-    canvas.paste(p2, ((W - p2.size[0]) // 2, 770), p2)
+    y = ay + 40
+    gold_badge(draw, (68, y + 16), 2, r=20)
+    draw.text((96, y), "不足スキルが一覧表示", font=font(FONT_B, 28), fill=INK)
+    y += 36
+
+    remain = H - y - 18
+    result_scaled = scale_to_width(result, inner_w)
+    if result_scaled.size[1] > remain - 20:
+        result_scaled = result_scaled.crop((0, 0, inner_w, remain - 20))
+    card2 = shadow_card(result_scaled, radius=22, pad=14, blur=10)
+    canvas.paste(card2, ((W - card2.size[0]) // 2, y), card2)
     return canvas
 
 
