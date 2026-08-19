@@ -40,8 +40,8 @@ def shadow_card(im, radius=28, pad=18, blur=12):
     canvas = Image.new("RGBA", (w + pad * 2, h + pad * 2), (0, 0, 0, 0))
     sh = Image.new("L", (w, h), 0)
     ImageDraw.Draw(sh).rounded_rectangle((0, 0, w - 1, h - 1), radius=radius, fill=140)
-    sh = sh.filter(ImageFilter.GaussianBlur(blur))
-    canvas.paste(Image.new("RGBA", (w, h), (*SHADOW, 255)), (pad + 3, pad + 8), sh)
+    sh = sh.filter(ImageFilter.GaussianBlur(8))
+    canvas.paste(Image.new("RGBA", (w, h), (*SHADOW, 90)), (pad + 2, pad + 5), sh)
     card = rounded(im, radius)
     canvas.paste(card, (pad, pad), card)
     return canvas
@@ -131,19 +131,29 @@ def scale_to_width(im, width):
     return im.resize((nw, nh), Image.Resampling.LANCZOS)
 
 
+def scale_to_fit(im, max_w, max_h):
+    """はみ出さないよう縦横比を保って縮小する。途中で切らない。"""
+    w, h = im.size
+    scale = min(max_w / w, max_h / h, 1.0)
+    nw = max(1, round(w * scale))
+    nh = max(1, round(h * scale))
+    if (nw, nh) == (w, h):
+        return im
+    return im.resize((nw, nh), Image.Resampling.LANCZOS)
+
+
 def crop_shot1_cards():
-    """コースパネルと編成パネルを別々に切り、隙間のページ余白を除く。"""
+    """コースパネルと編成パネルを別々に切り、元の外側の影が出ないよう内側で切る。"""
     im = Image.open(SHOT1).convert("RGB")
-    # ページ端と U-tools リンク行を落とし、中身だけ残す
-    course = im.crop((10, 8, 1014, 248))
-    deck = im.crop((10, 304, 1014, 528))
+    course = im.crop((16, 14, 1008, 244))
+    deck = im.crop((16, 314, 1008, 522))
     return course, deck
 
 
 def crop_shot2_panel():
-    """結果パネルの左右余白を切り、コピーボタン〜リスト先頭を残す。"""
+    """結果パネルを内側で切る。下端は行の途中ではなく区切りに合わせる。"""
     im = Image.open(SHOT2).convert("RGB")
-    return im.crop((10, 8, 1014, 508))
+    return im.crop((20, 14, 1004, 505))
 
 
 def compose_3x4():
@@ -185,9 +195,7 @@ def compose_3x4():
     y += 36
 
     remain = H - y - 18
-    result_scaled = scale_to_width(result, inner_w)
-    if result_scaled.size[1] > remain - 20:
-        result_scaled = result_scaled.crop((0, 0, inner_w, remain - 20))
+    result_scaled = scale_to_fit(result, inner_w, remain - 28)
     card2 = shadow_card(result_scaled, radius=22, pad=14, blur=10)
     canvas.paste(card2, ((W - card2.size[0]) // 2, y), card2)
     return canvas
