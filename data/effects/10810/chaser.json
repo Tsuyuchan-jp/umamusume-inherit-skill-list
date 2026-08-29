@@ -2,16 +2,16 @@
   "courseId": 10810,
   "style": "chaser",
   "source": "https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/10810/effects/chaser",
-  "fetchedAt": "2026-08-17T14:44:15.551Z",
-  "rankedCount": 397,
-  "whiteCommonCount": 101,
+  "fetchedAt": "2026-08-29T17:43:40.960Z",
+  "rankedCount": 405,
+  "whiteCommonCount": 106,
   "skills": [
     {
       "id": 200642,
       "name": "直線一気",
       "expectedEffect": 2.58834425,
       "needSkillPoint": 180,
-      "desc": "ラストスパートの最中なら直線で\n加速力がわずかに上がる＜作戦・追込＞",
+      "desc": "直線でラストスパートの最中なら\n加速力がわずかに上がる\n＜作戦・追込＞",
       "effectTags": [
         "加速"
       ],
@@ -28,7 +28,7 @@
       "name": "好機を捉えて",
       "expectedEffect": 2.4968969000000003,
       "needSkillPoint": 160,
-      "desc": "レース終盤始めの方早めに中団以降に\nいると加速力がわずかに上がる\n＜追込・長距離＞",
+      "desc": "レース終盤始めの早めのどこかで\n中団以降だと加速力がわずかに上がる\n＜追込・長距離＞",
       "effectTags": [
         "加速"
       ],
@@ -67,7 +67,7 @@
       "name": "登山家",
       "expectedEffect": 1.720443575,
       "needSkillPoint": 160,
-      "desc": "上り坂で加速力がわずかに上がる",
+      "desc": "いずれかの上り坂のどこかで\n加速力がわずかに上がる",
       "effectTags": [
         "加速"
       ],
@@ -82,7 +82,7 @@
       "name": "切れ味",
       "expectedEffect": 1.497047615763,
       "needSkillPoint": 180,
-      "desc": "レース終盤突入時まで掛からず後方に\n控え続けていると、終盤始めの方で\n加速力がわずかに上がる＜作戦・追込＞",
+      "desc": "レース終盤突入時まで掛からず後方を\nキープすると、終盤始めのどこかで\n加速力がわずかに上がる＜作戦・追込＞",
       "effectTags": [
         "加速"
       ],
@@ -99,7 +99,7 @@
       "name": "捕捉",
       "expectedEffect": 1.15674395,
       "needSkillPoint": 190,
-      "desc": "レース中盤に速度がわずかに上がる\n先頭から8バ身以上離れていると\n速度が少し上がる＜作戦・追込＞",
+      "desc": "レース中盤のどこかで速度が\nわずかに上がる、先頭から8バ身以上\n離れていると速度が少し上がる\n＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -116,7 +116,7 @@
       "name": "長距離直線◎",
       "expectedEffect": 0.9941067500000002,
       "needSkillPoint": 110,
-      "desc": "直線で速度が少し上がる＜長距離＞",
+      "desc": "いずれかの直線のどこかで\n速度が少し上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -133,7 +133,7 @@
       "name": "追込直線◎",
       "expectedEffect": 0.9941067500000002,
       "needSkillPoint": 140,
-      "desc": "直線で速度が少し上がる\n＜作戦・追込＞",
+      "desc": "いずれかの直線のどこかで\n速度が少し上がる＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -150,7 +150,7 @@
       "name": "おひとり様◎",
       "expectedEffect": 0.941891,
       "needSkillPoint": 110,
-      "desc": "自分と同じ作戦のウマ娘がいないと\n能力をすごく発揮しやすい",
+      "desc": "自分と同じ作戦のウマ娘がいないと\nスピードがすごく上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -161,7 +161,7 @@
       "name": "長距離コーナー◎",
       "expectedEffect": 0.9302836,
       "needSkillPoint": 110,
-      "desc": "コーナーで速度が少し上がる\n＜長距離＞",
+      "desc": "いずれかのコーナーのどこかで\n速度が少し上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -178,7 +178,7 @@
       "name": "追込コーナー◎",
       "expectedEffect": 0.9302836,
       "needSkillPoint": 140,
-      "desc": "コーナーで速度が少し上がる\n＜作戦・追込＞",
+      "desc": "いずれかのコーナーのどこかで\n速度が少し上がる＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -195,7 +195,7 @@
       "name": "惜しみなし",
       "expectedEffect": 0.9299099000000002,
       "needSkillPoint": 160,
-      "desc": "レース中盤に持久力を少し使って\n速度が少し上がる＜作戦・追込＞",
+      "desc": "レース中盤のどこかで持久力を少し\n使って速度が少し上がる\n＜作戦・追込＞",
       "effectTags": [
         "速度",
         "回復"
@@ -209,11 +209,26 @@
       "rateGroups": []
     },
     {
+      "id": 204622,
+      "name": "連綿",
+      "expectedEffect": 0.9296139,
+      "needSkillPoint": 200,
+      "desc": "レース中盤のどこかで速度が\nわずかに上がる\n継承スキルを3つ以上持っていると\n効果が増える",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [],
+      "rateGroups": []
+    },
+    {
       "id": 204262,
       "name": "星の煌き",
       "expectedEffect": 0.7626412250000001,
       "needSkillPoint": 200,
-      "desc": "全開スパート中に少し前に出て\nちょっと伸びを見せる",
+      "desc": "全開スパート中どこかで少し前に出て\nちょっと伸びを見せる",
       "effectTags": [
         "現在速度"
       ],
@@ -226,7 +241,7 @@
       "name": "比類なき",
       "expectedEffect": 0.715225725,
       "needSkillPoint": 200,
-      "desc": "レース中盤にわずかに前に出る",
+      "desc": "レース中盤のどこかでわずかに前に出る",
       "effectTags": [
         "現在速度"
       ],
@@ -259,7 +274,7 @@
       "name": "ウマ好み",
       "expectedEffect": 0.713503375,
       "needSkillPoint": 160,
-      "desc": "近くにウマ娘がたくさんいると\n速度がわずかに上がる",
+      "desc": "近くにウマ娘が3人以上いると\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -272,7 +287,7 @@
       "name": "尻尾上がり",
       "expectedEffect": 0.710519325,
       "needSkillPoint": 100,
-      "desc": "レース中盤にスキルを多く発動すると\n速度がわずかに上がる",
+      "desc": "レース中盤にスキルを3回発動すると\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -285,7 +300,7 @@
       "name": "右回り◎",
       "expectedEffect": 0.709289,
       "needSkillPoint": 110,
-      "desc": "右回りコースが得意になる",
+      "desc": "右回りコースなら\nスピードが上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -296,7 +311,7 @@
       "name": "秋ウマ娘◎",
       "expectedEffect": 0.709289,
       "needSkillPoint": 110,
-      "desc": "秋のレースが得意になる",
+      "desc": "秋のレースなら\nスピードが上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -307,7 +322,7 @@
       "name": "伏兵◎",
       "expectedEffect": 0.709289,
       "needSkillPoint": 110,
-      "desc": "4番人気以下のレースで\n能力を発揮しやすい",
+      "desc": "4番人気以下のレースで\nスピードが上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -318,7 +333,7 @@
       "name": "おひとり様○",
       "expectedEffect": 0.709289,
       "needSkillPoint": 90,
-      "desc": "自分と同じ作戦のウマ娘がいないと\n能力を発揮しやすい",
+      "desc": "自分と同じ作戦のウマ娘がいないと\nスピードが上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -329,7 +344,7 @@
       "name": "たぎる血潮",
       "expectedEffect": 0.654493,
       "needSkillPoint": 180,
-      "desc": "最終直線で2番手以降で\n先頭から4バ身以内にいると\n速度が少し上がる＜作戦・追込＞",
+      "desc": "最終直線で2番手以降にいるとき\n先頭から4バ身以内だと\n速度が少し上がる＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -354,7 +369,7 @@
       "name": "勝負を懸けて",
       "expectedEffect": 0.654493,
       "needSkillPoint": 200,
-      "desc": "ラストスパートの最中なら最終直線で\n速度がわずかに上がる\n余力十分なら少し上がる",
+      "desc": "最終直線でラストスパートの\n最中なら速度がわずかに上がる\n余力十分なら少し上がる",
       "effectTags": [
         "速度"
       ],
@@ -370,7 +385,7 @@
       "name": "長距離直線○",
       "expectedEffect": 0.643060925,
       "needSkillPoint": 100,
-      "desc": "直線で速度がわずかに上がる＜長距離＞",
+      "desc": "いずれかの直線のどこかで\n速度がわずかに上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -387,7 +402,7 @@
       "name": "追込直線○",
       "expectedEffect": 0.643060925,
       "needSkillPoint": 130,
-      "desc": "直線で速度がわずかに上がる\n＜作戦・追込＞",
+      "desc": "いずれかの直線のどこかで\n速度がわずかに上がる＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -404,7 +419,7 @@
       "name": "直線巧者",
       "expectedEffect": 0.643060925,
       "needSkillPoint": 170,
-      "desc": "直線で速度がわずかに上がる",
+      "desc": "いずれかの直線のどこかで\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -419,7 +434,7 @@
       "name": "聖女の挑戦",
       "expectedEffect": 0.6386810500000001,
       "needSkillPoint": 140,
-      "desc": "レース中盤始めの方に\n速度がちょっと上がる\n中団以降に控え続けていると\n速度がわずかに上がる",
+      "desc": "レース中盤始めのどこかで\n速度がちょっと上がる\n中団以降をキープすると\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -434,7 +449,7 @@
       "name": "覇気十分",
       "expectedEffect": 0.6386810500000001,
       "needSkillPoint": 200,
-      "desc": "レース中盤始めの方に中団以降にいると\n速度がわずかに上がり持久力を\nほんのわずかに回復する\n＜中距離/長距離＞",
+      "desc": "レース中盤始めのどこかで中団以降だと\n速度がわずかに上がり持久力を\nほんのわずかに回復する\n＜中距離/長距離＞",
       "effectTags": [
         "速度",
         "回復"
@@ -464,11 +479,45 @@
       ]
     },
     {
+      "id": 204512,
+      "name": "存在感",
+      "expectedEffect": 0.6386810500000001,
+      "needSkillPoint": 200,
+      "desc": "レース中盤始めのどこかで前方だと\n速度がわずかに上がり持久力を\nほんのわずかに回復する\n＜中距離/長距離＞",
+      "effectTags": [
+        "速度",
+        "回復"
+      ],
+      "phaseTags": [
+        "中盤前半"
+      ],
+      "aptTags": [
+        "中距離",
+        "長距離"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ],
+        [
+          {
+            "kind": "rate",
+            "sign": "<=",
+            "value": 50
+          }
+        ]
+      ]
+    },
+    {
       "id": 202012,
       "name": "影打",
       "expectedEffect": 0.6131566,
       "needSkillPoint": 160,
-      "desc": "レース終盤が迫ったとき前方にいると\n速度がわずかに上がる＜長距離＞",
+      "desc": "レース終盤が迫ったどこかで前方だと\n速度がわずかに上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -493,7 +542,7 @@
       "name": "ロックオン",
       "expectedEffect": 0.6131566,
       "needSkillPoint": 160,
-      "desc": "レース終盤が迫ったとき後方にいると\n速度がわずかに上がる＜長距離＞",
+      "desc": "レース終盤が迫ったどこかで中団以降\nだと速度がわずかに上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -508,7 +557,7 @@
           {
             "kind": "rate",
             "sign": ">=",
-            "value": 50
+            "value": 40
           }
         ]
       ]
@@ -518,7 +567,7 @@
       "name": "推力十分",
       "expectedEffect": 0.6131566,
       "needSkillPoint": 180,
-      "desc": "レース終盤が迫ったとき\n中団以降にいると速度がわずかに上がる\n＜作戦・追込＞",
+      "desc": "レース終盤が迫ったどこかで\n中団以降だと速度がわずかに上がる\n＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -543,7 +592,7 @@
       "name": "気持ちを乗せて",
       "expectedEffect": 0.6131566,
       "needSkillPoint": 180,
-      "desc": "レース終盤が迫ったとき前方にいると\n速度がわずかに上がる",
+      "desc": "レース終盤が迫ったどこかで前方だと\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -566,7 +615,7 @@
       "name": "輝きを放って",
       "expectedEffect": 0.589542275,
       "needSkillPoint": 180,
-      "desc": "レース後半にわずかに前に出る\n＜長距離＞",
+      "desc": "レース後半のどこかでわずかに前に出る\n＜長距離＞",
       "effectTags": [
         "現在速度"
       ],
@@ -581,7 +630,7 @@
       "name": "快速",
       "expectedEffect": 0.589542275,
       "needSkillPoint": 200,
-      "desc": "レース後半にわずかに前に出て\n持久力をほんのわずかに回復する",
+      "desc": "レース後半のどこかでわずかに前に出て\n持久力をほんのわずかに回復する",
       "effectTags": [
         "現在速度",
         "回復"
@@ -595,7 +644,7 @@
       "name": "ごぼう抜き",
       "expectedEffect": 0.579074975,
       "needSkillPoint": 160,
-      "desc": "レース終盤始めの方で\n余力十分ならわずかに前に出る\n＜追込・長距離＞",
+      "desc": "レース終盤始めのどこかで\n余力十分ならわずかに前に出る\n＜追込・長距離＞",
       "effectTags": [
         "現在速度"
       ],
@@ -613,7 +662,7 @@
       "name": "込み上げる熱",
       "expectedEffect": 0.579074975,
       "needSkillPoint": 180,
-      "desc": "レース終盤始めの方に中団にいると\nわずかに前に出る＜中距離/長距離＞",
+      "desc": "レース終盤始めのどこかで中団だと\nわずかに前に出る＜中距離/長距離＞",
       "effectTags": [
         "現在速度"
       ],
@@ -656,7 +705,7 @@
       "name": "急襲",
       "expectedEffect": 0.579074975,
       "needSkillPoint": 180,
-      "desc": "レース終盤始めの方に中団以降にいると\nわずかに前に出る＜中距離/長距離＞",
+      "desc": "レース終盤始めのどこかで中団以降だと\nわずかに前に出る＜中距離/長距離＞",
       "effectTags": [
         "現在速度"
       ],
@@ -689,7 +738,7 @@
       "name": "光明",
       "expectedEffect": 0.579074975,
       "needSkillPoint": 180,
-      "desc": "レース終盤始めの方に前方にいると\nわずかに前に出る＜中距離/長距離＞",
+      "desc": "レース終盤始めのどこかで前方だと\nわずかに前に出る＜中距離/長距離＞",
       "effectTags": [
         "現在速度"
       ],
@@ -722,7 +771,7 @@
       "name": "直線加速",
       "expectedEffect": 0.5750336500000001,
       "needSkillPoint": 170,
-      "desc": "直線で加速力がわずかに上がる",
+      "desc": "いずれかの直線のどこかで\n加速力がわずかに上がる",
       "effectTags": [
         "加速"
       ],
@@ -737,7 +786,7 @@
       "name": "登竜門",
       "expectedEffect": 0.56718595,
       "needSkillPoint": 120,
-      "desc": "上り坂で速度がわずかに上がる\n＜作戦・追込＞",
+      "desc": "いずれかの上り坂のどこかで\n速度がわずかに上がる＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -754,7 +803,7 @@
       "name": "長距離コーナー○",
       "expectedEffect": 0.5618052250000001,
       "needSkillPoint": 100,
-      "desc": "コーナーで速度がわずかに上がる\n＜長距離＞",
+      "desc": "いずれかのコーナーのどこかで\n速度がわずかに上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -771,7 +820,7 @@
       "name": "追込コーナー○",
       "expectedEffect": 0.5618052250000001,
       "needSkillPoint": 130,
-      "desc": "コーナーで速度がわずかに上がる\n＜作戦・追込＞",
+      "desc": "いずれかのコーナーのどこかで\n速度がわずかに上がる＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -788,7 +837,7 @@
       "name": "臆せぬ心",
       "expectedEffect": 0.560926475,
       "needSkillPoint": 160,
-      "desc": "レース中盤に速度がわずかに上がる\n＜長距離＞",
+      "desc": "レース中盤のどこかで速度が\nわずかに上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -805,7 +854,7 @@
       "name": "打開策",
       "expectedEffect": 0.560926475,
       "needSkillPoint": 180,
-      "desc": "レース中盤に後方にいると\n速度がわずかに上がり、コース取りが\nわずかにうまくなる＜作戦・追込＞",
+      "desc": "レース中盤のどこかで中団以降だと\n速度がわずかに上がりコース取りが\nわずかにうまくなる\n＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -820,7 +869,7 @@
           {
             "kind": "rate",
             "sign": ">=",
-            "value": 50
+            "value": 40
           }
         ]
       ]
@@ -830,7 +879,7 @@
       "name": "素直な一歩",
       "expectedEffect": 0.560926475,
       "needSkillPoint": 180,
-      "desc": "レース中盤に前方にいると\n速度がわずかに上がる",
+      "desc": "レース中盤のどこかで前方だと\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -853,7 +902,7 @@
       "name": "一歩ずつ前へ",
       "expectedEffect": 0.560926475,
       "needSkillPoint": 180,
-      "desc": "レース中盤に中団以降にいると\n速度がわずかに上がる",
+      "desc": "レース中盤のどこかで中団以降だと\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -876,7 +925,7 @@
       "name": "活路を拓く！",
       "expectedEffect": 0.560926475,
       "needSkillPoint": 180,
-      "desc": "レース中盤に速度がわずかに上がる\n＜中距離/長距離＞",
+      "desc": "レース中盤のどこかで速度が\nわずかに上がる＜中距離/長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -894,7 +943,7 @@
       "name": "心惹かれて",
       "expectedEffect": 0.560926475,
       "needSkillPoint": 180,
-      "desc": "レース中盤に速度がわずかに上がる",
+      "desc": "レース中盤のどこかで速度が\nわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -905,11 +954,36 @@
       "rateGroups": []
     },
     {
+      "id": 204522,
+      "name": "潮目を掴んで",
+      "expectedEffect": 0.560926475,
+      "needSkillPoint": 180,
+      "desc": "レース中盤のどこかで中団以降だと\n速度がわずかに上がる\n＜作戦・追込＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
+      "aptTags": [
+        "追込"
+      ],
+      "rateGroups": [
+        [
+          {
+            "kind": "rate",
+            "sign": ">=",
+            "value": 40
+          }
+        ]
+      ]
+    },
+    {
       "id": 202682,
       "name": "バイブス上昇",
       "expectedEffect": 0.560926475,
       "needSkillPoint": 200,
-      "desc": "レース中盤に速度がわずかに上がり\n持久力をちょっと回復する＜長距離＞",
+      "desc": "レース中盤のどこかで速度がわずかに\n上がり持久力をちょっと回復する\n＜長距離＞",
       "effectTags": [
         "速度",
         "回復"
@@ -927,7 +1001,7 @@
       "name": "巨歩",
       "expectedEffect": 0.5082569750000001,
       "needSkillPoint": 180,
-      "desc": "レース中盤に追い抜くか先頭にいると\n速度がわずかに上がる",
+      "desc": "レース中盤に追い抜くか先頭だと\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -950,7 +1024,7 @@
       "name": "型破り",
       "expectedEffect": 0.5057613249999999,
       "needSkillPoint": 180,
-      "desc": "最終コーナー前の第3コーナーで\n後ろの方にいるとわずかに前に出る\n＜中距離/長距離＞",
+      "desc": "最終コーナー前の第3コーナーの\nどこかで中団以降だとわずかに前に出る\n＜中距離/長距離＞",
       "effectTags": [
         "現在速度"
       ],
@@ -964,14 +1038,14 @@
           {
             "kind": "rate",
             "sign": ">=",
-            "value": 50
+            "value": 40
           }
         ],
         [
           {
             "kind": "rate",
             "sign": ">=",
-            "value": 50
+            "value": 40
           }
         ]
       ]
@@ -981,7 +1055,7 @@
       "name": "奮い立つ心",
       "expectedEffect": 0.5057613249999999,
       "needSkillPoint": 180,
-      "desc": "最終コーナー前の第3コーナーで\n前方にいるとわずかに前に出る\n＜中距離/長距離＞",
+      "desc": "最終コーナー前の第3コーナーの\nどこかで前方だとわずかに前に出る\n＜中距離/長距離＞",
       "effectTags": [
         "現在速度"
       ],
@@ -1012,7 +1086,7 @@
       "name": "あやしげな作戦",
       "expectedEffect": 0.499034725,
       "needSkillPoint": 120,
-      "desc": "レース後半に速度が少し上がるが\nすごく疲れてしまうことがある",
+      "desc": "レース後半のどこかで速度が少し\n上がるが持久力をすごく使ってしまう\nことがある",
       "effectTags": [
         "速度",
         "回復"
@@ -1056,7 +1130,7 @@
       "name": "奮闘",
       "expectedEffect": 0.4953578500000001,
       "needSkillPoint": 170,
-      "desc": "レース最終盤始めの方で\nラストスパートの最中なら\n速度がわずかに上がる＜長距離＞",
+      "desc": "レース最終盤始めのどこかで\nラストスパートの最中なら\n速度がわずかに上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -1073,7 +1147,7 @@
       "name": "仕掛け抜群",
       "expectedEffect": 0.4953578500000001,
       "needSkillPoint": 180,
-      "desc": "レース終盤に後方にいると\nラストスパートの最中なら\n最終盤始めの方で速度をわずかに上げる\n＜作戦・追込＞",
+      "desc": "レース終盤に後ろの方だと\n最終盤始めのどこかでラストスパートの\n最中なら速度がわずかに上がる\n＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -1090,7 +1164,7 @@
       "name": "追駆",
       "expectedEffect": 0.4953578500000001,
       "needSkillPoint": 180,
-      "desc": "レース最終盤始めの方で\nラストスパートの最中なら\n速度がわずかに上がる＜作戦・追込＞",
+      "desc": "レース最終盤始めのどこかで\nラストスパートの最中なら\n速度がわずかに上がる＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -1103,11 +1177,26 @@
       "rateGroups": []
     },
     {
+      "id": 204642,
+      "name": "私の足取り",
+      "expectedEffect": 0.4953578500000001,
+      "needSkillPoint": 180,
+      "desc": "最終コーナーで外から追い抜くと\n速度がわずかに上がる＜作戦・追込＞",
+      "effectTags": [
+        "速度"
+      ],
+      "phaseTags": [],
+      "aptTags": [
+        "追込"
+      ],
+      "rateGroups": []
+    },
+    {
       "id": 201651,
       "name": "スリップストリーム",
       "expectedEffect": 0.477744925,
       "needSkillPoint": 160,
-      "desc": "前のウマ娘のすぐ後ろに付けると\n速度がわずかに上がる",
+      "desc": "すぐ前にウマ娘が長くいると\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -1155,7 +1244,7 @@
       "name": "右回り○",
       "expectedEffect": 0.474794,
       "needSkillPoint": 90,
-      "desc": "右回りコースが少し得意になる",
+      "desc": "右回りコースなら\nスピードが少し上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1166,7 +1255,7 @@
       "name": "秋ウマ娘○",
       "expectedEffect": 0.474794,
       "needSkillPoint": 90,
-      "desc": "秋のレースが少し得意になる",
+      "desc": "秋のレースなら\nスピードが少し上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1177,7 +1266,7 @@
       "name": "伏兵○",
       "expectedEffect": 0.474794,
       "needSkillPoint": 90,
-      "desc": "4番人気以下のレースで\n能力を少し発揮しやすい",
+      "desc": "4番人気以下のレースで\nスピードが少し上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1188,7 +1277,7 @@
       "name": "良バ場◎",
       "expectedEffect": 0.464583,
       "needSkillPoint": 110,
-      "desc": "「良」のバ場状態が得意になる",
+      "desc": "「良」のバ場状態なら\nパワーが上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1199,7 +1288,7 @@
       "name": "対抗意識◎",
       "expectedEffect": 0.464583,
       "needSkillPoint": 110,
-      "desc": "自分と同じ作戦のウマ娘が多いと\n能力を発揮しやすい",
+      "desc": "自分と同じ作戦のウマ娘が多いと\nパワーが上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1210,7 +1299,7 @@
       "name": "コーナー巧者○",
       "expectedEffect": 0.443529175,
       "needSkillPoint": 180,
-      "desc": "コーナーが得意になり\n速度がわずかに上がる",
+      "desc": "いずれかのコーナーのどこかで\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -1225,7 +1314,7 @@
       "name": "熱狂的",
       "expectedEffect": 0.42443255,
       "needSkillPoint": 140,
-      "desc": "レース中盤に速度がわずかに上がる\n＜長距離＞",
+      "desc": "レース中盤のどこかで速度が\nわずかに上がる＜長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -1242,7 +1331,7 @@
       "name": "影を追って",
       "expectedEffect": 0.42443255,
       "needSkillPoint": 140,
-      "desc": "レース中盤に速度がわずかに上がる\n＜作戦・追込＞",
+      "desc": "レース中盤のどこかで速度が\nわずかに上がる＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -1259,7 +1348,7 @@
       "name": "中盤巧者",
       "expectedEffect": 0.42443255,
       "needSkillPoint": 160,
-      "desc": "レース中盤に速度がわずかに上がる",
+      "desc": "レース中盤のどこかで\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -1274,7 +1363,7 @@
       "name": "序盤巧者",
       "expectedEffect": 0.418515325,
       "needSkillPoint": 160,
-      "desc": "レース中盤が迫ったとき\n速度がわずかに上がる",
+      "desc": "レース中盤が迫ったどこかで\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -1289,7 +1378,7 @@
       "name": "外枠得意◎",
       "expectedEffect": 0.413751680237,
       "needSkillPoint": 110,
-      "desc": "枠番が6～8のレースが得意になる",
+      "desc": "枠番が6～8のレースなら\nスピードが上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1316,7 +1405,7 @@
       "name": "下り坂巧者",
       "expectedEffect": 0.399340075,
       "needSkillPoint": 170,
-      "desc": "下り坂で速度がわずかに上がる",
+      "desc": "いずれかの下り坂のどこかで\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -1345,7 +1434,7 @@
       "name": "末脚",
       "expectedEffect": 0.39545785000000006,
       "needSkillPoint": 170,
-      "desc": "レース最終盤始めの方で\nラストスパートの最中なら\n速度がわずかに上がる",
+      "desc": "レース最終盤始めのどこかで\nラストスパートの最中なら\n速度がわずかに上がる",
       "effectTags": [
         "速度"
       ],
@@ -1375,7 +1464,7 @@
       "name": "良バ場○",
       "expectedEffect": 0.313141,
       "needSkillPoint": 90,
-      "desc": "「良」のバ場状態が少し得意になる",
+      "desc": "「良」のバ場状態なら\nパワーが少し上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1386,9 +1475,24 @@
       "name": "対抗意識○",
       "expectedEffect": 0.313141,
       "needSkillPoint": 90,
-      "desc": "自分と同じ作戦のウマ娘が多いと\n能力を少し発揮しやすい",
+      "desc": "自分と同じ作戦のウマ娘が多いと\nパワーが少し上がる",
       "effectTags": [],
       "phaseTags": [],
+      "aptTags": [],
+      "rateGroups": []
+    },
+    {
+      "id": 204702,
+      "name": "突き抜ける走り",
+      "expectedEffect": 0.30949575,
+      "needSkillPoint": 200,
+      "desc": "レース中盤のどこかでしばらくの間\nちょっと前に出る",
+      "effectTags": [
+        "現在速度"
+      ],
+      "phaseTags": [
+        "中盤"
+      ],
       "aptTags": [],
       "rateGroups": []
     },
@@ -1397,7 +1501,7 @@
       "name": "早仕掛け",
       "expectedEffect": 0.30692147500000005,
       "needSkillPoint": 180,
-      "desc": "レース中盤に後方にいると\nしばらくの間速度がちょっと上がる\n＜作戦・追込＞",
+      "desc": "レース中盤のどこかで中団以降だと\nしばらくの間速度がちょっと上がる\n＜作戦・追込＞",
       "effectTags": [
         "速度"
       ],
@@ -1412,7 +1516,7 @@
           {
             "kind": "rate",
             "sign": ">=",
-            "value": 50
+            "value": 40
           }
         ]
       ]
@@ -1422,7 +1526,7 @@
       "name": "健脚",
       "expectedEffect": 0.30692147500000005,
       "needSkillPoint": 180,
-      "desc": "レース中盤に\nしばらくの間速度がちょっと上がる\n＜中距離/長距離＞",
+      "desc": "レース中盤のどこかで\nしばらくの間速度がちょっと上がる\n＜中距離/長距離＞",
       "effectTags": [
         "速度"
       ],
@@ -1440,7 +1544,7 @@
       "name": "折れない心",
       "expectedEffect": 0.285755625,
       "needSkillPoint": 180,
-      "desc": "レース中盤のコーナーで\nしばらくの間速度がちょっと上がる",
+      "desc": "レース中盤のコーナーのどこかで\nしばらくの間速度がちょっと上がる",
       "effectTags": [
         "速度"
       ],
@@ -1455,7 +1559,7 @@
       "name": "外枠得意○",
       "expectedEffect": 0.276963008402,
       "needSkillPoint": 90,
-      "desc": "枠番が6～8のレースが少し得意になる",
+      "desc": "枠番が6～8のレースなら\nスピードが少し上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1466,7 +1570,7 @@
       "name": "地固め",
       "expectedEffect": 0.2715208,
       "needSkillPoint": 100,
-      "desc": "レース序盤にスキルを多く発動すると\n加速力がわずかに上がる",
+      "desc": "レース序盤にスキルを3回発動すると\n加速力がわずかに上がる",
       "effectTags": [
         "加速"
       ],
@@ -1479,7 +1583,7 @@
       "name": "やまっけ",
       "expectedEffect": 0.2681268,
       "needSkillPoint": 180,
-      "desc": "レースでごくまれにさらなる力を発揮し\nスピード、パワー、根性が少し上がる\n人気が低いと力を発揮しやすくなる",
+      "desc": "レースでごくまれにさらなる力を発揮し\nスピード、パワー、根性が少し上がる\n4番人気以下だと力を発揮しやすくなる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1490,7 +1594,7 @@
       "name": "急降下",
       "expectedEffect": 0.256531175,
       "needSkillPoint": 120,
-      "desc": "下り坂で加速力がわずかに上がる\n＜作戦・追込＞",
+      "desc": "いずれかの下り坂のどこかで加速力が\nわずかに上がる＜作戦・追込＞",
       "effectTags": [
         "加速"
       ],
@@ -1525,7 +1629,7 @@
       "name": "張り切り",
       "expectedEffect": 0.213783225,
       "needSkillPoint": 200,
-      "desc": "レース中盤始めの方に速度がちょっと\n上がり、持久力をちょっと回復する\n＜長距離＞",
+      "desc": "レース中盤始めのどこかで速度が\nちょっと上がり持久力をちょっと\n回復する＜長距離＞",
       "effectTags": [
         "速度",
         "回復"
@@ -1560,7 +1664,7 @@
       "name": "脇目も振らず",
       "expectedEffect": 0.18828745000000002,
       "needSkillPoint": 200,
-      "desc": "レース中盤に持久力をわずかに回復し\n速度がちょっと上がる＜長距離＞",
+      "desc": "レース中盤のどこかで持久力を\nわずかに回復し速度がちょっと上がる\n＜長距離＞",
       "effectTags": [
         "回復",
         "速度"
@@ -1578,7 +1682,7 @@
       "name": "晴れの日◎",
       "expectedEffect": 0.154544,
       "needSkillPoint": 110,
-      "desc": "晴れの日のレースが得意になる",
+      "desc": "晴れの日のレースなら\n根性が上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1589,7 +1693,7 @@
       "name": "徹底マーク◎",
       "expectedEffect": 0.154544,
       "needSkillPoint": 110,
-      "desc": "1番人気のウマ娘と作戦が同じだと\n能力を発揮しやすい",
+      "desc": "1番人気のウマ娘と作戦が同じだと\n根性が上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1600,7 +1704,7 @@
       "name": "コーナー加速○",
       "expectedEffect": 0.141895925,
       "needSkillPoint": 180,
-      "desc": "華麗なコーナーワークで\n加速力がわずかに上がる",
+      "desc": "いずれかのコーナーのどこかで\n加速力がわずかに上がる",
       "effectTags": [
         "加速"
       ],
@@ -1615,7 +1719,7 @@
       "name": "息抜き上手",
       "expectedEffect": 0.12168745000000002,
       "needSkillPoint": 190,
-      "desc": "レース中盤始めの方に持久力を\nわずかに回復しほんのわずかに前に出る\n＜中距離/長距離＞",
+      "desc": "レース中盤始めのどこかで持久力を\nわずかに回復しほんのわずかに前に出る\n＜中距離/長距離＞",
       "effectTags": [
         "回復",
         "現在速度"
@@ -1631,7 +1735,7 @@
       "name": "端緒",
       "expectedEffect": 0.12168745000000002,
       "needSkillPoint": 200,
-      "desc": "中盤の直線に入ると持久力を\nわずかに回復しほんのわずかに前に出る",
+      "desc": "中盤の直線で持久力を\nわずかに回復しほんのわずかに前に出る",
       "effectTags": [
         "回復",
         "現在速度"
@@ -1647,7 +1751,7 @@
       "name": "晴れの日○",
       "expectedEffect": 0.103435,
       "needSkillPoint": 90,
-      "desc": "晴れの日のレースが少し得意になる",
+      "desc": "晴れの日のレースなら\n根性が少し上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1658,7 +1762,7 @@
       "name": "徹底マーク○",
       "expectedEffect": 0.103435,
       "needSkillPoint": 90,
-      "desc": "1番人気のウマ娘と作戦が同じだと\n能力を少し発揮しやすい",
+      "desc": "1番人気のウマ娘と作戦が同じだと\n根性が少し上がる",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],
@@ -1669,7 +1773,7 @@
       "name": "ラッキーセブン",
       "expectedEffect": 0.030467797878,
       "needSkillPoint": 110,
-      "desc": "枠番が7の時に少し\n良いことが起きる場合がある",
+      "desc": "枠番が7の時に\nスピードとスタミナとパワーが\n少し上がる場合がある",
       "effectTags": [],
       "phaseTags": [],
       "aptTags": [],

@@ -3,7 +3,7 @@
  *
  *   node scripts/extract_utools_effects.mjs --course 10606
  *   node scripts/extract_utools_effects.mjs --course 10606 --style leader --cache-only
- *   node scripts/extract_utools_effects.mjs --from-tracks
+ *   node scripts/extract_utools_effects.mjs --from-tracks --force
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -29,6 +29,7 @@ function parseArgs(argv) {
     cacheOnly: false,
     delayMs: 800,
     fromTracks: false,
+    force: false,
   };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
@@ -37,6 +38,7 @@ function parseArgs(argv) {
     else if (a === "--cache-only") opts.cacheOnly = true;
     else if (a === "--delay") opts.delayMs = Number(argv[++i]);
     else if (a === "--from-tracks") opts.fromTracks = true;
+    else if (a === "--force") opts.force = true;
   }
   return opts;
 }
@@ -49,13 +51,13 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function loadHtml(courseId, style, { cacheOnly }) {
+async function loadHtml(courseId, style, { cacheOnly, force }) {
   const file = cachePath(courseId, style);
-  if (fs.existsSync(file)) {
+  if (!force && fs.existsSync(file)) {
     return fs.readFileSync(file, "utf8");
   }
   const legacy = path.join(CACHE_DIR, "tokyo2400-leader.html");
-  if (courseId === 10606 && style === "leader" && fs.existsSync(legacy)) {
+  if (!force && courseId === 10606 && style === "leader" && fs.existsSync(legacy)) {
     return fs.readFileSync(legacy, "utf8");
   }
   if (cacheOnly) {
@@ -162,7 +164,7 @@ async function main() {
   let extracted = 0;
   for (let i = 0; i < courseIds.length; i++) {
     const courseId = courseIds[i];
-    if (opts.fromTracks && isComplete(courseId, styles)) {
+    if (opts.fromTracks && !opts.force && isComplete(courseId, styles)) {
       console.log(`${courseId}: 既存のためスキップ`);
       continue;
     }

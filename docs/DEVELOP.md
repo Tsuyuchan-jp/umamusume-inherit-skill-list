@@ -22,7 +22,7 @@ npm run extract:effects -- --from-tracks
 npm run extract:effects -- --course 10606
 ```
 
-`--from-tracks` は U-tools コース一覧の金ドット分を取り、既存はスキップします。`--cache-only` で `.cache/` の HTML だけ再パースできます。
+`--from-tracks` は U-tools コース一覧の金ドット分を取り、既存はスキップします。既存を取り直すときは `--from-tracks --force`（キャッシュも再取得）。`--cache-only` で `.cache/` の HTML だけ再パースできます。
 
 ## テスト
 
