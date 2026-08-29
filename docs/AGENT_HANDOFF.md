@@ -17,7 +17,7 @@
 
 関連: `C:\Users\PC1\Projects\umamusume-sp-calc` / `C:\Users\PC1\Projects\umamusume-rental-factor-fill`
 
-## いま動いていること（実機OK・v1完了）
+## いま動いていること（実機OK・v1完了。8/24追従も実機OK）
 
 - コースは場チップ → 距離チップ（芝緑 / ダ茶・回り・距離区分）。**既定はデータありのみ**。「すべてのコースを見る」で140件。そのときデータなしは薄く、金ドットは全件表示の距離チップだけ。場チップにドットは付けない。切替は localStorage。脚質（逃/先/差/追）
 - 一覧は 140 件（芝80 + ダート60）。U-tools のダート表記は「ダ」。`extract:courses` は「ダ」を取り `ground: "ダート"` に正規化する
@@ -55,7 +55,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** v1 公開済み。合意済みの次タスクなし。機能追加・見た目の作り直しはしない。
+**いま:** v1 公開済み。8/24 追従（エピファネイア・エフフォーリア・シービー、優先40廃止、effects 再抽出）は実機OKでクローズ。合意済みの次タスクなし。機能追加・見た目の作り直しはしない。
 
 Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジトリ直下を配信）。Source は GitHub Actions。
 
@@ -70,6 +70,8 @@ Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジト�
 - CSS は `chrome.css`＋`inherit.css`。間引き後の編成カード重なりは直して実機OK
 - 公開前レビュー完了。モック削除済み。README は Pages URL 前提
 - GitHub Pages 初回公開済み（`master` / Actions）
+- サポカは固定40種ではない。ガチ育成向けの採用分を `priority-supports.json` に順次追加する（2026-08-30 時点 42枚）
+- 8/24 パッチ追従は実機OKでクローズ（114101 / 30311 / 30312。30313 は未採用）
 
 後回し:
 

@@ -4,11 +4,12 @@
 
 ## 次（合意済み）
 
-なし。8/24 追加分（エピファネイア・エフフォーリア・シービー）と優先40廃止・effects 再抽出まで反映済み。
+なし。v1 公開済み。8/24 追従も実機OKでクローズ。機能追加・見た目の作り直しはしない。
 
 ## 完了
 
-- [x] **8/24 データ追従** — 育成 114101・サポカ 30311/30312 を採用リストへ。固定40種表記を廃止。金ドット effects を `--force` 再抽出
+- [x] **8/24 データ追従** — 育成 114101・サポカ 30311/30312 を採用リストへ。固定40種表記を廃止。金ドット effects を `--force` 再抽出。**実機OK・クローズ（2026-08-30）**
+- [x] **GitHub Pages 初回公開** — https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ 。`origin` は `Tsuyuchan-jp/umamusume-inherit-skill-list`。Actions でリポジトリ直下を配信
 - [x] **CSS 間引き** — `chrome.css`＋`inherit.css`。sp-calc の `style.css` / `foundation.css` は削除
 - [x] **公開前レビュー** — README 分離、非公式注記、Pages 入口、モック削除、未使用 JS/画像、テスト
 - [x] **v1 機能＋デザイン** — 実機OK。これ以上の機能追加・見た目の大きな変更はしない
