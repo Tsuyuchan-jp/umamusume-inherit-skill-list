@@ -4,9 +4,11 @@
 
 ## 次（合意済み）
 
-なし。v1 公開済み。8/24 追従も実機OKでクローズ。機能追加・見た目の作り直しはしない。
+なし。v1 公開済み。カード系ハブ接続は 2026-09-10。機能追加・見た目の作り直しはしない。
 
 ## 完了
+
+- [x] 2026-09-10 **カード系を umamusume-data から取得** — 失敗時は同梱。`priority-supports.json` は読まない。対象は events ∩ supports。courses/effects は同梱のまま
 
 - [x] **8/24 データ追従** — 育成 114101・サポカ 30311/30312 を採用リストへ。固定40種表記を廃止。金ドット effects を `--force` 再抽出。**実機OK・クローズ（2026-08-30）**
 - [x] **GitHub Pages 初回公開** — https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ 。`origin` は `Tsuyuchan-jp/umamusume-inherit-skill-list`。Actions でリポジトリ直下を配信

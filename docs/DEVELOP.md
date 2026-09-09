@@ -10,7 +10,12 @@
 npm run serve
 ```
 
-ルートの `index.html` が `/app/` へ飛ばします。アプリ本体は `app/`、JSON は `data/`、カード画像は `assets/` です。この3つを同じオリジンに置く前提です。
+ルートの `index.html` が `/app/` へ飛ばします。アプリ本体は `app/`、JSON は `data/`、カード画像は `assets/` です。カード系は起動時に `umamusume-data` を取り、失敗時は同梱を使います。コース effects は同じオリジンの `data/` のままです。
+
+ハブを強制 / 切る:
+
+- `?hub=local` … 同梱だけ
+- `?hub=remote` … ハブ必須（失敗したら起動しない）
 
 ## データ更新（手動）
 
@@ -30,7 +35,7 @@ npm run extract:effects -- --course 10606
 npm test
 ```
 
-parse effects（合成 HTML fixture）/ inherit list / parse courses / obtainable。
+parse effects（合成 HTML fixture）/ inherit list / parse courses / obtainable / hub。
 
 ## GitHub Pages
 

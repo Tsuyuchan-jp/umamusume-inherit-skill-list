@@ -1,4 +1,6 @@
+import { configureCardAssets } from "./cardAssets.js";
 import { createDeckUi } from "./deckUi.js";
+import { allowedSupportIds, hubPreferenceFromSearch, loadCardDataset } from "./hub.js";
 import { collectObtainableSkillIds } from "./obtainable.js";
 import {
   COPY_LIMIT,
@@ -520,23 +522,28 @@ function bind() {
 
 async function init() {
   restoreSession();
-  const [skills, supports, characters, events, scenario, priority, coursesDoc, availableDoc] =
-    await Promise.all([
-      loadJson("skills.json"),
-      loadJson("supports.json"),
-      loadJson("characters.json"),
-      loadJson("events.json"),
-      loadJson("scenarios/toresenken.json"),
-      loadJson("priority-supports.json"),
-      loadJson("courses.json").catch(() => ({ courses: [{ id: 10606, name: "東京 2400m（芝）", place: "東京" }] })),
-      loadJson("effects/available.json").catch(() => ({ courseIds: [10606] })),
-    ]);
+  const pref =
+    typeof window !== "undefined"
+      ? hubPreferenceFromSearch(window.location.search)
+      : "auto";
+  const [cardPack, coursesDoc, availableDoc] = await Promise.all([
+    loadCardDataset(pref),
+    loadJson("courses.json").catch(() => ({
+      courses: [{ id: 10606, name: "東京 2400m（芝）", place: "東京" }],
+    })),
+    loadJson("effects/available.json").catch(() => ({ courseIds: [10606] })),
+  ]);
+  const { skills, supports, characters, events, scenario } = cardPack.dataset;
+  configureCardAssets({
+    origin: cardPack.assetBase,
+    cacheBust: cardPack.manifest?.datasetVersion,
+  });
   state.skills = skills;
   state.supports = supports;
   state.characters = characters;
   state.events = events;
   state.scenario = scenario;
-  state.priorityIds = new Set((priority.supports || []).map((s) => s.id));
+  state.priorityIds = allowedSupportIds(supports, events);
   state.courses = coursesDoc.courses?.length
     ? coursesDoc.courses
     : [{ id: 10606, name: "東京 2400m（芝）", place: "東京" }];

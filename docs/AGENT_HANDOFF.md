@@ -35,12 +35,12 @@
 
 有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。追加は `npm run extract:effects -- --from-tracks`（既存はスキップ）。取り直しは `--from-tracks --force`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
 
-テスト: `npm test`（parse effects / inherit list / parse courses / obtainable）。
+テスト: `npm test`（parse effects / inherit list / parse courses / obtainable / hub）。
 
 ## 確定仕様
 
 - フィルタ正本: U-tools で白スキル **かつ** 共通スキル（積集合）。継承固有の白は出さない
-- サポカ: 採用分のみ選択可（`priority-supports.json`。件数は可変）。イベント UI なし → ヒント＋イベント全選択肢を「取れる」
+- サポカ: 採用分のみ選択可（`events.json` の ID ∩ 読み込んだ supports。件数は可変）。イベント UI なし → ヒント＋イベント全選択肢を「取れる」
 - シナリオ UI なし → トレセン軒の **自動付与のみ** 除外。リンク6択・ラーメン3択は見ない
 - コピー既定: 有効順の先頭25件（改行のスキル名。rental-factor-fill が解釈できる）。ボタン文言は「スキルリストをコピー」
 - ウマ娘DB入力は既存ユーザースクリプト。このアプリに入れない（別オリジンのため不可）
@@ -55,7 +55,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** v1 公開済み。8/24 追従（エピファネイア・エフフォーリア・シービー、優先40廃止、effects 再抽出）は実機OKでクローズ。合意済みの次タスクなし。機能追加・見た目の作り直しはしない。
+**いま:** v1 公開済み。カード系は `umamusume-data` を起動時取得（失敗時は同梱）。見た目の作り直しはしない。
 
 Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジトリ直下を配信）。Source は GitHub Actions。
 
@@ -70,7 +70,7 @@ Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジト�
 - CSS は `chrome.css`＋`inherit.css`。間引き後の編成カード重なりは直して実機OK
 - 公開前レビュー完了。モック削除済み。README は Pages URL 前提
 - GitHub Pages 初回公開済み（`master` / Actions）
-- サポカは固定40種ではない。ガチ育成向けの採用分を `priority-supports.json` に順次追加する（2026-08-30 時点 42枚）
+- サポカは固定40種ではない。対象は画像かつ events（ハブの supports と同じ集合）。`priority-supports.json` は読まない（2026-09-10）
 - 8/24 パッチ追従は実機OKでクローズ（114101 / 30311 / 30312。30313 は未採用）
 
 後回し:
