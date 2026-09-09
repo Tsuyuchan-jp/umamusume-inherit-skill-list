@@ -16,9 +16,11 @@ export function hubPreferenceFromSearch(search = "") {
   return "auto";
 }
 
-export function hubFileUrl(base, relPath) {
+export function hubFileUrl(base, relPath, version = "") {
   const normalized = String(relPath || "").replace(/^\.\//, "");
-  return new URL(normalized, base).href;
+  const url = new URL(normalized, base);
+  if (version) url.searchParams.set("v", String(version));
+  return url.href;
 }
 
 export async function fetchJson(url) {
@@ -62,12 +64,13 @@ async function loadHubCardDataset(base) {
   if (!files.events?.path || !files.scenarios?.path) {
     throw new Error("manifest に events / scenarios がありません");
   }
+  const version = manifest.datasetVersion || "";
   const [skills, supports, characters, events, scenario] = await Promise.all([
-    fetchJson(hubFileUrl(base, files.skills.path)),
-    fetchJson(hubFileUrl(base, files.supports.path)),
-    fetchJson(hubFileUrl(base, files.characters.path)),
-    fetchJson(hubFileUrl(base, files.events.path)),
-    fetchJson(hubFileUrl(base, files.scenarios.path)),
+    fetchJson(hubFileUrl(base, files.skills.path, version)),
+    fetchJson(hubFileUrl(base, files.supports.path, version)),
+    fetchJson(hubFileUrl(base, files.characters.path, version)),
+    fetchJson(hubFileUrl(base, files.events.path, version)),
+    fetchJson(hubFileUrl(base, files.scenarios.path, version)),
   ]);
   return {
     source: "hub",
