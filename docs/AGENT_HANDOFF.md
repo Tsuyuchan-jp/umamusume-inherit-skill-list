@@ -20,7 +20,7 @@
 ## いま動いていること（実機OK・v1完了。8/24追従も実機OK）
 
 - コースは場チップ → 距離チップ（芝緑 / ダ茶・回り・距離区分）。**既定はデータありのみ**。「すべてのコースを見る」で140件。そのときデータなしは薄く、金ドットは全件表示の距離チップだけ。場チップにドットは付けない。切替は localStorage。脚質（逃/先/差/追）
-- 一覧は 140 件（芝80 + ダート60）。U-tools のダート表記は「ダ」。`extract:courses` は「ダ」を取り `ground: "ダート"` に正規化する
+- 一覧は 140 件（芝80 + ダート60）。U-tools のダート表記は「ダ」。工場の `extract:courses` が「ダ」を取り `ground: "ダート"` に正規化する。アプリは棚の `courses.json`（失敗時は同梱）
 - 育成ウマ娘（全カード画像）＋採用サポカ（タイプ絞込のみ。固定件数なし。新規は順次追加）
 - 白∩共通 − 本育成取得可能（金チェーン含む）→ 先頭25件コピー
 - 先頭25件を行ごとに手動除外。下に「除外中」（戻す）。コピーは残件の先頭25件。除外はコース＋脚質ごとに localStorage
@@ -35,7 +35,7 @@
 
 有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。追加は `npm run extract:effects -- --from-tracks`（既存はスキップ）。取り直しは `--from-tracks --force`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
 
-テスト: `npm test`（parse effects / inherit list / parse courses / obtainable / hub）。
+テスト: `npm test`（parse effects / inherit list / parseEffectCourseIds / obtainable / hub）。
 
 ## 確定仕様
 
@@ -55,7 +55,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** v1 公開済み。カード系は `umamusume-data` を起動時取得（失敗時は同梱）。見た目の作り直しはしない。
+**いま:** v1 公開済み。カード系とコース一覧は `umamusume-data` を起動時取得（失敗時は同梱）。effects は同梱。見た目の作り直しはしない。
 
 Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジトリ直下を配信）。Source は GitHub Actions。
 
@@ -89,7 +89,7 @@ Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジト�
 |------|------|
 | UI | `app/index.html` `app/js/app.js` `app/js/deckUi.js` `app/css/inherit.css` `app/css/chrome.css` |
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
-| 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `extract_utools_courses.mjs` |
+| 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `parse_utools_effect_course_ids.mjs` |
 | データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
 | 公開入口 | ルート `index.html`（`/app/` へ） `.nojekyll` `.github/workflows/deploy-pages.yml` |
 

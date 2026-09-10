@@ -54,6 +54,19 @@ if (fs.existsSync(manifestPath)) {
     ids.size === expected && expected > 0,
     `ids=${ids.size} count=${expected}`
   );
+  const coursesMeta = manifest.files.courses;
+  if (coursesMeta?.path) {
+    const coursesPath = path.join(hubDir, coursesMeta.path);
+    const coursesDoc = JSON.parse(fs.readFileSync(coursesPath, "utf8"));
+    const n = Array.isArray(coursesDoc.courses) ? coursesDoc.courses.length : 0;
+    check(
+      "棚の courses 件数",
+      n > 0 && n === Number(coursesMeta.count || n),
+      `n=${n} count=${coursesMeta.count}`
+    );
+  } else {
+    check("棚の files.courses", false, "manifest に courses がありません");
+  }
 } else {
   console.log("skip 隣の umamusume-data が無いため棚ファイル検証は省略");
 }

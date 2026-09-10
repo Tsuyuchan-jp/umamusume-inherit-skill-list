@@ -8,7 +8,8 @@
 
 ## 完了
 
-- [x] 2026-09-10 **カード系を umamusume-data から取得** — 失敗時は同梱。`priority-supports.json` は読まない。対象は events ∩ supports。courses/effects は同梱のまま
+- [x] 2026-09-11 **courses.json を棚から取得** — 工場 `extract:courses`。失敗時は同梱。`extract:courses` はこのリポから削除
+- [x] 2026-09-10 **カード系を umamusume-data から取得** — 失敗時は同梱。`priority-supports.json` は読まない。対象は events ∩ supports。effects は同梱のまま
 
 - [x] **8/24 データ追従** — 育成 114101・サポカ 30311/30312 を採用リストへ。固定40種表記を廃止。金ドット effects を `--force` 再抽出。**実機OK・クローズ（2026-08-30）**
 - [x] **GitHub Pages 初回公開** — https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ 。`origin` は `Tsuyuchan-jp/umamusume-inherit-skill-list`。Actions でリポジトリ直下を配信

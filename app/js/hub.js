@@ -95,3 +95,36 @@ export async function loadCardDataset(pref = "auto", hubBase = DEFAULT_HUB_BASE)
   }
   return loadLocalCardDataset();
 }
+
+async function loadLocalCourses() {
+  return fetchJson(new URL("courses.json", LOCAL_DATA).href);
+}
+
+/**
+ * コース一覧。棚の files.courses を優先し、失敗・キー無しは同梱。
+ * カードパックが local ならハブは見ない。
+ *
+ * @param {"auto"|"local"|"remote"} pref
+ * @param {{ source?: string, manifest?: object } | null} [cardPack]
+ * @param {string} [hubBase]
+ */
+export async function loadCoursesDoc(pref = "auto", cardPack = null, hubBase = DEFAULT_HUB_BASE) {
+  const local = () => loadLocalCourses();
+  if (pref === "local" || cardPack?.source === "local") {
+    return local();
+  }
+  try {
+    const manifest = cardPack?.manifest;
+    const relPath = manifest?.files?.courses?.path;
+    if (!relPath) throw new Error("manifest に courses がありません");
+    const version = manifest.datasetVersion || "";
+    const doc = await fetchJson(hubFileUrl(hubBase, relPath, version));
+    if (!Array.isArray(doc?.courses) || doc.courses.length === 0) {
+      throw new Error("courses が空です");
+    }
+    return doc;
+  } catch (err) {
+    console.warn("ハブの courses 取得に失敗したためローカル data/ を使います", err);
+    return local();
+  }
+}

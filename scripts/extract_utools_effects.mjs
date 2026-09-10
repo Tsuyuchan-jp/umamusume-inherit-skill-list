@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseEffectCourseIds } from "./extract_utools_courses.mjs";
+import { parseEffectCourseIds } from "./parse_utools_effect_course_ids.mjs";
 import {
   STYLE_IDS,
   filterWhiteCommon,

@@ -10,7 +10,7 @@
 npm run serve
 ```
 
-ルートの `index.html` が `/app/` へ飛ばします。アプリ本体は `app/`、JSON は `data/`、カード画像は `assets/` です。カード系は起動時に `umamusume-data` を取り、失敗時は同梱を使います。コース effects は同じオリジンの `data/` のままです。
+ルートの `index.html` が `/app/` へ飛ばします。アプリ本体は `app/`、JSON は `data/`、カード画像は `assets/` です。カード系は起動時に `umamusume-data` を取り、失敗時は同梱を使います。コース一覧も同じ（`files.courses`）。effects は同じオリジンの `data/` のままです。
 
 ハブを強制 / 切る:
 
@@ -19,10 +19,9 @@ npm run serve
 
 ## データ更新（手動）
 
-起動のたびに U-tools へ取りに行きません。見たいコースを増やすときだけ実行します。
+起動のたびに U-tools へ取りに行きません。見たいコースの effects を増やすときだけ実行します。コース一覧の正本は工場（`umamusume-data-src` の `extract:courses`）。
 
 ```powershell
-npm run extract:courses
 npm run extract:effects -- --from-tracks
 npm run extract:effects -- --course 10606
 ```
@@ -35,7 +34,7 @@ npm run extract:effects -- --course 10606
 npm test
 ```
 
-parse effects（合成 HTML fixture）/ inherit list / parse courses / obtainable / hub。
+parse effects（合成 HTML fixture）/ inherit list / parseEffectCourseIds / obtainable / hub。
 
 ## GitHub Pages
 

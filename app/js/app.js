@@ -1,6 +1,6 @@
 import { configureCardAssets } from "./cardAssets.js";
 import { createDeckUi } from "./deckUi.js";
-import { allowedSupportIds, hubPreferenceFromSearch, loadCardDataset } from "./hub.js";
+import { allowedSupportIds, hubPreferenceFromSearch, loadCardDataset, loadCoursesDoc } from "./hub.js";
 import { collectObtainableSkillIds } from "./obtainable.js";
 import {
   COPY_LIMIT,
@@ -526,9 +526,9 @@ async function init() {
     typeof window !== "undefined"
       ? hubPreferenceFromSearch(window.location.search)
       : "auto";
-  const [cardPack, coursesDoc, availableDoc] = await Promise.all([
-    loadCardDataset(pref),
-    loadJson("courses.json").catch(() => ({
+  const cardPack = await loadCardDataset(pref);
+  const [coursesDoc, availableDoc] = await Promise.all([
+    loadCoursesDoc(pref, cardPack).catch(() => ({
       courses: [{ id: 10606, name: "東京 2400m（芝）", place: "東京" }],
     })),
     loadJson("effects/available.json").catch(() => ({ courseIds: [10606] })),
