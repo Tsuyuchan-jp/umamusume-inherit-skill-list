@@ -55,7 +55,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** v1 公開済み。カード系・コース一覧・effects は `umamusume-data` を取得（失敗時は同梱。effects は遅延読み込み）。見た目の作り直しはしない。
+**いま:** v1 公開済み。カード系・コース一覧・effects は `umamusume-data` を取得（失敗時は同梱。effects は遅延読み込み）。**effects 棚接続は実機OK**。見た目の作り直しはしない。
 
 Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジトリ直下を配信）。Source は GitHub Actions。
 
