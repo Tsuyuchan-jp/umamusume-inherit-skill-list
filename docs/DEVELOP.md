@@ -10,7 +10,7 @@
 npm run serve
 ```
 
-ルートの `index.html` が `/app/` へ飛ばします。アプリ本体は `app/`、JSON は `data/`、カード画像は `assets/` です。カード系は起動時に `umamusume-data` を取り、失敗時は同梱を使います。コース一覧も同じ（`files.courses`）。effects は同じオリジンの `data/` のままです。
+ルートの `index.html` が `/app/` へ飛ばします。アプリ本体は `app/`、JSON は `data/`、カード画像は `assets/` です。カード系・コース一覧・effects 索引は起動時に `umamusume-data` を取り、失敗時は同梱を使います。各 `effects/{courseId}/{style}.json` は選んだ1本だけ取ります。
 
 ハブを強制 / 切る:
 
@@ -19,14 +19,7 @@ npm run serve
 
 ## データ更新（手動）
 
-起動のたびに U-tools へ取りに行きません。見たいコースの effects を増やすときだけ実行します。コース一覧の正本は工場（`umamusume-data-src` の `extract:courses`）。
-
-```powershell
-npm run extract:effects -- --from-tracks
-npm run extract:effects -- --course 10606
-```
-
-`--from-tracks` は U-tools コース一覧の金ドット分を取り、既存はスキップします。既存を取り直すときは `--from-tracks --force`（キャッシュも再取得）。`--cache-only` で `.cache/` の HTML だけ再パースできます。
+起動のたびに U-tools へ取りに行きません。コース一覧と effects の正本は工場（`umamusume-data-src` の `extract:courses` / `extract:effects`）。棚へ `publish` したあと、失敗時同梱の `data/effects/**` を揃えます。
 
 ## テスト
 
@@ -34,7 +27,7 @@ npm run extract:effects -- --course 10606
 npm test
 ```
 
-parse effects（合成 HTML fixture）/ inherit list / parseEffectCourseIds / obtainable / hub。
+inherit list / obtainable / hub。
 
 ## GitHub Pages
 

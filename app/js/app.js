@@ -1,6 +1,6 @@
 import { configureCardAssets } from "./cardAssets.js";
 import { createDeckUi } from "./deckUi.js";
-import { allowedSupportIds, hubPreferenceFromSearch, loadCardDataset, loadCoursesDoc } from "./hub.js";
+import { allowedSupportIds, hubPreferenceFromSearch, loadCardDataset, loadCoursesDoc, loadEffectDoc, loadEffectsAvailable } from "./hub.js";
 import { collectObtainableSkillIds } from "./obtainable.js";
 import {
   COPY_LIMIT,
@@ -12,7 +12,6 @@ import { copyTextToClipboard } from "./clipboard.js";
 import { escapeHtml } from "./htmlEscape.js";
 import { activeOrders, rankBadge } from "./skillDetail.js";
 
-const DATA_BASE = new URL("../../data/", import.meta.url);
 const SESSION_KEY = "umamusume-inherit-skill-list-v1";
 const UTOOLS_ORIGIN = "https://xn--gck1f423k.xn--1bvt37a.tools";
 const STYLE_LABELS = {
@@ -32,6 +31,7 @@ const state = {
   priorityIds: new Set(),
   effects: null,
   effectCourseIds: new Set(),
+  effectsSource: "local",
   ui: {
     courseId: 10606,
     place: "東京",
@@ -52,16 +52,8 @@ let lastResult = null;
 let openSkillId = null;
 // コース切替の古い fetch が後から上書きしないため
 let effectsLoadSeq = 0;
-
-function dataUrl(name) {
-  return new URL(name, DATA_BASE).href;
-}
-
-async function loadJson(name) {
-  const res = await fetch(dataUrl(name));
-  if (!res.ok) throw new Error(`${name} HTTP ${res.status}`);
-  return res.json();
-}
+let hubPref = "auto";
+let effectsPack = null;
 
 function getCharacterById(id) {
   return state.characters.find((c) => c.id === id);
@@ -286,14 +278,9 @@ function syncUtoolsLink() {
 async function loadEffects() {
   const seq = ++effectsLoadSeq;
   const { courseId, style } = state.ui;
-  const res = await fetch(dataUrl(`effects/${courseId}/${style}.json`));
+  const doc = await loadEffectDoc(courseId, style, effectsPack, hubPref);
   if (seq !== effectsLoadSeq) return false;
-  if (!res.ok) {
-    state.effects = null;
-    return true;
-  }
-  state.effects = await res.json();
-  if (seq !== effectsLoadSeq) return false;
+  state.effects = doc;
   return true;
 }
 
@@ -366,7 +353,7 @@ function recalc() {
   if (!state.effects?.skills) {
     lastResult = null;
     listEl.innerHTML =
-      "<li class=\"result-empty\">このコース・脚質の有効スキルデータがまだありません。<code>npm run extract:effects -- --course " +
+      "<li class=\"result-empty\">このコース・脚質の有効スキルデータがまだありません。工場で <code>npm run extract:effects -- --course " +
       state.ui.courseId +
       "</code> を実行してください。</li>";
     if (excludedBlock) excludedBlock.hidden = true;
@@ -522,17 +509,26 @@ function bind() {
 
 async function init() {
   restoreSession();
-  const pref =
+  hubPref =
     typeof window !== "undefined"
       ? hubPreferenceFromSearch(window.location.search)
       : "auto";
-  const cardPack = await loadCardDataset(pref);
-  const [coursesDoc, availableDoc] = await Promise.all([
-    loadCoursesDoc(pref, cardPack).catch(() => ({
+  const cardPack = await loadCardDataset(hubPref);
+  const [coursesDoc, availablePack] = await Promise.all([
+    loadCoursesDoc(hubPref, cardPack).catch(() => ({
       courses: [{ id: 10606, name: "東京 2400m（芝）", place: "東京" }],
     })),
-    loadJson("effects/available.json").catch(() => ({ courseIds: [10606] })),
+    loadEffectsAvailable(hubPref, cardPack).catch((err) => {
+      if (hubPref === "remote") throw err;
+      return {
+        source: "local",
+        doc: { courseIds: [10606] },
+        meta: null,
+        version: "",
+      };
+    }),
   ]);
+  effectsPack = availablePack;
   const { skills, supports, characters, events, scenario } = cardPack.dataset;
   configureCardAssets({
     origin: cardPack.assetBase,
@@ -548,8 +544,9 @@ async function init() {
     ? coursesDoc.courses
     : [{ id: 10606, name: "東京 2400m（芝）", place: "東京" }];
   state.effectCourseIds = new Set(
-    (availableDoc.courseIds || []).map(Number).filter((n) => Number.isFinite(n))
+    (availablePack.doc?.courseIds || []).map(Number).filter((n) => Number.isFinite(n))
   );
+  state.effectsSource = availablePack.source || "local";
 
   renderCourseChips();
   syncStyleButtons();

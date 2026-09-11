@@ -7,6 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   allowedSupportIds,
+  effectsFileRel,
   hubFileUrl,
   hubPreferenceFromSearch,
 } from "../app/js/hub.js";
@@ -38,6 +39,11 @@ check(
   hubFileUrl("https://example.test/hub/", "data/skills.json", "0.1.1") ===
     "https://example.test/hub/data/skills.json?v=0.1.1"
 );
+check(
+  "effectsFileRel の遅延パス",
+  effectsFileRel({ path: "data/effects/" }, 10606, "leader") ===
+    "data/effects/10606/leader.json"
+);
 
 const hubDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../umamusume-data");
 const manifestPath = path.join(hubDir, "manifest.json");
@@ -66,6 +72,34 @@ if (fs.existsSync(manifestPath)) {
     );
   } else {
     check("棚の files.courses", false, "manifest に courses がありません");
+  }
+  const effectsMeta = manifest.files.effects;
+  if (effectsMeta?.path || effectsMeta?.index) {
+    const indexRel = effectsMeta.index || `${String(effectsMeta.path).replace(/\/?$/, "/")}available.json`;
+    const indexPath = path.join(hubDir, indexRel);
+    if (!fs.existsSync(indexPath)) {
+      check("棚の effects index", false, indexRel);
+    } else {
+      const available = JSON.parse(fs.readFileSync(indexPath, "utf8"));
+      const n = Array.isArray(available.courseIds) ? available.courseIds.length : 0;
+      const sampleId = available.courseIds?.[0];
+      const sampleFile =
+        sampleId != null
+          ? path.join(hubDir, effectsFileRel(effectsMeta, sampleId, "leader"))
+          : null;
+      check(
+        "棚の effects 件数",
+        n > 0 && n === Number(effectsMeta.courseCount || n),
+        `n=${n} count=${effectsMeta.courseCount}`
+      );
+      check(
+        "棚の effects は1コース1ファイル",
+        sampleFile ? fs.existsSync(sampleFile) : false,
+        sampleFile || "sample missing"
+      );
+    }
+  } else {
+    check("棚の files.effects", false, "manifest に effects がありません");
   }
 } else {
   console.log("skip 隣の umamusume-data が無いため棚ファイル検証は省略");

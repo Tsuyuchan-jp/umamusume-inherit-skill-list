@@ -128,3 +128,83 @@ export async function loadCoursesDoc(pref = "auto", cardPack = null, hubBase = D
     return local();
   }
 }
+
+function effectsIndexRel(meta) {
+  if (meta?.index) return String(meta.index).replace(/\\/g, "/");
+  const root = String(meta?.path || "data/effects/").replace(/\\/g, "/");
+  const base = root.endsWith("/") ? root : `${root}/`;
+  return `${base}available.json`;
+}
+
+export function effectsFileRel(meta, courseId, style) {
+  const root = String(meta?.path || "data/effects/").replace(/\\/g, "/");
+  const base = root.endsWith("/") ? root : `${root}/`;
+  return `${base}${courseId}/${style}.json`;
+}
+
+async function loadLocalEffectsAvailable() {
+  return fetchJson(new URL("effects/available.json", LOCAL_DATA).href);
+}
+
+/**
+ * 有効スキルの有無一覧。棚の files.effects.index を優先し、失敗は同梱。
+ * カードパックが local ならハブは見ない。?hub=remote では同梱に落とさない。
+ *
+ * @param {"auto"|"local"|"remote"} pref
+ * @param {{ source?: string, manifest?: object } | null} [cardPack]
+ * @param {string} [hubBase]
+ */
+export async function loadEffectsAvailable(pref = "auto", cardPack = null, hubBase = DEFAULT_HUB_BASE) {
+  const local = async () => ({
+    source: "local",
+    doc: await loadLocalEffectsAvailable(),
+    meta: { path: "data/effects/", index: "data/effects/available.json" },
+    version: "",
+    hubBase,
+  });
+  if (pref === "local" || cardPack?.source === "local") {
+    return local();
+  }
+  try {
+    const manifest = cardPack?.manifest;
+    const meta = manifest?.files?.effects;
+    if (!meta?.path && !meta?.index) throw new Error("manifest に effects がありません");
+    const version = manifest.datasetVersion || "";
+    const doc = await fetchJson(hubFileUrl(hubBase, effectsIndexRel(meta), version));
+    if (!Array.isArray(doc?.courseIds) || doc.courseIds.length === 0) {
+      throw new Error("effects available が空です");
+    }
+    return { source: "hub", doc, meta, version, hubBase };
+  } catch (err) {
+    if (pref === "remote") throw err;
+    console.warn("ハブの effects 索引取得に失敗したためローカル data/ を使います", err);
+    return local();
+  }
+}
+
+/**
+ * 選んだ 1 コース×1 脚質だけ取る。起動時全件 GET はしない。
+ * auto で棚失敗なら同梱。remote では同梱に落とさない。
+ *
+ * @returns {Promise<object|null>}
+ */
+export async function loadEffectDoc(courseId, style, pack, pref = "auto", hubBase = DEFAULT_HUB_BASE) {
+  const localUrl = new URL(`effects/${courseId}/${style}.json`, LOCAL_DATA).href;
+  const local = async () => {
+    const res = await fetch(localUrl);
+    if (!res.ok) return null;
+    return res.json();
+  };
+  if (pref === "local" || pack?.source === "local") {
+    return local();
+  }
+  try {
+    const base = pack?.hubBase || hubBase;
+    const rel = effectsFileRel(pack?.meta, courseId, style);
+    return await fetchJson(hubFileUrl(base, rel, pack?.version || ""));
+  } catch (err) {
+    if (pref === "remote") return null;
+    console.warn("ハブの effect JSON 取得に失敗したためローカルを使います", err);
+    return local();
+  }
+}

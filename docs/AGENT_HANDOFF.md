@@ -33,9 +33,9 @@
 - **使い方:** 目的（ウマ娘DBでレンタル継承親を探すときの OR 元リスト）＋中身＋手順は常時表示。計上の前提・リストの見方は折りたたみ。extract は出さない。レンタル因子貼り付けへリンク。閉じるは×と外側クリック。非公式注記あり
 - **結果枠:** 見出しは「不足しているかもしれないスキルリスト」。コピーは金ボタン「スキルリストをコピー」（幅100%・上限24rem。スマホ全幅／PCは左寄せ）。ウマ娘DBは白枠の補助ボタン
 
-有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。追加は `npm run extract:effects -- --from-tracks`（既存はスキップ）。取り直しは `--from-tracks --force`。起動時に U-tools へ取りに行かない。有無一覧は `data/effects/available.json`。選んだ courseId は従来どおり localStorage。
+有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。正本は工場 `extract:effects` → 棚。アプリは起動時に `available.json` だけ取り、各 `{style}.json` は選んだ1本だけ（失敗時は同梱）。選んだ courseId は従来どおり localStorage。
 
-テスト: `npm test`（parse effects / inherit list / parseEffectCourseIds / obtainable / hub）。
+テスト: `npm test`（inherit list / obtainable / hub）。
 
 ## 確定仕様
 
@@ -55,7 +55,7 @@ U-tools URL: `https://xn--gck1f423k.xn--1bvt37a.tools/race/courses/{id}/effects/
 
 正本は [TODO.md](./TODO.md)。UI を一度に大きく変えない。対話で1項目ずつ。いきなり実装しない。
 
-**いま:** v1 公開済み。カード系とコース一覧は `umamusume-data` を起動時取得（失敗時は同梱）。effects は同梱。見た目の作り直しはしない。
+**いま:** v1 公開済み。カード系・コース一覧・effects は `umamusume-data` を取得（失敗時は同梱。effects は遅延読み込み）。見た目の作り直しはしない。
 
 Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジトリ直下を配信）。Source は GitHub Actions。
 
@@ -89,8 +89,8 @@ Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジト�
 |------|------|
 | UI | `app/index.html` `app/js/app.js` `app/js/deckUi.js` `app/css/inherit.css` `app/css/chrome.css` |
 | 差集合 | `app/js/obtainable.js` `app/js/inheritList.js` `app/js/skillDetail.js` |
-| 抽出 | `scripts/parse_utools_effects.mjs` `extract_utools_effects.mjs` `parse_utools_effect_course_ids.mjs` |
-| データ | `data/effects/{courseId}/{style}.json` `data/effects/available.json` `data/courses.json` |
+| 抽出 | 工場 `umamusume-data-src`（`extract:effects`）。このリポの extract は廃止 |
+| データ | 棚 `data/effects/**`。失敗時同梱 `data/effects/{courseId}/{style}.json` `available.json` `data/courses.json` |
 | 公開入口 | ルート `index.html`（`/app/` へ） `.nojekyll` `.github/workflows/deploy-pages.yml` |
 
 ## 新チャットの最初のメッセージ例
