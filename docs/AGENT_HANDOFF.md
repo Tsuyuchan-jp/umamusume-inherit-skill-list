@@ -33,7 +33,7 @@
 - **使い方:** 目的（ウマ娘DBでレンタル継承親を探すときの OR 元リスト）＋中身＋手順は常時表示。計上の前提・リストの見方は折りたたみ。extract は出さない。レンタル因子貼り付けへリンク。閉じるは×と外側クリック。非公式注記あり
 - **結果枠:** 見出しは「不足しているかもしれないスキルリスト」。コピーは金ボタン「スキルリストをコピー」（幅100%・上限24rem。スマホ全幅／PCは左寄せ）。ウマ娘DBは白枠の補助ボタン
 
-有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **36件×4脚質**。正本は工場 `extract:effects` → 棚。アプリは起動時に `available.json` だけ取り、各 `{style}.json` は選んだ1本だけ（失敗時は同梱）。選んだ courseId は従来どおり localStorage。
+有効スキル JSON は U-tools コース一覧で金ドット（`course__effect`）が付く **37件×4脚質**。正本は工場 `extract:effects` → 棚。アプリは起動時に `available.json` だけ取り、各 `{style}.json` は選んだ1本だけ（失敗時は同梱）。選んだ courseId は従来どおり localStorage。
 
 テスト: `npm test`（inherit list / obtainable / hub）。
 
@@ -75,7 +75,7 @@ Pages: `.github/workflows/deploy-pages.yml`（`npm test` のあとリポジト�
 
 後回し:
 
-- 全コース分の `extract:effects` 一括（やらない。金ドット36件）
+- 全コース分の `extract:effects` 一括（やらない。金ドット37件）
 - アプリ内から extract
 - フィルタ精密化
 
