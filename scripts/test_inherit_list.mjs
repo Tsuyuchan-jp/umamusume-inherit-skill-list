@@ -2,6 +2,7 @@ import {
   expandObtainedChainIds,
   buildInheritSkillList,
   formatEffectStats,
+  parseListLimit,
   ptEfficiencyPer100,
 } from "../app/js/inheritList.js";
 import { activeOrders, rankBadge } from "../app/js/skillDetail.js";
@@ -83,6 +84,14 @@ const stats = formatEffectStats({
 });
 if (stats.basha !== "1.27[バ]" || stats.perPt !== "1.06[バ/Pt]") {
   throw new Error(`format mismatch: ${JSON.stringify(stats)}`);
+}
+
+if (parseListLimit("25") !== 25 || parseListLimit(1) !== 1 || parseListLimit("99") !== 99) {
+  throw new Error("parseListLimit should accept 1-99");
+}
+if (parseListLimit(" 12 ") !== 12) throw new Error("parseListLimit should trim");
+for (const bad of ["", "0", "00", "100", "1.5", "01", "-1", "9a"]) {
+  if (parseListLimit(bad) != null) throw new Error(`parseListLimit should reject ${bad}`);
 }
 
 const chanceOrders = activeOrders(9, [[{ kind: "rate", sign: ">=", value: 40 }]]);

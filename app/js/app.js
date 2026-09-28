@@ -4,9 +4,12 @@ import { allowedSupportIds, hubPreferenceFromSearch, loadCardDataset, loadCourse
 import { collectObtainableSkillIds } from "./obtainable.js";
 import {
   COPY_LIMIT,
+  LIST_LIMIT_MAX,
+  LIST_LIMIT_MIN,
   buildInheritSkillList,
   formatEffectStats,
   formatSkillLines,
+  parseListLimit,
 } from "./inheritList.js";
 import { copyTextToClipboard } from "./clipboard.js";
 import { escapeHtml } from "./htmlEscape.js";
@@ -43,6 +46,8 @@ const state = {
     fieldSize: 9,
     // 既定はデータありコースのみ。true で全140件
     showAllCourses: false,
+    // 表示・コピーするスキル数。コースや脚質では分けない
+    listLimit: COPY_LIMIT,
   },
 };
 
@@ -101,9 +106,58 @@ function restoreSession() {
     if (typeof saved.showAllCourses === "boolean") {
       state.ui.showAllCourses = saved.showAllCourses;
     }
+    const savedLimit = parseListLimit(saved.listLimit);
+    if (savedLimit != null) state.ui.listLimit = savedLimit;
   } catch {
     /* ignore */
   }
+}
+
+function writeSkillCountInput() {
+  const input = document.getElementById("skill-count-input");
+  const dec = document.getElementById("skill-count-dec");
+  const inc = document.getElementById("skill-count-inc");
+  if (input) input.value = String(state.ui.listLimit);
+  if (dec) dec.disabled = state.ui.listLimit <= LIST_LIMIT_MIN;
+  if (inc) inc.disabled = state.ui.listLimit >= LIST_LIMIT_MAX;
+}
+
+/** 入力欄を確定する。不正な値は直前のスキル数に戻す */
+function commitSkillCountFromInput() {
+  const input = document.getElementById("skill-count-input");
+  if (!input) return;
+  const parsed = parseListLimit(input.value);
+  if (parsed == null) {
+    writeSkillCountInput();
+    return;
+  }
+  if (parsed === state.ui.listLimit) {
+    writeSkillCountInput();
+    return;
+  }
+  state.ui.listLimit = parsed;
+  writeSkillCountInput();
+  recalc();
+  scheduleSessionSave();
+}
+
+function stepSkillCount(delta) {
+  const input = document.getElementById("skill-count-input");
+  const parsed = input ? parseListLimit(input.value) : null;
+  const base = parsed == null ? state.ui.listLimit : parsed;
+  const next = base + delta;
+  if (next < LIST_LIMIT_MIN || next > LIST_LIMIT_MAX) {
+    writeSkillCountInput();
+    return;
+  }
+  if (next === state.ui.listLimit) {
+    writeSkillCountInput();
+    return;
+  }
+  state.ui.listLimit = next;
+  writeSkillCountInput();
+  recalc();
+  scheduleSessionSave();
 }
 
 function currentCourse() {
@@ -377,7 +431,7 @@ function recalc() {
     rankedWhiteCommon: state.effects.skills,
     obtainableIds,
     skillById,
-    limit: COPY_LIMIT,
+    limit: state.ui.listLimit,
     manualExcludeIds,
   });
   lastResult = result;
@@ -497,6 +551,28 @@ function bind() {
     openSkillId = openSkillId === id ? null : id;
     recalc();
   });
+  document.getElementById("skill-count-dec")?.addEventListener("click", () => {
+    stepSkillCount(-1);
+  });
+  document.getElementById("skill-count-inc")?.addEventListener("click", () => {
+    stepSkillCount(1);
+  });
+  const skillCountInput = document.getElementById("skill-count-input");
+  skillCountInput?.addEventListener("blur", () => {
+    commitSkillCountFromInput();
+  });
+  skillCountInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      skillCountInput.blur();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      stepSkillCount(1);
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      stepSkillCount(-1);
+    }
+  });
   document.getElementById("field-seg")?.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-n]");
     if (!btn) return;
@@ -548,6 +624,7 @@ async function init() {
   );
   state.effectsSource = availablePack.source || "local";
 
+  writeSkillCountInput();
   renderCourseChips();
   syncStyleButtons();
   syncFieldSeg();

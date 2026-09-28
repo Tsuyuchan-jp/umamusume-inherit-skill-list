@@ -3,7 +3,23 @@
  */
 import { getChainRoot, isChainMember } from "./goldLower.js";
 
+/** スキル数の既定。ユーザー指定がないときの表示・コピー件数 */
 export const COPY_LIMIT = 25;
+export const LIST_LIMIT_MIN = 1;
+export const LIST_LIMIT_MAX = 99;
+
+/**
+ * スキル数の入力を解釈する。1〜99 の整数だけ採用し、それ以外は null。
+ * @param {unknown} raw
+ * @returns {number | null}
+ */
+export function parseListLimit(raw) {
+  const text = String(raw ?? "").trim();
+  if (!/^[1-9]\d?$/.test(text)) return null;
+  const n = Number(text);
+  if (n < LIST_LIMIT_MIN || n > LIST_LIMIT_MAX) return null;
+  return n;
+}
 
 /**
  * 取れるスキルがチェーン上にあれば、○/◎/金までまとめて除外する。

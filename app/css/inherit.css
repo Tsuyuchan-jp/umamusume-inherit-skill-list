@@ -241,7 +241,9 @@ body {
 
 .inherit-result__head {
   display: grid;
-  gap: 0.4rem;
+  row-gap: 0.4rem;
+  column-gap: 0.75rem;
+  align-items: center;
 }
 
 .inherit-result__head h2 {
@@ -265,6 +267,146 @@ body {
   display: grid;
   gap: 0.45rem;
   justify-items: start;
+}
+
+/* コピーボタンと同じ幅。DBボタンを左、スキル数は狭い画面で右 */
+.inherit-result__tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 24rem;
+  min-width: 0;
+}
+
+.skill-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* 広い画面: スキル数だけ見出し行の右へ出す。メタ文とは重ならない */
+@media (min-width: 641px) {
+  .inherit-result__head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .inherit-result__actions,
+  .inherit-result__tools {
+    display: contents;
+  }
+
+  .inherit-result__head h2 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .skill-count {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .inherit-result__meta {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .inherit-copy {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    justify-self: start;
+  }
+
+  #open-db {
+    grid-column: 1;
+    grid-row: 4;
+    justify-self: start;
+  }
+}
+
+.skill-count__label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.skill-count__step,
+.skill-count__input {
+  box-sizing: border-box;
+  height: 2rem;
+  border: 1px solid var(--border-default);
+  background: #fff;
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 700;
+}
+
+.skill-count__step {
+  width: 2rem;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.skill-count__step:not(:disabled):hover {
+  background: var(--surface-muted, #f5f3f8);
+}
+
+.skill-count__step:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.skill-count__step:focus-visible,
+.skill-count__input:focus-visible {
+  outline: 2px solid var(--c-gold, #f5cf6f);
+  outline-offset: 2px;
+}
+
+.skill-count__input {
+  width: 2.5rem;
+  padding: 0 0.1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .inherit-result__head h2 {
+    max-width: 100%;
+  }
+
+  .inherit-result__tools {
+    gap: 0.4rem;
+  }
+
+  #open-db {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .skill-count {
+    margin-left: auto;
+    gap: 0.18rem;
+  }
+
+  .skill-count__step,
+  .skill-count__input {
+    height: 1.75rem;
+  }
+
+  .skill-count__step {
+    width: 1.75rem;
+  }
+
+  .skill-count__input {
+    width: 2.2rem;
+    font-size: 0.95rem;
+  }
 }
 
 .inherit-copy {

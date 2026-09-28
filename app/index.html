@@ -103,7 +103,25 @@
             <button type="button" id="copy-top" class="inherit-copy" disabled>
               スキルリストをコピー
             </button>
-            <button type="button" id="open-db" class="inherit-action">ウマ娘DBを開く</button>
+            <div class="inherit-result__tools">
+              <button type="button" id="open-db" class="inherit-action">ウマ娘DBを開く</button>
+              <div class="skill-count" role="group" aria-labelledby="skill-count-label">
+                <span class="skill-count__label" id="skill-count-label">スキル数</span>
+                <button type="button" class="skill-count__step" id="skill-count-dec" aria-label="スキル数を1減らす">−</button>
+                <input
+                  id="skill-count-input"
+                  class="skill-count__input"
+                  type="text"
+                  inputmode="numeric"
+                  maxlength="2"
+                  autocomplete="off"
+                  enterkeyhint="done"
+                  aria-labelledby="skill-count-label"
+                  value="25"
+                />
+                <button type="button" class="skill-count__step" id="skill-count-inc" aria-label="スキル数を1増やす">+</button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="list-bar">
@@ -135,7 +153,7 @@
         <section class="help-lead" aria-labelledby="help-lead-title">
           <h3 id="help-lead-title" class="help-lead__title">このツール</h3>
           <p>コースと脚質の有効白スキルから、本育成で取れる分を除いて出します。レンタルの継承親探しや、因子周回の候補整理に使えます。</p>
-          <p>任意コースの U-tools 有効スキル（白スキル ∩ 共通スキル）から本育成で取れる分を除いた先頭25件です。</p>
+          <p>任意コースの U-tools 有効スキル（白スキル ∩ 共通スキル）から、本育成で取れる分を除いたスキルを出します。件数は「スキル数」で指定します（既定25件）。</p>
           <p>
             コピーした名前は
             <a href="https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill" target="_blank" rel="noopener">レンタル因子貼り付け</a>
@@ -149,7 +167,8 @@
             <li>場と距離、脚質を選ぶ（既定はデータがあるコースだけ。「すべてのコースを見る」で全件）</li>
             <li>育成ウマ娘とサポカを選ぶ</li>
             <li>いらないスキルは行から外す。下の「除外中」から戻せます。除外はこのブラウザに、コースと脚質ごとに残ります</li>
-            <li>「スキルリストをコピー」→ レンタル因子貼り付けへ貼る</li>
+            <li>「スキル数」で出す件数を決める（既定は25、1〜99）。このブラウザに残ります</li>
+            <li>「スキルリストをコピー」は、リストに出ているスキルだけをコピーする。レンタル因子貼り付けへ貼る</li>
             <li>必要なら「U-tools の有効スキルを開く」で同じコース・脚質を突き合わせる（白と共通にチェック）</li>
           </ol>
         </section>
