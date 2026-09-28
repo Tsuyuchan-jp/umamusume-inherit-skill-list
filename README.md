@@ -33,4 +33,4 @@
 
 ## 開発者向け
 
-データ更新（extract）は [docs/DEVELOP.md](docs/DEVELOP.md)。新チャットの引継ぎは [docs/AGENT_HANDOFF.md](docs/AGENT_HANDOFF.md)。次タスクは [docs/TODO.md](docs/TODO.md)。
+データ更新（extract）は [docs/DEVELOP.md](docs/DEVELOP.md)。変更履歴は [docs/CHANGELOG.md](docs/CHANGELOG.md)。新チャットの引継ぎは [docs/AGENT_HANDOFF.md](docs/AGENT_HANDOFF.md)。次タスクは [docs/TODO.md](docs/TODO.md)。

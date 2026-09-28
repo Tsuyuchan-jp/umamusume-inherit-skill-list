@@ -1,6 +1,6 @@
 # 開発者向け
 
-利用者向けの説明はリポジトリ直下の [README.md](../README.md)。仕様は [SPEC.md](./SPEC.md)。引継ぎは [AGENT_HANDOFF.md](./AGENT_HANDOFF.md)。
+利用者向けの説明はリポジトリ直下の [README.md](../README.md)。仕様は [SPEC.md](./SPEC.md)。変更履歴は [CHANGELOG.md](./CHANGELOG.md)。引継ぎは [AGENT_HANDOFF.md](./AGENT_HANDOFF.md)。
 
 公開 URL: https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/
 
@@ -20,6 +20,10 @@ npm run serve
 ## データ更新（手動）
 
 起動のたびに U-tools へ取りに行きません。コース一覧と effects の正本は工場（`umamusume-data-src` の `extract:courses` / `extract:effects`）。棚へ `publish` したあと、失敗時同梱の `data/effects/**` を揃えます。
+
+## バージョン
+
+セマンティック バージョニング。画面のタイトル右、`package.json` の `version`、[CHANGELOG.md](./CHANGELOG.md) の最新見出しを同じ番号にする。機能追加は MINOR、データ追加と修正は PATCH。
 
 ## テスト
 

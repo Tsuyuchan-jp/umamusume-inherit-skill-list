@@ -1,6 +1,6 @@
 # AGENT_HANDOFF — 新チャット最初に読むこと
 
-会話履歴なしで続けるための最短ブリーフ。利用者向けは [README.md](../README.md)。開発手順は [DEVELOP.md](./DEVELOP.md)。詳細仕様は [SPEC.md](./SPEC.md)。
+会話履歴なしで続けるための最短ブリーフ。利用者向けは [README.md](../README.md)。開発手順は [DEVELOP.md](./DEVELOP.md)。変更履歴は [CHANGELOG.md](./CHANGELOG.md)。詳細仕様は [SPEC.md](./SPEC.md)。
 
 ## プロジェクト
 
@@ -11,6 +11,7 @@
 | 形態 | 静的 HTML/JS + JSON。公開は GitHub Pages（`/app/`）。ローカルは `npm run serve` |
 | 目的 | コース・脚質の有効白スキル（白∩共通）から本育成で取れる分を除き、指定したスキル数（既定25）を出す。レンタル親探し（コピー先 [rental-factor-fill](https://github.com/Tsuyuchan-jp/umamusume-rental-factor-fill)）や因子周回の候補整理に使える |
 | 公開 | 済み。https://Tsuyuchan-jp.github.io/umamusume-inherit-skill-list/app/ 。remote: `origin` → `Tsuyuchan-jp/umamusume-inherit-skill-list` |
+| 版 | セマンティック バージョニング。現在 **1.1.0**。正本は `package.json` と画面タイトル右の `v1.1.0` と [CHANGELOG.md](./CHANGELOG.md)。機能は MINOR、データと修正は PATCH |
 | 言語 | ユーザー向け応答・コードコメントは日本語 |
 
 **触らない:** `umamusume-sp-calc` 本体には機能追加しない。画像・ピッカー・JSON は流用済み。v1 の機能・見た目は完了。大きな UI 変更をしない。

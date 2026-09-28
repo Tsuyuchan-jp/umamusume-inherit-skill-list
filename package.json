@@ -1,9 +1,10 @@
 {
   "name": "umamusume-inherit-skill-list",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node scripts/test_inherit_list.mjs && node scripts/test_obtainable.mjs && node scripts/test_hub.mjs",
+    "test": "node scripts/test_inherit_list.mjs && node scripts/test_obtainable.mjs && node scripts/test_hub.mjs && node scripts/test_version.mjs",
     "serve": "npx --yes serve -l 5173 ."
   }
 }
